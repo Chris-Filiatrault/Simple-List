@@ -22,6 +22,7 @@ extension Item {
     @NSManaged public var markedOff: Bool
     @NSManaged public var dateAdded: Date?
     @NSManaged public var position: Double
+    @NSManaged public var shownInList: Bool
    
    public var wrappedName: String {
       name ?? "Unknown item"

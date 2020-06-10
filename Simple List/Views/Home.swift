@@ -31,7 +31,32 @@ struct Home: View {
       UITableView.appearance().backgroundColor = .clear
       
       //UITextField.appearance().backgroundColor = UIColor.blue
+      
+      guard let appDelegate =
+         UIApplication.shared.delegate as? AppDelegate else {
+            return
+      }
+      
+      let managedContext =
+         appDelegate.persistentContainer.viewContext
+      
+      let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Item")
+      
+      do {
+         let fetchReturn = try managedContext.fetch(fetchRequest) as! [Item]
+         
+         for item in fetchReturn {
+            print(item.wrappedName)
+         }
+         
+      }
+      catch let error as NSError {
+         print("Could not delete. \(error), \(error.userInfo)")
+      }
+      
    }
+   
+   
    
    var body: some View {
       

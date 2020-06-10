@@ -6,11 +6,11 @@
  ====== NEXT ======
  ------------------
 
+ 
 - Autofill textfield based on historical items
  
 - disable dark mode on free version
  
-
  
 - Implement a context menu for editing/deleting items
  

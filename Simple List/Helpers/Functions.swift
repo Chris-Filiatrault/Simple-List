@@ -28,6 +28,7 @@ func addNewItem(itemName: Binding<String>) {
    newItem.dateAdded = Date()
    newItem.markedOff = false
    newItem.id = UUID()
+   newItem.shownInList = true
    
    let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Item")
    fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Item.position, ascending: false)]
@@ -106,7 +107,7 @@ func deleteItems() {
       
       for item in items {
          if item.markedOff == true {
-            managedContext.delete(item)
+            item.shownInList = false
          }
       }
       
@@ -147,7 +148,7 @@ func deleteSwipedItem(at offsets: IndexSet) {
          
          let item = fetchReturn[offset]
          
-         managedContext.delete(item)
+         item.shownInList = false
          
       }
       

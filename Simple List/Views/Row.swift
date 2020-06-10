@@ -16,6 +16,7 @@ struct Row: View {
    @State var markedOff: Bool
    @State var position: Double
    @State var itemName: String
+   @State var shownInList: Bool
    
 
    var body: some View {

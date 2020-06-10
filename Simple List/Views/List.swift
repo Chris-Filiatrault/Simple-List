@@ -14,7 +14,11 @@ struct ListView: View {
    
    @FetchRequest(entity: Item.entity(), sortDescriptors: [
       NSSortDescriptor(keyPath: \Item.position, ascending: false)
-   ]) var itemsFromFetchRequest: FetchedResults<Item>
+   ]
+      , predicate: NSPredicate(format: "shownInList == true" )
+   ) var itemsFromFetchRequest: FetchedResults<Item>
+   
+   
    
    var body: some View {
       VStack {
@@ -22,7 +26,14 @@ struct ListView: View {
          if itemAdded == true {
             List {
                ForEach(itemsFromFetchRequest, id: \.self) { item in
-                  Row(thisItem: item, markedOff: item.markedOff, position: item.position, itemName: item.wrappedName)
+                  VStack {
+                     
+                     
+                        
+                        Row(thisItem: item, markedOff: item.markedOff, position: item.position, itemName: item.wrappedName,
+                            shownInList: item.shownInList)
+                     
+                  }
                }
                .onMove(perform: move)
                .onDelete(perform: deleteSwipedItem)
@@ -32,8 +43,14 @@ struct ListView: View {
          else if itemAdded == false {
             List {
                ForEach(itemsFromFetchRequest, id: \.self) { item in
-                  Row(thisItem: item, markedOff: item.markedOff, position: item.position, itemName: item.wrappedName)
+                  VStack {
+                     
+                        Row(thisItem: item, markedOff: item.markedOff, position: item.position, itemName: item.wrappedName,
+                            shownInList: item.shownInList)
+                     
+                  }
                }
+                  
                .onMove(perform: move)
                .onDelete(perform: deleteSwipedItem)
                .listRowBackground(Color("listRowBackground").edgesIgnoringSafeArea(.horizontal))
