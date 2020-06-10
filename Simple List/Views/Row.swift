@@ -1,8 +1,8 @@
 //
 //  Row.swift
-//  Simple To-Do List
+//  Simple List
 //
-//  Created by Chris Filiatrault on 5/6/20.
+//  Created by Chris Filiatrault on 10/6/20.
 //  Copyright © 2020 Chris Filiatrault. All rights reserved.
 //
 

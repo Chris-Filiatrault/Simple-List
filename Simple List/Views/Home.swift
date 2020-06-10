@@ -1,12 +1,10 @@
 //
-//  ListView.swift
-//  Simple To-Do List
+//  Home.swift
+//  Simple List
 //
-//  Created by Chris Filiatrault on 5/6/20.
+//  Created by Chris Filiatrault on 10/6/20.
 //  Copyright © 2020 Chris Filiatrault. All rights reserved.
 //
-
-
 
 import SwiftUI
 import CoreData
@@ -19,6 +17,7 @@ struct Home: View {
    @State var textfieldActive: Bool = false
    @State var itemAdded: Bool = true
    @State var showAddButton: Bool = false
+   @State var showEditButton: Bool = true
    
    init() {
       
@@ -46,6 +45,9 @@ struct Home: View {
                
                TextField("", text: self.$textfieldValue, onEditingChanged: { changed in
                   self.textfieldActive.toggle()
+                  withAnimation {
+                     self.showEditButton.toggle()
+                  }
                }, onCommit: {
                   if self.textfieldValue != "" {
                      addNewItem(itemName: self.$textfieldValue)
@@ -54,13 +56,13 @@ struct Home: View {
                   }
                })
             }
-               .padding(8)
-               .padding(.horizontal, 3)
+            .padding(8)
+            .padding(.horizontal, 3)
             .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color("textfield"), lineWidth: 1.2))
             .background(RoundedRectangle(cornerRadius: 12).foregroundColor(Color("textfieldBackground")))
-               .font(.headline)
-               .padding()
-               .padding(.top, 5)
+            .font(.headline)
+            .padding()
+            .padding(.top, 5)
                
                
                // ===Navigation bar===
@@ -68,15 +70,13 @@ struct Home: View {
                
                // ===Nav bar items===
                .navigationBarItems(leading:
-                  EditButton()
-                  .simultaneousGesture(TapGesture().onEnded {
-                     withAnimation {
-                     self.globalVariables.editModeIsActive.toggle()
+                  VStack {
+                     if self.showEditButton == true {
+                        EditButton()
+                           .padding()
+                           .offset(x: -5)
                      }
-                  })
-                     .padding()
-                     .offset(x: -5)
-                  
+                  }
                   //.foregroundColor(Color("navBarFont"))
                   ,trailing:
                   TrailingNavBarButtons(textfieldActive: $textfieldActive,
@@ -90,7 +90,7 @@ struct Home: View {
          }
          .background(Color("background").edgesIgnoringSafeArea(.all))
       } // End of NavView
-      .navigationViewStyle(StackNavigationViewStyle())
+         .navigationViewStyle(StackNavigationViewStyle())
       
    }
 }

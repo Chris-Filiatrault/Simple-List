@@ -15,18 +15,18 @@
 		6D2B1FAC24904A110025E786 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D2B1FAA24904A110025E786 /* LaunchScreen.storyboard */; };
 		6D2B1FB724904A120025E786 /* Simple_ListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B1FB624904A120025E786 /* Simple_ListTests.swift */; };
 		6D2B1FC224904A120025E786 /* Simple_ListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B1FC124904A120025E786 /* Simple_ListUITests.swift */; };
-		6D2B1FDD24904AB20025E786 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B1FD324904AB20025E786 /* Functions.swift */; };
-		6D2B1FDE24904AB20025E786 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B1FD424904AB20025E786 /* Extensions.swift */; };
-		6D2B1FDF24904AB20025E786 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B1FD524904AB20025E786 /* Globals.swift */; };
-		6D2B1FE024904AB20025E786 /* AdaptsToSK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B1FD624904AB20025E786 /* AdaptsToSK.swift */; };
-		6D2B1FF624904B110025E786 /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B1FF524904B110025E786 /* Misc.swift */; };
 		6D2B1FF924904B830025E786 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B1FF724904B830025E786 /* Item+CoreDataClass.swift */; };
 		6D2B1FFA24904B830025E786 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B1FF824904B830025E786 /* Item+CoreDataProperties.swift */; };
-		6D2B200C24904BFA0025E786 /* DropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B200724904BFA0025E786 /* DropDown.swift */; };
-		6D2B200D24904BFA0025E786 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B200824904BFA0025E786 /* Home.swift */; };
-		6D2B200E24904BFA0025E786 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B200924904BFA0025E786 /* List.swift */; };
-		6D2B200F24904BFA0025E786 /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B200A24904BFA0025E786 /* Row.swift */; };
-		6D2B201024904BFA0025E786 /* TrailingNavBarButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B200B24904BFA0025E786 /* TrailingNavBarButtons.swift */; };
+		6D2B20132490501D0025E786 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B20122490501D0025E786 /* Home.swift */; };
+		6D2B2015249050240025E786 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B2014249050240025E786 /* List.swift */; };
+		6D2B20172490502B0025E786 /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B20162490502B0025E786 /* Row.swift */; };
+		6D2B2019249050400025E786 /* TrailingNavBarButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B2018249050400025E786 /* TrailingNavBarButtons.swift */; };
+		6D2B201C249050550025E786 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B201B249050550025E786 /* Globals.swift */; };
+		6D2B201E2490505E0025E786 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B201D2490505E0025E786 /* Functions.swift */; };
+		6D2B2020249050690025E786 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B201F249050690025E786 /* Extensions.swift */; };
+		6D2B2022249050710025E786 /* AdaptsToSK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B2021249050710025E786 /* AdaptsToSK.swift */; };
+		6D2B2025249051400025E786 /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B2024249051400025E786 /* Misc.swift */; };
+		6D2B2027249054180025E786 /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B2026249054180025E786 /* ToDo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,18 +61,18 @@
 		6D2B1FBD24904A120025E786 /* Simple ListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Simple ListUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D2B1FC124904A120025E786 /* Simple_ListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simple_ListUITests.swift; sourceTree = "<group>"; };
 		6D2B1FC324904A120025E786 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6D2B1FD324904AB20025E786 /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
-		6D2B1FD424904AB20025E786 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		6D2B1FD524904AB20025E786 /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
-		6D2B1FD624904AB20025E786 /* AdaptsToSK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptsToSK.swift; sourceTree = "<group>"; };
-		6D2B1FF524904B110025E786 /* Misc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Misc.swift; sourceTree = "<group>"; };
 		6D2B1FF724904B830025E786 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
 		6D2B1FF824904B830025E786 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		6D2B200724904BFA0025E786 /* DropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDown.swift; sourceTree = "<group>"; };
-		6D2B200824904BFA0025E786 /* Home.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
-		6D2B200924904BFA0025E786 /* List.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
-		6D2B200A24904BFA0025E786 /* Row.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
-		6D2B200B24904BFA0025E786 /* TrailingNavBarButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrailingNavBarButtons.swift; sourceTree = "<group>"; };
+		6D2B20122490501D0025E786 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		6D2B2014249050240025E786 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
+		6D2B20162490502B0025E786 /* Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
+		6D2B2018249050400025E786 /* TrailingNavBarButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailingNavBarButtons.swift; sourceTree = "<group>"; };
+		6D2B201B249050550025E786 /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
+		6D2B201D2490505E0025E786 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
+		6D2B201F249050690025E786 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		6D2B2021249050710025E786 /* AdaptsToSK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptsToSK.swift; sourceTree = "<group>"; };
+		6D2B2024249051400025E786 /* Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Misc.swift; sourceTree = "<group>"; };
+		6D2B2026249054180025E786 /* ToDo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +103,7 @@
 		6D2B1F9024904A070025E786 = {
 			isa = PBXGroup;
 			children = (
+				6D2B2026249054180025E786 /* ToDo.swift */,
 				6D2B1F9B24904A070025E786 /* Simple List */,
 				6D2B1FB524904A120025E786 /* Simple ListTests */,
 				6D2B1FC024904A120025E786 /* Simple ListUITests */,
@@ -123,10 +124,10 @@
 		6D2B1F9B24904A070025E786 /* Simple List */ = {
 			isa = PBXGroup;
 			children = (
-				6D2B200624904BFA0025E786 /* Views */,
+				6D2B2011249050130025E786 /* Views */,
 				6D2B1FFC24904B9E0025E786 /* Data model */,
-				6D2B1FF424904B110025E786 /* Misc */,
-				6D2B1FD224904AB20025E786 /* Helpers */,
+				6D2B201A249050470025E786 /* Helpers */,
+				6D2B2023249051270025E786 /* Misc items */,
 				6D2B1F9C24904A070025E786 /* AppDelegate.swift */,
 				6D2B1F9E24904A070025E786 /* SceneDelegate.swift */,
 				6D2B1FA524904A110025E786 /* Assets.xcassets */,
@@ -163,27 +164,6 @@
 			path = "Simple ListUITests";
 			sourceTree = "<group>";
 		};
-		6D2B1FD224904AB20025E786 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				6D2B1FD324904AB20025E786 /* Functions.swift */,
-				6D2B1FD424904AB20025E786 /* Extensions.swift */,
-				6D2B1FD524904AB20025E786 /* Globals.swift */,
-				6D2B1FD624904AB20025E786 /* AdaptsToSK.swift */,
-			);
-			name = Helpers;
-			path = "../../Simple List Old/Simple To-Do List/Simple To-Do List/Helpers";
-			sourceTree = "<group>";
-		};
-		6D2B1FF424904B110025E786 /* Misc */ = {
-			isa = PBXGroup;
-			children = (
-				6D2B1FF524904B110025E786 /* Misc.swift */,
-				6D2B200724904BFA0025E786 /* DropDown.swift */,
-			);
-			path = Misc;
-			sourceTree = "<group>";
-		};
 		6D2B1FFC24904B9E0025E786 /* Data model */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,15 +174,34 @@
 			path = "Data model";
 			sourceTree = "<group>";
 		};
-		6D2B200624904BFA0025E786 /* Views */ = {
+		6D2B2011249050130025E786 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				6D2B200824904BFA0025E786 /* Home.swift */,
-				6D2B200924904BFA0025E786 /* List.swift */,
-				6D2B200A24904BFA0025E786 /* Row.swift */,
-				6D2B200B24904BFA0025E786 /* TrailingNavBarButtons.swift */,
+				6D2B20122490501D0025E786 /* Home.swift */,
+				6D2B2014249050240025E786 /* List.swift */,
+				6D2B20162490502B0025E786 /* Row.swift */,
+				6D2B2018249050400025E786 /* TrailingNavBarButtons.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		6D2B201A249050470025E786 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6D2B201B249050550025E786 /* Globals.swift */,
+				6D2B201D2490505E0025E786 /* Functions.swift */,
+				6D2B201F249050690025E786 /* Extensions.swift */,
+				6D2B2021249050710025E786 /* AdaptsToSK.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		6D2B2023249051270025E786 /* Misc items */ = {
+			isa = PBXGroup;
+			children = (
+				6D2B2024249051400025E786 /* Misc.swift */,
+			);
+			path = "Misc items";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -337,19 +336,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D2B1F9D24904A070025E786 /* AppDelegate.swift in Sources */,
-				6D2B1FE024904AB20025E786 /* AdaptsToSK.swift in Sources */,
-				6D2B1FDE24904AB20025E786 /* Extensions.swift in Sources */,
 				6D2B1F9F24904A070025E786 /* SceneDelegate.swift in Sources */,
-				6D2B200E24904BFA0025E786 /* List.swift in Sources */,
-				6D2B201024904BFA0025E786 /* TrailingNavBarButtons.swift in Sources */,
+				6D2B2019249050400025E786 /* TrailingNavBarButtons.swift in Sources */,
+				6D2B2015249050240025E786 /* List.swift in Sources */,
+				6D2B201E2490505E0025E786 /* Functions.swift in Sources */,
 				6D2B1FF924904B830025E786 /* Item+CoreDataClass.swift in Sources */,
+				6D2B2027249054180025E786 /* ToDo.swift in Sources */,
+				6D2B20172490502B0025E786 /* Row.swift in Sources */,
+				6D2B2020249050690025E786 /* Extensions.swift in Sources */,
+				6D2B2022249050710025E786 /* AdaptsToSK.swift in Sources */,
 				6D2B1FFA24904B830025E786 /* Item+CoreDataProperties.swift in Sources */,
-				6D2B1FDD24904AB20025E786 /* Functions.swift in Sources */,
-				6D2B1FDF24904AB20025E786 /* Globals.swift in Sources */,
-				6D2B1FF624904B110025E786 /* Misc.swift in Sources */,
-				6D2B200C24904BFA0025E786 /* DropDown.swift in Sources */,
-				6D2B200D24904BFA0025E786 /* Home.swift in Sources */,
-				6D2B200F24904BFA0025E786 /* Row.swift in Sources */,
+				6D2B20132490501D0025E786 /* Home.swift in Sources */,
+				6D2B2025249051400025E786 /* Misc.swift in Sources */,
+				6D2B201C249050550025E786 /* Globals.swift in Sources */,
 				6D2B1FA224904A070025E786 /* Simple_List.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

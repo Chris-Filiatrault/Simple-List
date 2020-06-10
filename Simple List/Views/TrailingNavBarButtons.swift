@@ -1,10 +1,11 @@
 //
-//  NavBarButtons.swift
-//  Simple To-Do List
+//  TrailingNavBarButtons.swift
+//  Simple List
 //
-//  Created by Chris Filiatrault on 8/6/20.
+//  Created by Chris Filiatrault on 10/6/20.
 //  Copyright © 2020 Chris Filiatrault. All rights reserved.
 //
+
 
 import SwiftUI
 
