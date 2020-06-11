@@ -68,7 +68,9 @@ struct Home: View {
                if textfieldValue.isEmpty { Text("Enter item...").foregroundColor(Color("textfield")) }
                
                TextField("", text: self.$textfieldValue, onEditingChanged: { changed in
-                  self.textfieldActive.toggle()
+                  withAnimation {
+                     self.textfieldActive.toggle()
+                  }
                }, onCommit: {
                   if self.textfieldValue != "" {
                      addNewItem(itemName: self.$textfieldValue)
@@ -81,7 +83,8 @@ struct Home: View {
 //            .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color("textfield"), lineWidth: 1.2))
 //            .background(RoundedRectangle(cornerRadius: 12).foregroundColor(Color("textfieldBackground")))
             .font(.headline)
-            .padding()
+            .padding(.vertical)
+            .padding(.horizontal, 7)
             .padding(.top, 5)
             .offset(y: 5)
 
@@ -91,9 +94,15 @@ struct Home: View {
                
                // ===Nav bar items===
                .navigationBarItems(leading:
+                  VStack {
+                     if textfieldActive == false && globalVariables.textfieldRowEditMode == false {
+                        
                   EditButton()
                      .padding()
                      .offset(x: -5)
+                        
+                     }
+                  }
                   
                   //.foregroundColor(Color("navBarFont"))
                   ,trailing:

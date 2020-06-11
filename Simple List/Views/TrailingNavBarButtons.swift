@@ -57,7 +57,7 @@ struct TrailingNavBarButtons: View {
                      withAnimation { self.itemAdded.toggle() }
                   }
                }) {
-                  Text("Add")
+                  Text("Done")
                }.padding()
             }
                

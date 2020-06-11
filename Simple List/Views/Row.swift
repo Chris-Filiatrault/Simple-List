@@ -28,7 +28,7 @@ struct Row: View {
             
          Button(action: {
             markOffItem(thisItem: self.thisItem)
-            if self.textfieldActive == true {
+            if self.textfieldActive == true || self.globalVariables.textfieldRowEditMode == true {
                UIApplication.shared.endEditing()
             }
          }) {
@@ -42,8 +42,9 @@ struct Row: View {
          
             
          TextField("", text: $itemName, onEditingChanged: { edit in
+            withAnimation {
             self.globalVariables.textfieldRowEditMode.toggle()
-            
+            }
             if self.itemName == "" {
                self.confirmDeleteItemAlert.toggle()
             }

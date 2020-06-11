@@ -6,11 +6,6 @@
  ====== NEXT ======
  ------------------
  
-
- 
- - Improve the alert when the user changes an item to a blank string, to include when they simply tap elsewhere, not just onCommit
-
- 
  - Set up iCloud syncing
 
  
