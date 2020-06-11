@@ -18,9 +18,7 @@ struct ListView: View {
    @Binding var textfieldActive: Bool
    
    @FetchRequest(entity: Item.entity(), sortDescriptors: [
-      NSSortDescriptor(keyPath: \Item.position, ascending: false)
-      ], predicate: NSPredicate(format: "shownInList == true" )
-   ) var itemsFromFetchRequest: FetchedResults<Item>
+      NSSortDescriptor(keyPath: \Item.position, ascending: false)], predicate: NSPredicate(format: "shownInList == true")) var itemsFromFetchRequest: FetchedResults<Item>
    
    
    
@@ -28,7 +26,7 @@ struct ListView: View {
       VStack(spacing: 0) {
          
          if itemAdded == true {
-           // List {
+            List {
                ForEach(itemsFromFetchRequest, id: \.self) { item in
                   VStack(spacing: 0) {
                      
@@ -40,11 +38,12 @@ struct ListView: View {
                .onMove(perform: move)
                .onDelete(perform: deleteSwipedItem)
                .listRowBackground(Color("listRowBackground").edgesIgnoringSafeArea(.horizontal))
-           // }
+            }
+            .environment(\.defaultMinListRowHeight, 20)
          }
             
          else if itemAdded == false {
-           //List {
+           List {
                ForEach(itemsFromFetchRequest, id: \.self) { item in
                   VStack(spacing: 0) {
                      
@@ -57,7 +56,8 @@ struct ListView: View {
                .onMove(perform: move)
                .onDelete(perform: deleteSwipedItem)
                .listRowBackground(Color("listRowBackground").edgesIgnoringSafeArea(.horizontal))
-            //}
+            }
+           .environment(\.defaultMinListRowHeight, 20)
             
          }
          

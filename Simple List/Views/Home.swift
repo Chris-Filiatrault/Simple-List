@@ -21,7 +21,7 @@ struct Home: View {
    init() {
       
       // To remove all separators in list:
-      // UITableView.appearance().separatorStyle = .none
+      //UITableView.appearance().separatorStyle = .none
       
       // To remove only extra separators below the list:
       UITableView.appearance().tableFooterView = UIView()
@@ -77,14 +77,14 @@ struct Home: View {
                   }
                })
             }
-            .padding(8)
-            .padding(.horizontal, 3)
-            .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color("textfield"), lineWidth: 1.2))
-            .background(RoundedRectangle(cornerRadius: 12).foregroundColor(Color("textfieldBackground")))
+            .padding(.horizontal, 10)
+//            .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color("textfield"), lineWidth: 1.2))
+//            .background(RoundedRectangle(cornerRadius: 12).foregroundColor(Color("textfieldBackground")))
             .font(.headline)
             .padding()
             .padding(.top, 5)
-               
+            .offset(y: 5)
+
                
                // ===Navigation bar===
                .navigationBarTitle("", displayMode: .inline)

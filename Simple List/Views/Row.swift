@@ -23,44 +23,47 @@ struct Row: View {
    @Binding var showRenameTextfield: Bool
    
    var body: some View {
-      
-      HStack(alignment: .center) {
+      HStack {
          
+            
          Button(action: {
             markOffItem(thisItem: self.thisItem)
             if self.textfieldActive == true {
                UIApplication.shared.endEditing()
             }
          }) {
-            
+
             Image(systemName: thisItem.markedOff ? "checkmark.circle" : "circle")
                .imageScale(.large)
                .foregroundColor(thisItem.markedOff ? .gray : Color("listItemsFont"))
-         }
+            }
          
-               
-               TextField("", text: $itemName, onEditingChanged: { edit in
-                  self.globalVariables.textfieldRowEditMode = true
-               }, onCommit: {
-                  if self.itemName == "" {
-                     self.confirmDeleteItemAlert.toggle()
-                  }
-                  else if self.itemName != "" {
-                     editName(thisItem: self.thisItem, itemNewName: self.itemName)
-                  }
-               })
-                  .background(Color(.gray))
-                  .font(.headline)
-                  .foregroundColor(thisItem.markedOff ? .gray : Color("listItemsFont"))
-                  .padding(.vertical, 5)
-                  .alert(isPresented: $confirmDeleteItemAlert) {
-                     Alert(title: Text("Delete \(thisItem.wrappedName)?"), primaryButton: .default(Text("Cancel")), secondaryButton: .destructive(Text("Delete"), action: {
-                        deleteThisItem(thisItem: self.thisItem)
-                     }))}
-               
+         
+         
             
-         }
+         TextField("", text: $itemName, onEditingChanged: { edit in
+            self.globalVariables.textfieldRowEditMode.toggle()
+            
+            if self.itemName == "" {
+               self.confirmDeleteItemAlert.toggle()
+            }
+            else if self.itemName != "" {
+               editName(thisItem: self.thisItem, itemNewName: self.itemName)
+            }
+         }, onCommit: {
+            
+         })
+            .font(.headline)
+            .foregroundColor(thisItem.markedOff ? .gray : Color("listItemsFont"))
+            .alert(isPresented: $confirmDeleteItemAlert) {
+               Alert(title: Text("Delete \(thisItem.wrappedName)?"), primaryButton: .default(Text("Cancel")), secondaryButton: .destructive(Text("Delete"), action: {
+                  deleteThisItem(thisItem: self.thisItem)
+               }))}
+         
+         
+         
+         
       }
+      
    }
-   
-
+}

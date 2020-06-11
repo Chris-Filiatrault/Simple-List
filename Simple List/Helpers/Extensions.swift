@@ -43,6 +43,19 @@ extension UIApplication {
     }
 }
 
+
+
+struct MyTextFieldStyle: TextFieldStyle {
+    func _body(configuration: TextField<Self._Label>) -> some View {
+        configuration
+        .padding(30)
+        .background(
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .stroke(Color.red, lineWidth: 3)
+        ).padding()
+    }
+}
+
 //
 //struct ResignKeyboardOnDragGesture: ViewModifier {
 //    var gesture = DragGesture().onChanged{_ in

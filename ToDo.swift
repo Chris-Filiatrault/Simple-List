@@ -9,11 +9,6 @@
 
  
  - Improve the alert when the user changes an item to a blank string, to include when they simply tap elsewhere, not just onCommit
- 
- - Make textfield easier to press
-
- 
- - Alert when the user presses the trash button if there are no items ticked, asking them to tick items then delete them at once
 
  
  - Set up iCloud syncing

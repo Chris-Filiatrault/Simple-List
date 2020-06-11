@@ -11,35 +11,44 @@ import SwiftUI
 
 struct TrailingNavBarButtons: View {
    
+   @FetchRequest(entity: Item.entity(), sortDescriptors: [
+      NSSortDescriptor(keyPath: \Item.position, ascending: false)], predicate: NSPredicate(format: "shownInList == true && markedOff == true")) var tickedOffItems: FetchedResults<Item>
+   
    @EnvironmentObject var globalVariables: GlobalVariableClass
    
    @Binding var textfieldActive: Bool
    @Binding var textfieldValue: String
    @Binding var itemAdded: Bool
+   @State var showNoItemsAlert: Bool = false
    @Environment(\.colorScheme) var colorScheme
-
-//       var body: some View {
-//           Text(colorScheme == .dark ? "In dark mode" : "In light mode")
-//       }
    
-    var body: some View {
-        VStack {
-         if self.textfieldActive == false {
-                 
-                 // Delete items
-                 Button(action: {
-                    deleteItems()
-                    print("Trash button pressed")
-                 }) {
-                  Image(systemName: colorScheme == .light ? "trash.fill" : "trash")
-                       .imageScale(.large)
-                       .foregroundColor(.red)
-                 }.padding()
-              }
-                 
-                 // Add button
-         else if textfieldActive == true {
-                 Button(action: {
+   
+   var body: some View {
+      VStack {
+         if self.textfieldActive == false && globalVariables.textfieldRowEditMode == false {
+            
+            // Delete items
+            Button(action: {
+               if self.tickedOffItems.count == 0 {
+                  self.showNoItemsAlert = true
+               } else if self.tickedOffItems.count > 0 {
+                  deleteItems()
+               }
+               print("Trash button pressed")
+            }) {
+               Image(systemName: colorScheme == .light ? "trash" : "trash")
+                  .imageScale(.large)
+                  .foregroundColor(.red)
+            }.padding()
+               .alert(isPresented: $showNoItemsAlert) {
+                  Alert(title: Text("Information"), message: Text("Tick off items in your list to delete them all at once"), dismissButton: .default(Text("Ok")))
+            }
+         }
+            
+            
+            // Add button
+            else if textfieldActive == true && globalVariables.textfieldRowEditMode == false {
+               Button(action: {
                   if self.textfieldValue == "" {
                      UIApplication.shared.endEditing()
                   } else if self.textfieldValue != "" {
@@ -47,28 +56,24 @@ struct TrailingNavBarButtons: View {
                      self.textfieldValue = ""
                      withAnimation { self.itemAdded.toggle() }
                   }
-                 }) {
-                    Text("Add")
-                 }.padding()
-              }
+               }) {
+                  Text("Add")
+               }.padding()
+            }
                
+               
+               
+            //Rename done button
+            else if self.textfieldActive == false && globalVariables.textfieldRowEditMode == true {
+               Button(action: {
+                  UIApplication.shared.endEditing()
+                  
+               }) {
+                  Text("Done")
+                  
+               }.padding()
+            }
             
-            
-                  //Add button
-         else if globalVariables.textfieldRowEditMode == true {
-                 Button(action: {
-                    if self.textfieldValue != "" {
-
-                     withAnimation { self.itemAdded.toggle() }
-                    }
-                 }) {
-                  Image(systemName: colorScheme == .light ? "plus.circle.fill" : "plus.circle")
-                     .imageScale(.large)
-                     .foregroundColor(.green)
-
-                 }.padding()
-              }
-              
-        }
-    }
+         }
+      }
 }
