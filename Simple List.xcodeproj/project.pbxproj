@@ -27,6 +27,7 @@
 		6D2B2022249050710025E786 /* AdaptsToSK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B2021249050710025E786 /* AdaptsToSK.swift */; };
 		6D2B2025249051400025E786 /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B2024249051400025E786 /* Misc.swift */; };
 		6D2B2027249054180025E786 /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B2026249054180025E786 /* ToDo.swift */; };
+		6DE0879D2491CD1E000F2041 /* CustomTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE0879C2491CD1E000F2041 /* CustomTextfield.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		6D2B2021249050710025E786 /* AdaptsToSK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptsToSK.swift; sourceTree = "<group>"; };
 		6D2B2024249051400025E786 /* Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Misc.swift; sourceTree = "<group>"; };
 		6D2B2026249054180025E786 /* ToDo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDo.swift; sourceTree = "<group>"; };
+		6DE0879C2491CD1E000F2041 /* CustomTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextfield.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,13 +126,14 @@
 		6D2B1F9B24904A070025E786 /* Simple List */ = {
 			isa = PBXGroup;
 			children = (
+				6D2B1F9C24904A070025E786 /* AppDelegate.swift */,
+				6D2B1F9E24904A070025E786 /* SceneDelegate.swift */,
 				6D2B2011249050130025E786 /* Views */,
 				6D2B1FFC24904B9E0025E786 /* Data model */,
 				6D2B201A249050470025E786 /* Helpers */,
 				6D2B2023249051270025E786 /* Misc items */,
-				6D2B1F9C24904A070025E786 /* AppDelegate.swift */,
-				6D2B1F9E24904A070025E786 /* SceneDelegate.swift */,
 				6D2B1FA524904A110025E786 /* Assets.xcassets */,
+				6DE0879C2491CD1E000F2041 /* CustomTextfield.swift */,
 				6D2B1FAA24904A110025E786 /* LaunchScreen.storyboard */,
 				6D2B1FAD24904A110025E786 /* Info.plist */,
 				6D2B1FA724904A110025E786 /* Preview Content */,
@@ -335,6 +338,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DE0879D2491CD1E000F2041 /* CustomTextfield.swift in Sources */,
 				6D2B1F9D24904A070025E786 /* AppDelegate.swift in Sources */,
 				6D2B1F9F24904A070025E786 /* SceneDelegate.swift in Sources */,
 				6D2B2019249050400025E786 /* TrailingNavBarButtons.swift in Sources */,

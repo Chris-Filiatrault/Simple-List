@@ -42,7 +42,7 @@ func addNewItem(itemName: Binding<String>) {
          newItem.position = 1
          print("Set position = 1")
       } else {
-         print("Set position = items[0].position = \(items[0].wrappedName) / 2")
+         print("Set position = items[0].position = \(items[0].wrappedName) * 1.1")
          newItem.position = items[0].position * 1.1
       }
       
@@ -108,6 +108,7 @@ func deleteItems() {
       for item in items {
          if item.markedOff == true {
             item.shownInList = false
+            item.position = 0
          }
       }
       
@@ -126,6 +127,44 @@ func deleteItems() {
 
 
 
+func deleteThisItem(thisItem: Item) {
+   
+   guard let appDelegate =
+      UIApplication.shared.delegate as? AppDelegate else {
+         return
+   }
+   
+   let managedContext =
+      appDelegate.persistentContainer.viewContext
+   
+   let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Item")
+   //fetchRequest.predicate = NSPredicate(format: "markedOff = %@", true)
+   
+   do {
+      let fetchReturn = try managedContext.fetch(fetchRequest)
+      let items = fetchReturn as! [Item]
+      
+      for item in items {
+         if item == thisItem {
+            item.shownInList = false
+            item.position = 0
+         }
+      }
+      
+      
+      do {
+         try managedContext.save()
+         print("deleted successfully")
+      } catch let error as NSError {
+         print("Could not delete. \(error), \(error.userInfo)")
+      }
+      
+   } catch let error as NSError {
+      print("Could not fetch. \(error), \(error.userInfo)")
+   }
+}
+
+
 func deleteSwipedItem(at offsets: IndexSet) {
    
    guard let appDelegate =
@@ -138,7 +177,7 @@ func deleteSwipedItem(at offsets: IndexSet) {
    
    let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Item")
    fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Item.position, ascending: false)]
-   
+   fetchRequest.predicate = NSPredicate(format: "shownInList = true")
    
    
    do {
@@ -149,6 +188,7 @@ func deleteSwipedItem(at offsets: IndexSet) {
          let item = fetchReturn[offset]
          
          item.shownInList = false
+         item.position = 0
          
       }
       

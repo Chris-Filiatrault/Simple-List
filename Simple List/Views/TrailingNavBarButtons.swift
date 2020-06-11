@@ -24,8 +24,6 @@ struct TrailingNavBarButtons: View {
    
     var body: some View {
         VStack {
-             
-         
          if self.textfieldActive == false {
                  
                  // Delete items
@@ -39,28 +37,35 @@ struct TrailingNavBarButtons: View {
                  }.padding()
               }
                  
-                 // Done button
-         else if textfieldActive == true && textfieldValue == "" && globalVariables.editModeIsActive == false {
+                 // Add button
+         else if textfieldActive == true {
                  Button(action: {
-                    UIApplication.shared.endEditing()
+                  if self.textfieldValue == "" {
+                     UIApplication.shared.endEditing()
+                  } else if self.textfieldValue != "" {
+                     addNewItem(itemName: self.$textfieldValue)
+                     self.textfieldValue = ""
+                     withAnimation { self.itemAdded.toggle() }
+                  }
                  }) {
-                    Text("Done")
+                    Text("Add")
                  }.padding()
               }
-                 
-                 // Add button
-              else if textfieldActive == true && textfieldValue != "" {
+               
+            
+            
+                  //Add button
+         else if globalVariables.textfieldRowEditMode == true {
                  Button(action: {
                     if self.textfieldValue != "" {
-                       addNewItem(itemName: self.$textfieldValue)
-                       self.textfieldValue = ""
+
                      withAnimation { self.itemAdded.toggle() }
                     }
                  }) {
                   Image(systemName: colorScheme == .light ? "plus.circle.fill" : "plus.circle")
                      .imageScale(.large)
                      .foregroundColor(.green)
-                  
+
                  }.padding()
               }
               

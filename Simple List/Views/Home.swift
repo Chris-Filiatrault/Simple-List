@@ -17,7 +17,6 @@ struct Home: View {
    @State var textfieldActive: Bool = false
    @State var itemAdded: Bool = true
    @State var showAddButton: Bool = false
-   @State var showEditButton: Bool = true
    
    init() {
       
@@ -70,9 +69,6 @@ struct Home: View {
                
                TextField("", text: self.$textfieldValue, onEditingChanged: { changed in
                   self.textfieldActive.toggle()
-                  withAnimation {
-                     self.showEditButton.toggle()
-                  }
                }, onCommit: {
                   if self.textfieldValue != "" {
                      addNewItem(itemName: self.$textfieldValue)
@@ -95,13 +91,10 @@ struct Home: View {
                
                // ===Nav bar items===
                .navigationBarItems(leading:
-                  VStack {
-                     if self.showEditButton == true {
-                        EditButton()
-                           .padding()
-                           .offset(x: -5)
-                     }
-                  }
+                  EditButton()
+                     .padding()
+                     .offset(x: -5)
+                  
                   //.foregroundColor(Color("navBarFont"))
                   ,trailing:
                   TrailingNavBarButtons(textfieldActive: $textfieldActive,
@@ -110,7 +103,7 @@ struct Home: View {
             
             
             //  ===List===
-            ListView(itemAdded: $itemAdded)
+            ListView(itemAdded: $itemAdded, textfieldActive: $textfieldActive)
             
          }
          .background(Color("background").edgesIgnoringSafeArea(.all))

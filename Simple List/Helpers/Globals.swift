@@ -15,7 +15,8 @@ import CoreData
 class GlobalVariableClass: ObservableObject {
  
    @Published var textfieldRowValue: String = ""
-   @Published var editModeIsActive: Bool = false
+   @Published var textfieldRowEditMode: Bool = false
    @Published var itemID: UUID = UUID()
+   @Published var blurList: Bool = false
    
 }
