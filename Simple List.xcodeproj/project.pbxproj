@@ -28,6 +28,7 @@
 		6D2B2025249051400025E786 /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B2024249051400025E786 /* Misc.swift */; };
 		6D2B2027249054180025E786 /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B2026249054180025E786 /* ToDo.swift */; };
 		6DE0879D2491CD1E000F2041 /* CustomTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE0879C2491CD1E000F2041 /* CustomTextfield.swift */; };
+		6DE4934D2493084E00C4FB02 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DE4934C2493084E00C4FB02 /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,8 @@
 		6D2B2024249051400025E786 /* Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Misc.swift; sourceTree = "<group>"; };
 		6D2B2026249054180025E786 /* ToDo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDo.swift; sourceTree = "<group>"; };
 		6DE0879C2491CD1E000F2041 /* CustomTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextfield.swift; sourceTree = "<group>"; };
+		6DE4934A2493082D00C4FB02 /* Simple List.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Simple List.entitlements"; sourceTree = "<group>"; };
+		6DE4934C2493084E00C4FB02 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DE4934D2493084E00C4FB02 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +114,7 @@
 				6D2B1FB524904A120025E786 /* Simple ListTests */,
 				6D2B1FC024904A120025E786 /* Simple ListUITests */,
 				6D2B1F9A24904A070025E786 /* Products */,
+				6DE4934B2493084E00C4FB02 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -126,6 +131,7 @@
 		6D2B1F9B24904A070025E786 /* Simple List */ = {
 			isa = PBXGroup;
 			children = (
+				6DE4934A2493082D00C4FB02 /* Simple List.entitlements */,
 				6D2B1F9C24904A070025E786 /* AppDelegate.swift */,
 				6D2B1F9E24904A070025E786 /* SceneDelegate.swift */,
 				6D2B2011249050130025E786 /* Views */,
@@ -205,6 +211,14 @@
 				6D2B2024249051400025E786 /* Misc.swift */,
 			);
 			path = "Misc items";
+			sourceTree = "<group>";
+		};
+		6DE4934B2493084E00C4FB02 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6DE4934C2493084E00C4FB02 /* CloudKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -518,6 +532,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Simple List/Simple List.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Simple List/Preview Content\"";
 				DEVELOPMENT_TEAM = U29H955YLN;
@@ -540,6 +555,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Simple List/Simple List.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Simple List/Preview Content\"";
 				DEVELOPMENT_TEAM = U29H955YLN;

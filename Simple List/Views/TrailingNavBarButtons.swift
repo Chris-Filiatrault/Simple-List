@@ -57,7 +57,7 @@ struct TrailingNavBarButtons: View {
                      withAnimation { self.itemAdded.toggle() }
                   }
                }) {
-                  Text("Done")
+                  Text(self.textfieldValue == "" ? "Done" : "Add")
                }.padding()
             }
                
@@ -67,6 +67,7 @@ struct TrailingNavBarButtons: View {
             else if self.textfieldActive == false && globalVariables.textfieldRowEditMode == true {
                Button(action: {
                   UIApplication.shared.endEditing()
+                  self.globalVariables.textfieldRowEditMode = false
                   
                }) {
                   Text("Done")

@@ -59,6 +59,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                fatalError("Unresolved error \(error), \(error.userInfo)")
            }
        })
+      
+      // Allow conflicts to be merged
+      container.viewContext.automaticallyMergesChangesFromParent = true
+      
+      // Make the iCloud store the source of truth
+      container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+      
        return container
    }()
 

@@ -6,8 +6,9 @@
  ====== NEXT ======
  ------------------
  
+- Fix the Done/Trash button glitching when switching between textfield rows ✅
+ 
  - Set up iCloud syncing
-
  
  - Make privacy policy for Simple List and upload it using MediaFire
  https://www.mediafire.com/

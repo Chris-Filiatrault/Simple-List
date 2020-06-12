@@ -65,11 +65,16 @@ struct Home: View {
             // ===Enter item textfield===
             ZStack(alignment: .leading) {
                
-               if textfieldValue.isEmpty { Text("Enter item...").foregroundColor(Color("textfield")) }
+               if textfieldValue.isEmpty {
+                     Text("Tap to enter an item...")
+                        .foregroundColor(Color("textfield"))
+               }
                
                TextField("", text: self.$textfieldValue, onEditingChanged: { changed in
                   withAnimation {
                      self.textfieldActive.toggle()
+                     
+                     self.globalVariables.textfieldRowEditMode = false
                   }
                }, onCommit: {
                   if self.textfieldValue != "" {
