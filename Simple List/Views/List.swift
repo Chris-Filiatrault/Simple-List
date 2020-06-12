@@ -30,7 +30,7 @@ struct ListView: View {
                ForEach(itemsFromFetchRequest, id: \.self) { item in
                   VStack(spacing: 0) {
                      
-                     Row(thisItem: item, markedOff: item.markedOff, position: item.position, itemName: item.wrappedName,
+                     Row(thisItem: item, markedOff: item.markedOff, position: item.position,
                          shownInList: item.shownInList, textfieldActive: self.$textfieldActive, itemAdded: self.$itemAdded,
                          showRenameTextfield: self.$showRenameTextfield)
                   }
@@ -47,7 +47,7 @@ struct ListView: View {
                ForEach(itemsFromFetchRequest, id: \.self) { item in
                   VStack(spacing: 0) {
                      
-                     Row(thisItem: item, markedOff: item.markedOff, position: item.position, itemName: item.wrappedName,
+                     Row(thisItem: item, markedOff: item.markedOff, position: item.position,
                          shownInList: item.shownInList, textfieldActive: self.$textfieldActive, itemAdded: self.$itemAdded,
                          showRenameTextfield: self.$showRenameTextfield)
                   }

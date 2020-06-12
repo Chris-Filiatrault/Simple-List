@@ -27,6 +27,18 @@ struct TrailingNavBarButtons: View {
       VStack {
          if self.textfieldActive == false && globalVariables.textfieldRowEditMode == false {
             
+            HStack {
+               
+            Button(action: {
+               resetMOC()
+               print("MOC reset")
+            }) {
+               Text("Del")
+                  .foregroundColor(.red)
+            }.padding()
+            
+            
+            
             // Delete items
             Button(action: {
                if self.tickedOffItems.count == 0 {
@@ -43,6 +55,7 @@ struct TrailingNavBarButtons: View {
                .alert(isPresented: $showNoItemsAlert) {
                   Alert(title: Text("Information"), message: Text("Tick off items in your list to delete them all at once"), dismissButton: .default(Text("Ok")))
             }
+         }
          }
             
             
