@@ -19,7 +19,5 @@ class GlobalVariableClass: ObservableObject {
    @Published var itemID: UUID = UUID()
    @Published var blurList: Bool = false
    
-   @FetchRequest(entity: Item.entity(), sortDescriptors: [
-      NSSortDescriptor(keyPath: \Item.position, ascending: false)], predicate: NSPredicate(format: "shownInList == true")) var itemsFromFetchRequest: FetchedResults<Item>
    
 }
