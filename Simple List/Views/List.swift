@@ -14,42 +14,43 @@ struct ListView: View {
 
    @State private var showRenameTextfield = false
    @State private var alertInput = ""
-   @Binding var itemAdded: Bool
-   @Binding var textfieldActive: Bool
+   @Binding var isEditMode: EditMode
 
    @FetchRequest(entity: Item.entity(), sortDescriptors: [
       NSSortDescriptor(keyPath: \Item.position, ascending: false)], predicate: NSPredicate(format: "shownInList == true")) var itemsFromFetchRequest: FetchedResults<Item>
 
 
-
    var body: some View {
       VStack(spacing: 0) {
 
-         if itemAdded == true {
+         if globalVariables.itemAdded == true {
             List {
                ForEach(itemsFromFetchRequest, id: \.self) { item in
                   VStack(spacing: 0) {
 
                      Row(thisItem: item, markedOff: item.markedOff, position: item.position, itemName: item.wrappedName,
-                         shownInList: item.shownInList, textfieldActive: self.$textfieldActive, itemAdded: self.$itemAdded,
-                         showRenameTextfield: self.$showRenameTextfield)
+                         shownInList: item.shownInList,
+                         showRenameTextfield: self.$showRenameTextfield, isEditMode: self.$isEditMode)
+                          
                   }
                }
                .onMove(perform: move)
                .onDelete(perform: deleteSwipedItem)
                .listRowBackground(Color("listRowBackground").edgesIgnoringSafeArea(.horizontal))
-            }
-            .environment(\.defaultMinListRowHeight, 20)
+            }.environment(\.editMode, self.$isEditMode) 
+           // .environment(\.defaultMinListRowHeight, 20)
          }
 
-         else if itemAdded == false {
+         else if globalVariables.itemAdded == false {
            List {
-               ForEach(itemsFromFetchRequest, id: \.self) { item in
+            ForEach(itemsFromFetchRequest, id: \.self) { item in
                   VStack(spacing: 0) {
 
                      Row(thisItem: item, markedOff: item.markedOff, position: item.position, itemName: item.wrappedName,
-                         shownInList: item.shownInList, textfieldActive: self.$textfieldActive, itemAdded: self.$itemAdded,
-                         showRenameTextfield: self.$showRenameTextfield)
+                         shownInList: item.shownInList,
+                         showRenameTextfield: self.$showRenameTextfield, isEditMode: self.$isEditMode)
+                        
+                     
                   }
                }
 
@@ -57,11 +58,12 @@ struct ListView: View {
                .onDelete(perform: deleteSwipedItem)
                .listRowBackground(Color("listRowBackground").edgesIgnoringSafeArea(.horizontal))
             }
-           .environment(\.defaultMinListRowHeight, 20)
+           //.environment(\.defaultMinListRowHeight, 20)
 
          }
 
       }
+         
       .modifier(AdaptsToSoftwareKeyboard())
 
    }

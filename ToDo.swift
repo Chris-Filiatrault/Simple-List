@@ -6,13 +6,13 @@
  ====== NEXT ======
  ------------------
  
-- Fix the Done/Trash button glitching when switching between textfield rows ✅
+ - Change icon to dark mode
  
- - Set up iCloud syncing
+ - Put the app on app store connect and submit application for review before sending out on testflight - use the name "Simple List Pro"
+ 
  
  - Make privacy policy for Simple List and upload it using MediaFire
  https://www.mediafire.com/
- 
  
  - Make pro version with darkmode and without ads
  Release the pro version first as it doesn't involve creating the ads as well.

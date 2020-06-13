@@ -16,29 +16,17 @@ struct TrailingNavBarButtons: View {
    
    @EnvironmentObject var globalVariables: GlobalVariableClass
    
-   @Binding var textfieldActive: Bool
    @Binding var textfieldValue: String
-   @Binding var itemAdded: Bool
    @State var showNoItemsAlert: Bool = false
    @Environment(\.colorScheme) var colorScheme
    
    
    var body: some View {
       VStack {
-         if self.textfieldActive == false && globalVariables.textfieldRowEditMode == false {
+         if self.globalVariables.textfieldActive == false && globalVariables.textfieldRowEditMode == false {
             
             HStack {
                
-            Button(action: {
-               resetMOC()
-               print("MOC reset")
-            }) {
-               Text("Del")
-                  .foregroundColor(.red)
-            }.padding()
-            
-            
-            
             // Delete items
             Button(action: {
                if self.tickedOffItems.count == 0 {
@@ -60,14 +48,14 @@ struct TrailingNavBarButtons: View {
             
             
             // Add button
-            else if textfieldActive == true && globalVariables.textfieldRowEditMode == false {
+            else if globalVariables.textfieldActive == true && globalVariables.textfieldRowEditMode == false {
                Button(action: {
                   if self.textfieldValue == "" {
                      UIApplication.shared.endEditing()
                   } else if self.textfieldValue != "" {
                      addNewItem(itemName: self.$textfieldValue)
                      self.textfieldValue = ""
-                     withAnimation { self.itemAdded.toggle() }
+                     withAnimation { self.globalVariables.itemAdded.toggle() }
                   }
                }) {
                   Text(self.textfieldValue == "" ? "Done" : "Add")
@@ -77,7 +65,7 @@ struct TrailingNavBarButtons: View {
                
                
             //Rename done button
-            else if self.textfieldActive == false && globalVariables.textfieldRowEditMode == true {
+         else if globalVariables.textfieldActive == false && globalVariables.textfieldRowEditMode == true {
                Button(action: {
                   UIApplication.shared.endEditing()
                   self.globalVariables.textfieldRowEditMode = false

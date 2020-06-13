@@ -14,9 +14,10 @@ struct Home: View {
    @EnvironmentObject var globalVariables: GlobalVariableClass
    
    @State var textfieldValue: String = ""
-   @State var textfieldActive: Bool = false
-   @State var itemAdded: Bool = true
    @State var showAddButton: Bool = false
+   @State var isEditMode: EditMode = .inactive
+   
+   
    
    init() {
       
@@ -72,7 +73,8 @@ struct Home: View {
                
                TextField("", text: self.$textfieldValue, onEditingChanged: { changed in
                   withAnimation {
-                     self.textfieldActive.toggle()
+                     print(self.isEditMode)
+                     self.globalVariables.textfieldActive.toggle()
                      
                      self.globalVariables.textfieldRowEditMode = false
                   }
@@ -80,13 +82,11 @@ struct Home: View {
                   if self.textfieldValue != "" {
                      addNewItem(itemName: self.$textfieldValue)
                      self.textfieldValue = ""
-                     withAnimation { self.itemAdded.toggle() }
+                     withAnimation { self.globalVariables.itemAdded.toggle() }
                   }
                })
             }
             .padding(.horizontal, 10)
-//            .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color("textfield"), lineWidth: 1.2))
-//            .background(RoundedRectangle(cornerRadius: 12).foregroundColor(Color("textfieldBackground")))
             .font(.headline)
             .padding(.vertical)
             .padding(.horizontal, 7)
@@ -100,7 +100,7 @@ struct Home: View {
                // ===Nav bar items===
                .navigationBarItems(leading:
                   VStack {
-                     if textfieldActive == false && globalVariables.textfieldRowEditMode == false {
+                     if globalVariables.textfieldActive == false && globalVariables.textfieldRowEditMode == false {
                         
                   EditButton()
                      .padding()
@@ -109,17 +109,17 @@ struct Home: View {
                      }
                   }
                   
-                  //.foregroundColor(Color("navBarFont"))
                   ,trailing:
-                  TrailingNavBarButtons(textfieldActive: $textfieldActive,
-                                        textfieldValue: $textfieldValue,
-                                        itemAdded: $itemAdded))
+                  TrailingNavBarButtons(textfieldValue: $textfieldValue))
+                  .environment(\.editMode, self.$isEditMode)
             
             
             //  ===List===
-            ListView(itemAdded: $itemAdded, textfieldActive: $textfieldActive)
+            ListView(isEditMode: $isEditMode)
+            
             
          }
+         
          .background(Color("background").edgesIgnoringSafeArea(.all))
       } // End of NavView
          .navigationViewStyle(StackNavigationViewStyle())

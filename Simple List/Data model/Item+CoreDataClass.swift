@@ -16,34 +16,13 @@ public class Item: NSManagedObject {
 
 }
 
-//extension Item {
-//   static func getItemsFetchRequest () -> NSFetchRequest<Item> {
-//         
-//      guard let appDelegate =
-//         UIApplication.shared.delegate as? AppDelegate else {
-//            
-//      }
-//
-//      let managedContext =
-//         appDelegate.persistentContainer.viewContext
-//
-//
-//      let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Item")
-//      fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Item.position, ascending: false)]
-//
-//
-//      do {
-//         let fetchReturn = try managedContext.fetch(fetchRequest)
-//         
-//         return fetchReturn
-//            
-//         } catch let error as NSError {
-//            print("Could not fetch. \(error), \(error.userInfo)")
-//         }
-//    
-//      
-//   }
-//}
+extension Item {
+   static func getItemsFetchRequest () -> NSFetchRequest<Item> {
+      let request: NSFetchRequest<Item> = Item.fetchRequest() 
+      request.sortDescriptors = [NSSortDescriptor(key: "position", ascending: false)]
+      return request
+   }
+}
 
 
 

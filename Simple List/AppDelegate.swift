@@ -101,8 +101,6 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
       // Override point for customization after application launch.
       return true
@@ -164,7 +162,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
 
 
-//      NotificationCenter.default.addObserver(self, selector: #selector(self.processUpdate), name: .NSPersistentStoreRemoteChange, object: nil)
+      NotificationCenter.default.addObserver(self, selector: #selector(self.processUpdate), name: .NSPersistentStoreRemoteChange, object: nil)
 
        return container
    }()
@@ -188,46 +186,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
    @objc
    func processUpdate(notification: NSNotification) {
       operationQueue.addOperation {
-
+         
          let context = self.persistentContainer.newBackgroundContext()
          context.performAndWait {
-
-            // get items
-            let items: [Item]
-
-            let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Item")
-
-            do {
-               items = try context.fetch(fetchRequest) as! [Item]
-               
-//               for item in items {
-//                  item.name = item.name
-//               }
-               // reorder items
-//               for index in 0..<items.count {
-//                  if items[index] != orderedItems[index] {
-//                     items[index].position = orderedItems[index].position
-//                  }
-//               }
-            } catch let error as NSError {
-               print("Could not fetch. \(error), \(error.userInfo)")
-            }
-
-            if context.hasChanges {
-               do {
-                  try context.save()
-                  print("Context had changes. Now saved.")
-               } catch let error as NSError {
-                  print("Could not save. \(error), \(error.userInfo)")
-               }
-            }
-
-//            items.enumerated().forEach { index, item in
-//               if item.position !=  {
-//                  item.position = index
-//               }
-//            }
-
+            print("Changes detected")
          }
       }
    }
