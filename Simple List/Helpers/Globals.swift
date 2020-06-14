@@ -14,8 +14,7 @@ import CoreData
 
 class GlobalVariableClass: ObservableObject {
  
-   @Published var textfieldRowValue: String = ""
-   @Published var textfieldRowEditMode: Bool = false
+
    @Published var textfieldActive: Bool = false
    @Published var itemAdded: Bool = true // for refreshing list state
    @Published var itemID: UUID = UUID()

@@ -19,10 +19,7 @@ struct EditNameView: View {
       NavigationView {
       GeometryReader { geometry in
 
-
          VStack {
-
-            // Fix Connection to daemon was invalidated bug when trying to rename items
 
             Text("Rename \"\(self.thisItem.wrappedName)\" to...")
                .font(.title)

@@ -11,9 +11,7 @@ import SwiftUI
 struct ListView: View {
 
    @EnvironmentObject var globalVariables: GlobalVariableClass
-
-   @State private var showRenameTextfield = false
-   @State private var alertInput = ""
+   
    @Binding var isEditMode: EditMode
 
    @FetchRequest(entity: Item.entity(), sortDescriptors: [
@@ -22,23 +20,24 @@ struct ListView: View {
 
    var body: some View {
       VStack(spacing: 0) {
+         
+         if itemsFromFetchRequest.count >= 1 {
+            Divider()
+         }
 
          if globalVariables.itemAdded == true {
             List {
                ForEach(itemsFromFetchRequest, id: \.self) { item in
                   VStack(spacing: 0) {
 
-                     Row(thisItem: item, markedOff: item.markedOff, position: item.position, itemName: item.wrappedName,
-                         shownInList: item.shownInList,
-                         showRenameTextfield: self.$showRenameTextfield, isEditMode: self.$isEditMode)
+                     Row(thisItem: item, markedOff: item.markedOff, position: item.position, isEditMode: self.$isEditMode)
                           
                   }
                }
                .onMove(perform: move)
                .onDelete(perform: deleteSwipedItem)
                .listRowBackground(Color("listRowBackground").edgesIgnoringSafeArea(.horizontal))
-            }.environment(\.editMode, self.$isEditMode) 
-           // .environment(\.defaultMinListRowHeight, 20)
+            }.environment(\.editMode, self.$isEditMode)
          }
 
          else if globalVariables.itemAdded == false {
@@ -46,24 +45,19 @@ struct ListView: View {
             ForEach(itemsFromFetchRequest, id: \.self) { item in
                   VStack(spacing: 0) {
 
-                     Row(thisItem: item, markedOff: item.markedOff, position: item.position, itemName: item.wrappedName,
-                         shownInList: item.shownInList,
-                         showRenameTextfield: self.$showRenameTextfield, isEditMode: self.$isEditMode)
+                     Row(thisItem: item, markedOff: item.markedOff, position: item.position, isEditMode: self.$isEditMode)
                         
                      
                   }
                }
-
                .onMove(perform: move)
                .onDelete(perform: deleteSwipedItem)
                .listRowBackground(Color("listRowBackground").edgesIgnoringSafeArea(.horizontal))
-            }
-           //.environment(\.defaultMinListRowHeight, 20)
+            }.environment(\.editMode, self.$isEditMode)
 
          }
 
       }
-         
       .modifier(AdaptsToSoftwareKeyboard())
 
    }

@@ -6,9 +6,7 @@
  ====== NEXT ======
  ------------------
  
- - Change icon to dark mode
  
- - Put the app on app store connect and submit application for review before sending out on testflight - use the name "Simple List Pro"
  
  
  - Make privacy policy for Simple List and upload it using MediaFire
@@ -23,13 +21,14 @@
  ----------------------------------
  ===== Things for later =====
  ----------------------------------
-
-
- - Tapping on a list item to cross it off dismisses the keyboard
  
  - Animation issue when moving an item one spot above
  
- - Swipe to dismiss keyboard (without breaking other functions. See stackoverflow question I asked)
+ - Increase active area textfields
+ 
+ - Customise the return button so the keyboard isn't dismissed
+ 
+ - Swipe down to dismiss keyboard (without breaking other functions. See stackoverflow question I asked)
 
  
  

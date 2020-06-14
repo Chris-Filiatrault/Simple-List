@@ -107,8 +107,7 @@ func deleteItems() {
       
       for item in items {
          if item.markedOff == true {
-            item.shownInList = false
-            item.position = 0
+            managedContext.delete(item)
          }
       }
       
@@ -146,8 +145,7 @@ func deleteThisItem(thisItem: Item) {
       
       for item in items {
          if item == thisItem {
-            item.shownInList = false
-            item.position = 0
+            managedContext.delete(item)
          }
       }
       
@@ -187,8 +185,7 @@ func deleteSwipedItem(at offsets: IndexSet) {
          
          let item = fetchReturn[offset]
          
-         item.shownInList = false
-         item.position = 0
+         managedContext.delete(item)
          
       }
       
@@ -207,43 +204,43 @@ func deleteSwipedItem(at offsets: IndexSet) {
 
 
 func move(at offsets: IndexSet, to destination: Int) {
-
-guard let appDelegate =
-   UIApplication.shared.delegate as? AppDelegate else {
-      return
-}
-
-let managedContext =
-   appDelegate.persistentContainer.viewContext
-
-
-let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Item")
-fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Item.position, ascending: false)]
-
-
-do {
-   let items = try managedContext.fetch(fetchRequest) as! [Item]
    
-   for offset in offsets {
-      let movedItem = items[offset]
+   guard let appDelegate =
+      UIApplication.shared.delegate as? AppDelegate else {
+         return
+   }
+   
+   let managedContext =
+      appDelegate.persistentContainer.viewContext
+   
+   
+   let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Item")
+   fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Item.position, ascending: false)]
+   
+   
+   do {
+      let items = try managedContext.fetch(fetchRequest) as! [Item]
       
-      // Item is moving to last position
-      if destination == items.count {
-         movedItem.position = items[destination - 1].position * 0.999999
-      
-      // Item is moving to first position
-      } else if destination == 0 {
-         movedItem.position = items[0].position * 1.001
-      
-      // Item is moving in between first and last positions
-      } else {
-         let priorItem: Item = items[destination - 1]
-         let followingItem: Item = items[destination]
-         movedItem.position = (priorItem.position + followingItem.position) / 2
+      for offset in offsets {
+         let movedItem = items[offset]
+         
+         // Item is moving to last position
+         if destination == items.count {
+            movedItem.position = items[destination - 1].position * 0.999999
+            
+            // Item is moving to first position
+         } else if destination == 0 {
+            movedItem.position = items[0].position * 1.001
+            
+            // Item is moving in between first and last positions
+         } else {
+            let priorItem: Item = items[destination - 1]
+            let followingItem: Item = items[destination]
+            movedItem.position = (priorItem.position + followingItem.position) / 2
+         }
+         
       }
       
-   }
-
       do {
          try managedContext.save()
          
@@ -295,59 +292,6 @@ func editName(thisItem: Item, itemNewName: String) {
       print("Could not fetch. \(error), \(error.userInfo)")
    }
 }
-
-
-
-//func saveItemNames() {
-//   
-//   guard let appDelegate =
-//      UIApplication.shared.delegate as? AppDelegate else {
-//         return
-//   }
-//   
-//   let managedContext =
-//      appDelegate.persistentContainer.viewContext
-//   
-//   let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Item")
-//   fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Item.position, ascending: false)]
-//   
-//   do {
-//      let items = try managedContext.fetch(fetchRequest) as! [Item]
-//      
-//
-//      for item in items {
-//         
-//      }
-//      //let objectUpdate = fetchReturn[0] as! NSManagedObject
-//      //objectUpdate.setValue(itemNewValue, forKey: "name")
-//      
-//      do {
-//         try managedContext.save()
-//         print("updated successfully")
-//      } catch let error as NSError {
-//         print("Could not save. \(error), \(error.userInfo)")
-//      }
-//      
-//   } catch let error as NSError {
-//      print("Could not fetch. \(error), \(error.userInfo)")
-//   }
-//}
-
-//
-//func checkIfItemExists(name: String) -> Bool {
-//
-//   var result = false
-//
-//   for item in itemsFromFetchRequest {
-//      if item.name == newItem {
-//         result = true
-//         return result
-//      }
-//   }
-//   return result
-//}
-//
-//
 
 
 

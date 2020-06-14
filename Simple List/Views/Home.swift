@@ -61,13 +61,13 @@ struct Home: View {
    var body: some View {
       
       NavigationView {
-         VStack {
+         VStack(spacing: 0) {
             
             // ===Enter item textfield===
             ZStack(alignment: .leading) {
                
                if textfieldValue.isEmpty {
-                     Text("Tap to enter an item...")
+                  Text("Tap to enter an item...")
                         .foregroundColor(Color("textfield"))
                }
                
@@ -75,8 +75,9 @@ struct Home: View {
                   withAnimation {
                      print(self.isEditMode)
                      self.globalVariables.textfieldActive.toggle()
+                     self.isEditMode = .inactive
                      
-                     self.globalVariables.textfieldRowEditMode = false
+                     
                   }
                }, onCommit: {
                   if self.textfieldValue != "" {
@@ -86,21 +87,23 @@ struct Home: View {
                   }
                })
             }
-            .padding(.horizontal, 10)
+            .padding(.horizontal, 5)
             .font(.headline)
-            .padding(.vertical)
-            .padding(.horizontal, 7)
+            .padding()
             .padding(.top, 5)
-            .offset(y: 5)
-
+            .padding(.vertical, 10)
+            .background(Color("listRowBackground"))
                
+            
+
+            
                // ===Navigation bar===
                .navigationBarTitle("", displayMode: .inline)
                
                // ===Nav bar items===
                .navigationBarItems(leading:
                   VStack {
-                     if globalVariables.textfieldActive == false && globalVariables.textfieldRowEditMode == false {
+                     if globalVariables.textfieldActive == false {
                         
                   EditButton()
                      .padding()

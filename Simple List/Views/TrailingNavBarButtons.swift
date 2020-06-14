@@ -16,66 +16,72 @@ struct TrailingNavBarButtons: View {
    
    @EnvironmentObject var globalVariables: GlobalVariableClass
    
-   @Binding var textfieldValue: String
    @State var showNoItemsAlert: Bool = false
+   @State var confirmDeleteItemsAlert: Bool = false
+   
+   @Binding var textfieldValue: String
+
    @Environment(\.colorScheme) var colorScheme
+   
    
    
    var body: some View {
       VStack {
-         if self.globalVariables.textfieldActive == false && globalVariables.textfieldRowEditMode == false {
+         if self.globalVariables.textfieldActive == false {
             
             HStack {
                
-            // Delete items
-            Button(action: {
-               if self.tickedOffItems.count == 0 {
-                  self.showNoItemsAlert = true
-               } else if self.tickedOffItems.count > 0 {
-                  deleteItems()
-               }
-               print("Trash button pressed")
-            }) {
-               Image(systemName: colorScheme == .light ? "trash" : "trash")
-                  .imageScale(.large)
-                  .foregroundColor(.red)
-            }.padding()
-               .alert(isPresented: $showNoItemsAlert) {
-                  Alert(title: Text("Information"), message: Text("Tick off items in your list to delete them all at once"), dismissButton: .default(Text("Ok")))
-            }
-         }
-         }
-            
-            
-            // Add button
-            else if globalVariables.textfieldActive == true && globalVariables.textfieldRowEditMode == false {
+               // Delete items
                Button(action: {
-                  if self.textfieldValue == "" {
-                     UIApplication.shared.endEditing()
-                  } else if self.textfieldValue != "" {
-                     addNewItem(itemName: self.$textfieldValue)
-                     self.textfieldValue = ""
-                     withAnimation { self.globalVariables.itemAdded.toggle() }
+                  if self.tickedOffItems.count > 0 {
+                     self.confirmDeleteItemsAlert = true
                   }
                }) {
-                  Text(self.textfieldValue == "" ? "Done" : "Add")
-               }.padding()
+                  Image(systemName: colorScheme == .light ? "trash" : "trash")
+                     .imageScale(.large)
+                     .foregroundColor(.red)
+               }
+               .padding()
+               .alert(isPresented: $confirmDeleteItemsAlert) {
+                  Alert(
+                        title: Text(
+                           tickedOffItems.count > 1 ? "Delete \(tickedOffItems.count) items?" : "Delete \(tickedOffItems.count) item?"),
+                        primaryButton: .default(Text("Cancel")),
+                        secondaryButton: .destructive(Text("Delete")) { deleteItems() }
+                  )
+               }
             }
-               
-               
-               
-            //Rename done button
-         else if globalVariables.textfieldActive == false && globalVariables.textfieldRowEditMode == true {
-               Button(action: {
-                  UIApplication.shared.endEditing()
-                  self.globalVariables.textfieldRowEditMode = false
-                  
-               }) {
-                  Text("Done")
-                  
-               }.padding()
-            }
-            
          }
+            
+            
+         // Add button
+         else if globalVariables.textfieldActive == true {
+            Button(action: {
+               if self.textfieldValue == "" {
+                  UIApplication.shared.endEditing()
+               } else if self.textfieldValue != "" {
+                  addNewItem(itemName: self.$textfieldValue)
+                  self.textfieldValue = ""
+                  withAnimation { self.globalVariables.itemAdded.toggle() }
+               }
+            }) {
+               Text(self.textfieldValue == "" ? "Done" : "Add")
+            }.padding()
+         }
+            
+            
+            
+         //Rename done button
+         else if globalVariables.textfieldActive == false {
+            Button(action: {
+               UIApplication.shared.endEditing()
+               
+            }) {
+               Text("Done")
+               
+            }.padding()
+         }
+         
       }
+   }
 }
