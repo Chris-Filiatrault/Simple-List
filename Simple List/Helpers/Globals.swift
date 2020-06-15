@@ -21,5 +21,4 @@ class GlobalVariableClass: ObservableObject {
    @Published var blurList: Bool = false
    
    
-   
 }
