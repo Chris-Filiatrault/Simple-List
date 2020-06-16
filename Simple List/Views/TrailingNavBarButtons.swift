@@ -18,8 +18,10 @@ struct TrailingNavBarButtons: View {
    
    @State var showNoItemsAlert: Bool = false
    @State var confirmDeleteItemsAlert: Bool = false
+   @State var showRemoveAdsView: Bool = false
    
    @Binding var textfieldValue: String
+   @Binding var isEditMode: EditMode
 
    @Environment(\.colorScheme) var colorScheme
    
@@ -30,6 +32,17 @@ struct TrailingNavBarButtons: View {
          if self.globalVariables.textfieldActive == false {
             
             HStack {
+               
+               Button(action: {
+                  self.isEditMode = .inactive
+                  self.showRemoveAdsView = true
+               }) {
+                  Image(systemName: "info.circle")
+                     .imageScale(.large)
+               }
+               .sheet(isPresented: self.$showRemoveAdsView){
+                  RemoveAdsView(showRemoveAdsView: self.$showRemoveAdsView)
+               }
                
                // Delete items
                Button(action: {

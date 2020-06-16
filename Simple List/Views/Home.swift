@@ -104,7 +104,7 @@ struct Home: View {
                .navigationBarItems(leading:
                   VStack {
                      if globalVariables.textfieldActive == false {
-                        
+                  
                   EditButton()
                      .padding()
                      .offset(x: -5)
@@ -113,7 +113,7 @@ struct Home: View {
                   }
                   
                   ,trailing:
-                  TrailingNavBarButtons(textfieldValue: $textfieldValue))
+                  TrailingNavBarButtons(textfieldValue: $textfieldValue, isEditMode: self.$isEditMode))
                   .environment(\.editMode, self.$isEditMode)
             
             

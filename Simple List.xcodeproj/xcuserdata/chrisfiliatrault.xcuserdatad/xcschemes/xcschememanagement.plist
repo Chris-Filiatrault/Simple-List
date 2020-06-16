@@ -4,11 +4,6 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Simple List Lite.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
-		</dict>
 		<key>Simple List.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -17,6 +12,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>6D2B1FB124904A120025E786</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>6DE6176E249833C00069214B</key>
 		<dict>
 			<key>primary</key>

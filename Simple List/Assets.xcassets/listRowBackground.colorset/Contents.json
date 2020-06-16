@@ -32,9 +32,9 @@
         "color-space" : "display-p3",
         "components" : {
           "alpha" : "1.000",
-          "blue" : "0.102",
-          "green" : "0.101",
-          "red" : "0.101"
+          "blue" : "0x26",
+          "green" : "0x26",
+          "red" : "0x25"
         }
       },
       "idiom" : "universal"

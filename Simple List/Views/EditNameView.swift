@@ -75,7 +75,7 @@ struct EditNameView: View {
                      .frame(minWidth: 50)
                      .font(.subheadline)
                      .padding(10)
-                     .background(Color("renameItemButton"))
+                     .background(Color("blueButton"))
                      .foregroundColor(.white)
                      .cornerRadius(10)
                      .transition(.scale)
