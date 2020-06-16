@@ -27,9 +27,13 @@
 		6D2B2022249050710025E786 /* AdaptsToSK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B2021249050710025E786 /* AdaptsToSK.swift */; };
 		6D2B2025249051400025E786 /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B2024249051400025E786 /* Misc.swift */; };
 		6D2B2027249054180025E786 /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B2026249054180025E786 /* ToDo.swift */; };
+		6D6672232498D7B900EA7058 /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6672222498D7B900EA7058 /* IAPManager.swift */; };
+		6D6672252498DA6E00EA7058 /* BuyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6672242498DA6E00EA7058 /* BuyView.swift */; };
+		6D6672272498DB6B00EA7058 /* TestHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6672262498DB6B00EA7058 /* TestHome.swift */; };
 		6DDD831A249461E900D347C3 /* EditNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDD8319249461E900D347C3 /* EditNameView.swift */; };
 		6DE4934D2493084E00C4FB02 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DE4934C2493084E00C4FB02 /* CloudKit.framework */; };
 		6DE77BF224988FE6009DF678 /* RemoveAdsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE77BF124988FE6009DF678 /* RemoveAdsView.swift */; };
+		6DE77BF42498AE9D009DF678 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DE77BF32498AE9D009DF678 /* StoreKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,10 +80,14 @@
 		6D2B2021249050710025E786 /* AdaptsToSK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptsToSK.swift; sourceTree = "<group>"; };
 		6D2B2024249051400025E786 /* Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Misc.swift; sourceTree = "<group>"; };
 		6D2B2026249054180025E786 /* ToDo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDo.swift; sourceTree = "<group>"; };
+		6D6672222498D7B900EA7058 /* IAPManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IAPManager.swift; path = "../../../../../Library/Mobile Documents/com~apple~CloudDocs/.Trash/IAPManager.swift"; sourceTree = "<group>"; };
+		6D6672242498DA6E00EA7058 /* BuyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyView.swift; sourceTree = "<group>"; };
+		6D6672262498DB6B00EA7058 /* TestHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHome.swift; sourceTree = "<group>"; };
 		6DDD8319249461E900D347C3 /* EditNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNameView.swift; sourceTree = "<group>"; };
 		6DE4934A2493082D00C4FB02 /* Simple List.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Simple List.entitlements"; sourceTree = "<group>"; };
 		6DE4934C2493084E00C4FB02 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		6DE77BF124988FE6009DF678 /* RemoveAdsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveAdsView.swift; sourceTree = "<group>"; };
+		6DE77BF32498AE9D009DF678 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +96,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6DE4934D2493084E00C4FB02 /* CloudKit.framework in Frameworks */,
+				6DE77BF42498AE9D009DF678 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,6 +202,8 @@
 				6DDD8319249461E900D347C3 /* EditNameView.swift */,
 				6D2B2018249050400025E786 /* TrailingNavBarButtons.swift */,
 				6DE77BF124988FE6009DF678 /* RemoveAdsView.swift */,
+				6D6672262498DB6B00EA7058 /* TestHome.swift */,
+				6D6672242498DA6E00EA7058 /* BuyView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -200,6 +211,7 @@
 		6D2B201A249050470025E786 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				6D6672222498D7B900EA7058 /* IAPManager.swift */,
 				6D2B201B249050550025E786 /* Globals.swift */,
 				6D2B201D2490505E0025E786 /* Functions.swift */,
 				6D2B201F249050690025E786 /* Extensions.swift */,
@@ -219,6 +231,7 @@
 		6DE4934B2493084E00C4FB02 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6DE77BF32498AE9D009DF678 /* StoreKit.framework */,
 				6DE4934C2493084E00C4FB02 /* CloudKit.framework */,
 			);
 			name = Frameworks;
@@ -355,13 +368,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D6672232498D7B900EA7058 /* IAPManager.swift in Sources */,
 				6DE77BF224988FE6009DF678 /* RemoveAdsView.swift in Sources */,
+				6D6672272498DB6B00EA7058 /* TestHome.swift in Sources */,
 				6D2B1F9D24904A070025E786 /* AppDelegate.swift in Sources */,
 				6D2B1F9F24904A070025E786 /* SceneDelegate.swift in Sources */,
 				6D2B2019249050400025E786 /* TrailingNavBarButtons.swift in Sources */,
 				6D2B2015249050240025E786 /* List.swift in Sources */,
 				6D2B201E2490505E0025E786 /* Functions.swift in Sources */,
 				6D2B1FF924904B830025E786 /* Item+CoreDataClass.swift in Sources */,
+				6D6672252498DA6E00EA7058 /* BuyView.swift in Sources */,
 				6D2B2027249054180025E786 /* ToDo.swift in Sources */,
 				6D2B20172490502B0025E786 /* Row.swift in Sources */,
 				6DDD831A249461E900D347C3 /* EditNameView.swift in Sources */,

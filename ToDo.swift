@@ -6,7 +6,11 @@
  ====== NEXT ======
  ------------------
 
+ - In-app purchase to remove ads
  
+ - Include ads through admob
+ 
+ - Add
  
  ----------------------------------
  ===== Things for later =====

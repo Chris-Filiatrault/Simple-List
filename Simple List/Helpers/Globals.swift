@@ -16,5 +16,6 @@ class GlobalVariableClass: ObservableObject {
  
    @Published var textfieldActive: Bool = false
    @Published var itemAdded: Bool = true // for refreshing list state
+
    
 }
