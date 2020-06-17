@@ -12,6 +12,7 @@ import CoreData
 struct Home: View {
    
    @EnvironmentObject var globalVariables: GlobalVariableClass
+   @Environment(\.horizontalSizeClass) var sizeClass
    
    @State var textfieldValue: String = ""
    @State var showAddButton: Bool = false
@@ -54,78 +55,94 @@ struct Home: View {
          print("Could not delete. \(error), \(error.userInfo)")
       }
       
+      
+      // initialise user defaults to false for paidToRemoveAds
+      
    }
    
    
    
    var body: some View {
       
-      NavigationView {
-         VStack(spacing: 0) {
-            
-            // ===Enter item textfield===
-            ZStack(alignment: .leading) {
+      GeometryReader { geometry in
+         NavigationView {
+            VStack(spacing: 0) {
                
-               if textfieldValue.isEmpty {
-                  Text("Tap to enter an item...")
-                        .foregroundColor(Color("textfield"))
-               }
-               
-               TextField("", text: self.$textfieldValue, onEditingChanged: { changed in
-                  withAnimation {
-                     print(self.isEditMode)
-                     self.globalVariables.textfieldActive.toggle()
-                     self.isEditMode = .inactive
-                     
-                     
-                  }
-               }, onCommit: {
-                  if self.textfieldValue != "" {
-                     addNewItem(itemName: self.$textfieldValue)
-                     self.textfieldValue = ""
-                     withAnimation { self.globalVariables.itemAdded.toggle() }
-                  }
-               })
-            }
-            .padding(.horizontal, 5)
-            .font(.headline)
-            .padding()
-            .padding(.top, 5)
-            .padding(.vertical, 10)
-            .background(Color("listRowBackground"))
-               
-            
-
-            
-               // ===Navigation bar===
-               .navigationBarTitle("", displayMode: .inline)
-               
-               // ===Nav bar items===
-               .navigationBarItems(leading:
-                  VStack {
-                     if globalVariables.textfieldActive == false {
+               // ===Enter item textfield===
+               ZStack(alignment: .leading) {
                   
-                  EditButton()
-                     .padding()
-                     .offset(x: -5)
+                  if self.textfieldValue.isEmpty {
+                     Text("Tap to enter an item...")
+                        .foregroundColor(Color("textfield"))
+                  }
+                  
+                  TextField("", text: self.$textfieldValue, onEditingChanged: { changed in
+                     withAnimation {
+                        print(self.isEditMode)
+                        self.globalVariables.textfieldActive.toggle()
+                        self.isEditMode = .inactive
+                        
                         
                      }
-                  }
+                  }, onCommit: {
+                     if self.textfieldValue != "" {
+                        addNewItem(itemName: self.$textfieldValue)
+                        self.textfieldValue = ""
+                        withAnimation { self.globalVariables.itemAdded.toggle() }
+                     }
+                  })
+               }
+               .padding(.horizontal, 5)
+               .font(.headline)
+               .padding()
+               .padding(.top, 5)
+               .padding(.vertical, 10)
+               .background(Color("listRowBackground"))
                   
-                  ,trailing:
-                  TrailingNavBarButtons(textfieldValue: $textfieldValue, isEditMode: self.$isEditMode))
+                  
+                  
+                  
+                  // ===Navigation bar===
+                  .navigationBarTitle("", displayMode: .inline)
+                  
+                  // ===Nav bar items===
+                  .navigationBarItems(leading:
+                     VStack {
+                        if self.globalVariables.textfieldActive == false {
+                           
+                           EditButton()
+                              .padding()
+                              .offset(x: -5)
+                           
+                        }
+                     }
+                     
+                     ,trailing:
+                     TrailingNavBarButtons(textfieldValue: self.$textfieldValue, isEditMode: self.$isEditMode))
                   .environment(\.editMode, self.$isEditMode)
-            
-            
-            //  ===List===
-            ListView(isEditMode: $isEditMode)
-            
-            
-         }
-         
-         .background(Color("background").edgesIgnoringSafeArea(.all))
-      } // End of NavView
-         .navigationViewStyle(StackNavigationViewStyle())
+               
+               
+               //  ===List===
+               ListView(isEditMode: self.$isEditMode)
+               
+               if self.sizeClass == .compact {
+                  AdView()
+                  .frame(width: geometry.size.width * 0.85, height: geometry.size.height * 0.04)
+                        .padding()
+
+               } else {
+                  AdView()
+                     .frame(width: geometry.size.width * 0.85, height: geometry.size.height * 0.04)
+                     .padding()
+               }
+               
+               
+            }
+               
+            .background(Color("background").edgesIgnoringSafeArea(.all))
+         } // End of NavView
+            .navigationViewStyle(StackNavigationViewStyle())
+      }
       
    }
 }

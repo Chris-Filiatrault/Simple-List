@@ -11,12 +11,14 @@ import SwiftUI
 struct TestHome: View {
    
    @State var purchased: Bool = false
+   //@State var showBuyView: Bool = false
     var body: some View {
       
       VStack {
-      Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
       
       BuyView(purchased: $purchased)
+         
+
       }
     }
 }
