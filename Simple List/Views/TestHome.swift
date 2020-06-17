@@ -10,13 +10,14 @@ import SwiftUI
 
 struct TestHome: View {
    
+   @ObservedObject var userPurchase = UserPurchase()
    @State var purchased: Bool = false
    //@State var showBuyView: Bool = false
     var body: some View {
       
       VStack {
       
-      BuyView(purchased: $purchased)
+         BuyView(purchased: $purchased)
          
 
       }

@@ -11,27 +11,34 @@ import StoreKit
 struct BuyView: View {
    
    @State var numPurchases: Int = 0
+   @Binding var purchased: Bool
+   @ObservedObject var products = ProductsDB.shared
+   @ObservedObject var userPurchase = UserPurchase()
 
    @EnvironmentObject var globalVariables: GlobalVariableClass
    
-   @Binding var purchased: Bool
-   @ObservedObject var products = ProductsDB.shared
    
    
    let productIDs: [String] = IAPManager.shared.returnProductIDs()
    let product: SKProduct = SKProduct()
    var body: some View {
+
+
       GeometryReader { geometry in
          VStack {
             
+            
+            
+            
             Button(action: {
-               UserDefaults.standard.set(true, forKey: "paidToRemoveAds")
+               UserDefaults.standard.set(true, forKey: "purchased")
+               print("Set to true")
             }) {
                Text("Paid")
             }
             
             Button(action: {
-               UserDefaults.standard.set(false, forKey: "paid")
+               UserDefaults.standard.set(false, forKey: "purchased")
                print("Set to false")
             }) {
                Text("Not paid")
@@ -70,10 +77,18 @@ struct BuyView: View {
                }
             }
             
-            
+
+            if self.userPurchase.purchased == false {
             AdView()
-               .frame(width: geometry.size.width * 0.85, height: geometry.size.height * 0.04)
-               .padding()
+               .frame(width: 320, height: 50, alignment: .center)
+            }
+            
+//
+//            if self.globalVariables.defaults.object(forKey: "purchased") as? Bool ?? true == false {
+//
+//            AdView()
+//               .frame(width: 320, height: 50, alignment: .center)
+//            }
             
          }
       }

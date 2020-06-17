@@ -18,8 +18,6 @@ struct Home: View {
    @State var showAddButton: Bool = false
    @State var isEditMode: EditMode = .inactive
    
-   
-   
    init() {
       
       // To remove all separators in list:
@@ -55,8 +53,7 @@ struct Home: View {
          print("Could not delete. \(error), \(error.userInfo)")
       }
       
-      
-      // initialise user defaults to false for paidToRemoveAds
+      UserDefaults.standard.set(false, forKey: "purchased")
       
    }
    
@@ -125,16 +122,29 @@ struct Home: View {
                //  ===List===
                ListView(isEditMode: self.$isEditMode)
                
-               if self.sizeClass == .compact {
-                  AdView()
-                  .frame(width: geometry.size.width * 0.85, height: geometry.size.height * 0.04)
-                        .padding()
-
-               } else {
-                  AdView()
-                     .frame(width: geometry.size.width * 0.85, height: geometry.size.height * 0.04)
-                     .padding()
+               
+               
+               if self.globalVariables.defaults.object(forKey: "purchased") as? Bool ?? true == true {
+                  
+               AdView()
+                  .frame(width: 320, height: 50, alignment: .center)
                }
+               
+
+//               Banner()
+//               .frame(width: geometry.size.width * 0.85, height: geometry.size.height * 0.04)
+//                     .padding()
+               
+//               if self.sizeClass == .compact {
+//                  AdView()
+//                  .frame(width: geometry.size.width * 0.85, height: geometry.size.height * 0.04)
+//                        .padding()
+//
+//               } else {
+//                  AdView()
+//                     .frame(width: geometry.size.width * 0.85, height: geometry.size.height * 0.04)
+//                     .padding()
+//               }
                
                
             }

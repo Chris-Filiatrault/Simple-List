@@ -7,23 +7,17 @@
 //
 
 // Simple list banner ad ID
+// Put it in place when releasing an update
 // ca-app-pub-8331624426045290~5019801581
 
-
-// Test banner ad id
+// Otherwise use the test banner ad id
 // ca-app-pub-3940256099942544/2934735716
+
+
 
 import SwiftUI
 import GoogleMobileAds
 
-struct TestAdView: View {
-    var body: some View {
-      GeometryReader { geometry in
-      AdView()
-         .frame(width: geometry.size.width * 0.85, height: geometry.size.height * 0.04)
-      }
-    }
-}
 
 struct AdView : UIViewRepresentable {
    
@@ -40,4 +34,70 @@ struct AdView : UIViewRepresentable {
    func updateUIView(_ uiView: GADBannerView, context: UIViewRepresentableContext<AdView>) {
       
    }
+   
+   
+   
 }
+
+
+import Foundation
+import Combine
+
+class UserPurchase: ObservableObject {
+    
+    @Published var purchased: Bool {
+      didSet {
+          UserDefaults.standard.set(false, forKey: "purchased")
+      }
+      
+//      didSet {
+//            UserDefaults.standard.set(purchased, forKey: "purchased")
+//        }
+    }
+    
+    init() {
+        self.purchased = UserDefaults.standard.object(forKey: "purchased") as? Bool ?? true
+   }
+   
+}
+
+
+
+
+
+
+
+
+//
+//import SwiftUI
+//import GoogleMobileAds
+////import UIKit
+//
+//final private class BannerVC: UIViewControllerRepresentable  {
+//
+//   func makeUIViewController(context: Context) -> UIViewController {
+//      let view = GADBannerView(adSize: kGADAdSizeBanner)
+//
+//      let viewController = UIViewController()
+//      view.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+//      view.rootViewController = viewController
+//      viewController.view.addSubview(view)
+//      viewController.view.frame = CGRect(origin: .zero, size: kGADAdSizeBanner.size)
+//      view.load(GADRequest())
+//
+//      return viewController
+//   }
+//
+//   func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
+//}
+//
+//struct Banner: View {
+//   var body: some View{
+//      HStack{
+//         Spacer()
+//         BannerVC()
+//            .frame(width: 320, height: 50, alignment: .center)
+//         Spacer()
+//      }
+//   }
+//}
