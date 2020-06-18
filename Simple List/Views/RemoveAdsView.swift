@@ -9,9 +9,10 @@
 import SwiftUI
 
 struct RemoveAdsView: View {
-    
+
    @Binding var showRemoveAdsView: Bool
-   
+   @ObservedObject var products = ProductsDB.shared
+
    var body: some View {
 
       NavigationView {
@@ -19,7 +20,7 @@ struct RemoveAdsView: View {
 
          VStack {
 
-            Text("Remove ads for")
+            Text("Remove ads for \(IAPManager.shared.formatPrice(for: self.products.items[0]) ?? "")")
 
             // ===Buttons===
             HStack(alignment: .center) {
@@ -35,11 +36,18 @@ struct RemoveAdsView: View {
                      .frame(minWidth: 50)
                }.contentShape(Rectangle())
 
-               
+
                // Purchase button
                Button(action: {
-                  
+
+                  // Needs error handling
+                  let removeAdsProduct = self.products.items[0]
+
                   // Handle purchase here
+                  IAPManager.shared.purchaseV5(product: removeAdsProduct)
+
+                  print("Tried to purchase")
+
 
                }) {
                   Text("Purchase")
@@ -58,13 +66,35 @@ struct RemoveAdsView: View {
 
             }
 
+
+            // Restore purchase button
+            Button(action: {
+               
+               IAPManager.shared.restorePurchasesV5()
+               // Remove if successful
+               // self.showRemoveAdsView.toggle()
+
+            }) {
+               Text("Restore purchase")
+                  .bold()
+                  .cornerRadius(20)
+                  .font(.subheadline)
+                  .frame(minWidth: 50)
+            }.contentShape(Rectangle())
+
+
+
+
+
+         }
+         .onAppear {
+            IAPManager.shared.getProductsV5()
          }
          .padding(.bottom, geometry.size.height * 0.65)
          .padding()
             }
 
          .navigationBarTitle("", displayMode: .inline)
-
          .navigationBarItems(leading:
                Button(action: {
                   self.showRemoveAdsView.toggle()
@@ -81,6 +111,8 @@ struct RemoveAdsView: View {
       .environment(\.horizontalSizeClass, .compact)
    }
 }
+
+
 
 
 

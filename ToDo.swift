@@ -5,14 +5,18 @@
  ------------------
  ====== NEXT ======
  ------------------
-
- - Figure out how to save purchases to user defaults
+ 
+ - Implement purchase functionality in RemoveAdsView
+ 
+ - BuyView() needs error handling in the event that AppDelegate can't load the items from the app store when declaring products.items[0]
+ 
+ 
+ - Ensure that purchases write the status of the purchase to user defaults
  
  - Ensure that restorePurchases saves the paid status to userDefaults 
  
- - Include ads through admob
+ - Link up my app and admob
 
- - In-app purchase to remove ads
  
  
  ----------------------------------

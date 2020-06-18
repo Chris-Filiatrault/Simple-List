@@ -10,14 +10,18 @@ import SwiftUI
 
 struct TestHome: View {
    
-   @ObservedObject var userPurchase = UserPurchase()
-   @State var purchased: Bool = false
-   //@State var showBuyView: Bool = false
+   @EnvironmentObject var globalVariables: GlobalVariableClass
+   //@ObservedObject var userPurchase = UserPurchase()
+   
+   init() {
+      
+   }
+   
     var body: some View {
       
       VStack {
       
-         BuyView(purchased: $purchased)
+         BuyView()
          
 
       }

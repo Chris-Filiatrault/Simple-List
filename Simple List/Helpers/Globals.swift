@@ -16,7 +16,7 @@ class GlobalVariableClass: ObservableObject {
  
    @Published var textfieldActive: Bool = false
    @Published var itemAdded: Bool = true // for refreshing list state
-   @Published var defaults = UserDefaults.standard
+   //@Published var defaults = UserDefaults.standard
    
    
 //   @Published var paidToRemoveAds: Bool {
@@ -24,7 +24,7 @@ class GlobalVariableClass: ObservableObject {
 //         UserDefaults.standard.set(paidToRemoveAds, forKey: "paidToRemoveAds")
 //      }
 //   }
-   
+//
 //   init() {
 //      self.paidToRemoveAds = UserDefaults.standard.object(forKey: "paidToRemoveAds") as? Bool ?? true
 //   }

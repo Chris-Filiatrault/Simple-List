@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       // Override point for customization after application launch.
       
       GADMobileAds.sharedInstance().start(completionHandler: nil)
+      IAPManager.shared.getProductsV5()
       return true
    }
 

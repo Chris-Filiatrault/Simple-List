@@ -20,23 +20,20 @@ import GoogleMobileAds
 
 
 struct AdView : UIViewRepresentable {
-   
+
    func makeUIView(context: UIViewRepresentableContext<AdView>) -> GADBannerView {
-      
+
       let banner = GADBannerView(adSize: kGADAdSizeBanner)
       banner.adUnitID = "ca-app-pub-3940256099942544/2934735716"
       banner.rootViewController = UIApplication.shared.windows.first?.rootViewController
       banner.load(GADRequest())
-      
+
       return banner
    }
-   
+
    func updateUIView(_ uiView: GADBannerView, context: UIViewRepresentableContext<AdView>) {
-      
    }
-   
-   
-   
+
 }
 
 
@@ -44,23 +41,18 @@ import Foundation
 import Combine
 
 class UserPurchase: ObservableObject {
-    
+
     @Published var purchased: Bool {
       didSet {
           UserDefaults.standard.set(false, forKey: "purchased")
       }
-      
-//      didSet {
-//            UserDefaults.standard.set(purchased, forKey: "purchased")
-//        }
     }
-    
+
     init() {
         self.purchased = UserDefaults.standard.object(forKey: "purchased") as? Bool ?? true
    }
-   
-}
 
+}
 
 
 
@@ -101,3 +93,6 @@ class UserPurchase: ObservableObject {
 //      }
 //   }
 //}
+
+
+

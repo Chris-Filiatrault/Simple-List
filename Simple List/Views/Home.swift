@@ -12,7 +12,6 @@ import CoreData
 struct Home: View {
    
    @EnvironmentObject var globalVariables: GlobalVariableClass
-   @Environment(\.horizontalSizeClass) var sizeClass
    
    @State var textfieldValue: String = ""
    @State var showAddButton: Bool = false
@@ -122,30 +121,11 @@ struct Home: View {
                //  ===List===
                ListView(isEditMode: self.$isEditMode)
                
-               
-               
-               if self.globalVariables.defaults.object(forKey: "purchased") as? Bool ?? true == true {
-                  
-               AdView()
-                  .frame(width: 320, height: 50, alignment: .center)
-               }
-               
-
-//               Banner()
-//               .frame(width: geometry.size.width * 0.85, height: geometry.size.height * 0.04)
-//                     .padding()
-               
-//               if self.sizeClass == .compact {
-//                  AdView()
-//                  .frame(width: geometry.size.width * 0.85, height: geometry.size.height * 0.04)
-//                        .padding()
-//
-//               } else {
-//                  AdView()
-//                     .frame(width: geometry.size.width * 0.85, height: geometry.size.height * 0.04)
-//                     .padding()
-//               }
-               
+                              if UserDefaults.standard.object(forKey: "purchased") as? Bool ?? true != true {
+                              AdView()
+                                 .frame(width: 320, height: 50, alignment: .center)
+                                 .padding(.top, 5)
+                              }
                
             }
                
