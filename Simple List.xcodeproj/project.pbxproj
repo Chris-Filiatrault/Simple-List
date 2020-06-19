@@ -232,8 +232,8 @@
 		6D2B201A249050470025E786 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				6D6672222498D7B900EA7058 /* IAPManager.swift */,
 				6D2B201B249050550025E786 /* Globals.swift */,
+				6D6672222498D7B900EA7058 /* IAPManager.swift */,
 				6D2B201D2490505E0025E786 /* Functions.swift */,
 				6D2B201F249050690025E786 /* Extensions.swift */,
 				6D2B2021249050710025E786 /* AdaptsToSK.swift */,
