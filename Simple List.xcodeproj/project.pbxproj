@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D06DB1C249CBFE300F0A019 /* NewStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D06DB1B249CBFE300F0A019 /* NewStruct.swift */; };
 		6D2B1F9D24904A070025E786 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B1F9C24904A070025E786 /* AppDelegate.swift */; };
 		6D2B1F9F24904A070025E786 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B1F9E24904A070025E786 /* SceneDelegate.swift */; };
 		6D2B1FA224904A070025E786 /* Simple_List.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B1FA024904A070025E786 /* Simple_List.xcdatamodeld */; };
@@ -67,6 +68,7 @@
 		3F254C79CEE908BFD42BA13D /* Pods-Simple ListTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Simple ListTests.release.xcconfig"; path = "Target Support Files/Pods-Simple ListTests/Pods-Simple ListTests.release.xcconfig"; sourceTree = "<group>"; };
 		5F39C66B4012F7D4B5799CE0 /* Pods_Simple_List_Simple_ListUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Simple_List_Simple_ListUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AE8C91E7A82DC1AA73C0A7D /* Pods-Simple List.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Simple List.release.xcconfig"; path = "Target Support Files/Pods-Simple List/Pods-Simple List.release.xcconfig"; sourceTree = "<group>"; };
+		6D06DB1B249CBFE300F0A019 /* NewStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStruct.swift; sourceTree = "<group>"; };
 		6D2B1F9924904A070025E786 /* Simple List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Simple List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D2B1F9C24904A070025E786 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6D2B1F9E24904A070025E786 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 			children = (
 				6D2B201B249050550025E786 /* Globals.swift */,
 				6D6672222498D7B900EA7058 /* IAPManager.swift */,
+				6D06DB1B249CBFE300F0A019 /* NewStruct.swift */,
 				6D2B201D2490505E0025E786 /* Functions.swift */,
 				6D2B201F249050690025E786 /* Extensions.swift */,
 				6D2B2021249050710025E786 /* AdaptsToSK.swift */,
@@ -526,6 +529,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D6672232498D7B900EA7058 /* IAPManager.swift in Sources */,
+				6D06DB1C249CBFE300F0A019 /* NewStruct.swift in Sources */,
 				6DE77BF224988FE6009DF678 /* RemoveAdsView.swift in Sources */,
 				6D6672272498DB6B00EA7058 /* TestHome.swift in Sources */,
 				6D2B1F9D24904A070025E786 /* AppDelegate.swift in Sources */,
