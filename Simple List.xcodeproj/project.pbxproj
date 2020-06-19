@@ -93,7 +93,6 @@
 		6D2B2021249050710025E786 /* AdaptsToSK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptsToSK.swift; sourceTree = "<group>"; };
 		6D2B2024249051400025E786 /* Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Misc.swift; sourceTree = "<group>"; };
 		6D2B2026249054180025E786 /* ToDo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDo.swift; sourceTree = "<group>"; };
-		6D615D66249A26F40000DD31 /* Simple List copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Simple List copy-Info.plist"; path = "/Users/chrisfiliatrault/Documents/Apps/Simple List/Simple List copy-Info.plist"; sourceTree = "<absolute>"; };
 		6D6672222498D7B900EA7058 /* IAPManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IAPManager.swift; path = "../../../../../Library/Mobile Documents/com~apple~CloudDocs/.Trash/IAPManager.swift"; sourceTree = "<group>"; };
 		6D6672242498DA6E00EA7058 /* BuyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyView.swift; sourceTree = "<group>"; };
 		6D6672262498DB6B00EA7058 /* TestHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHome.swift; sourceTree = "<group>"; };
@@ -149,7 +148,6 @@
 				6D2B1F9A24904A070025E786 /* Products */,
 				6DE4934B2493084E00C4FB02 /* Frameworks */,
 				76D98C7FBE9CBE69FE210578 /* Pods */,
-				6D615D66249A26F40000DD31 /* Simple List copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -170,6 +168,7 @@
 				6D2B1F9C24904A070025E786 /* AppDelegate.swift */,
 				6D2B1F9E24904A070025E786 /* SceneDelegate.swift */,
 				6D2B2011249050130025E786 /* Views */,
+				6DD243CD249C5B0E0019E2A1 /* In-app purchase */,
 				6D2B1FFC24904B9E0025E786 /* Data model */,
 				6D2B201A249050470025E786 /* Helpers */,
 				6D2B2023249051270025E786 /* Misc items */,
@@ -225,11 +224,7 @@
 				6D2B20162490502B0025E786 /* Row.swift */,
 				6DDD8319249461E900D347C3 /* EditNameView.swift */,
 				6D2B2018249050400025E786 /* TrailingNavBarButtons.swift */,
-				6DE77BF124988FE6009DF678 /* RemoveAdsView.swift */,
-				6D6672262498DB6B00EA7058 /* TestHome.swift */,
-				6D6672242498DA6E00EA7058 /* BuyView.swift */,
-				6DB0B0162499B95F0020CCAB /* Settings.swift */,
-				6DB0B0182499B9900020CCAB /* SettingsView.swift */,
+				6DB0B01A2499FD8F0020CCAB /* AdView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -237,7 +232,6 @@
 		6D2B201A249050470025E786 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				6DB0B01A2499FD8F0020CCAB /* AdView.swift */,
 				6D6672222498D7B900EA7058 /* IAPManager.swift */,
 				6D2B201B249050550025E786 /* Globals.swift */,
 				6D2B201D2490505E0025E786 /* Functions.swift */,
@@ -251,8 +245,20 @@
 			isa = PBXGroup;
 			children = (
 				6D2B2024249051400025E786 /* Misc.swift */,
+				6DB0B0162499B95F0020CCAB /* Settings.swift */,
+				6DB0B0182499B9900020CCAB /* SettingsView.swift */,
 			);
 			path = "Misc items";
+			sourceTree = "<group>";
+		};
+		6DD243CD249C5B0E0019E2A1 /* In-app purchase */ = {
+			isa = PBXGroup;
+			children = (
+				6DE77BF124988FE6009DF678 /* RemoveAdsView.swift */,
+				6D6672242498DA6E00EA7058 /* BuyView.swift */,
+				6D6672262498DB6B00EA7058 /* TestHome.swift */,
+			);
+			path = "In-app purchase";
 			sourceTree = "<group>";
 		};
 		6DE4934B2493084E00C4FB02 /* Frameworks */ = {
@@ -706,7 +712,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 098720754696CDE80CBECF44 /* Pods-Simple List.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconLite;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Simple List/Simple List.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Simple List/Preview Content\"";
@@ -730,7 +736,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6AE8C91E7A82DC1AA73C0A7D /* Pods-Simple List.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconLite;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Simple List/Simple List.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Simple List/Preview Content\"";

@@ -42,34 +42,3 @@ extension UIApplication {
             .endEditing(force)
     }
 }
-
-
-
-struct MyTextFieldStyle: TextFieldStyle {
-    func _body(configuration: TextField<Self._Label>) -> some View {
-        configuration
-        .padding(30)
-        .background(
-            RoundedRectangle(cornerRadius: 20, style: .continuous)
-                .stroke(Color.red, lineWidth: 3)
-        ).padding()
-    }
-}
-
-//
-//struct ResignKeyboardOnDragGesture: ViewModifier {
-//    var gesture = DragGesture().onChanged{_ in
-//        UIApplication.shared.endEditing(true)
-//    }
-//    func body(content: Content) -> some View {
-//        content.gesture(gesture)
-//    }
-//}
-//
-//extension View {
-//    func resignKeyboardOnDragGesture() -> some View {
-//        return modifier(ResignKeyboardOnDragGesture())
-//    }
-//}
-
-

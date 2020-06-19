@@ -32,17 +32,19 @@ struct TrailingNavBarButtons: View {
          if self.globalVariables.textfieldActive == false {
             
             HStack {
+  
                
-               Button(action: {
-                  self.isEditMode = .inactive
-                  self.showRemoveAdsView = true
-               }) {
-                  Image(systemName: "info.circle")
-                     .imageScale(.large)
-               }
-               .sheet(isPresented: self.$showRemoveAdsView){
-                  RemoveAdsView(showRemoveAdsView: self.$showRemoveAdsView)
-               }
+//// Add this back when implementing the in-app purchase to remove ads
+//               Button(action: {
+//                  self.isEditMode = .inactive
+//                  self.showRemoveAdsView = true
+//               }) {
+//                  Image(systemName: "info.circle")
+//                     .imageScale(.large)
+//               }
+//               .sheet(isPresented: self.$showRemoveAdsView){
+//                  RemoveAdsView(showRemoveAdsView: self.$showRemoveAdsView)
+//               }
                
                // Delete items
                Button(action: {

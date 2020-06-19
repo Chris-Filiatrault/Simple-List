@@ -369,3 +369,28 @@
 //    }
 //    
 //}
+
+
+
+
+
+
+//import Foundation
+//import Combine
+//
+//class UserPurchase: ObservableObject {
+//
+//    @Published var purchased: Bool {
+//      didSet {
+//          UserDefaults.standard.set(false, forKey: "purchased")
+//      }
+//    }
+//
+//    init() {
+//        self.purchased = UserDefaults.standard.object(forKey: "purchased") as? Bool ?? true
+//   }
+//
+//}
+//
+//
+//

@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import GoogleMobileAds
+import AdSupport
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,7 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       // Override point for customization after application launch.
       
       GADMobileAds.sharedInstance().start(completionHandler: nil)
-      IAPManager.shared.getProductsV5()
+      
+//      GADMobileAds.sharedInstance().disableAutomatedInAppPurchaseReporting()
+      
+// Add this back when implementing the in-app purchase to remove ads
+//      IAPManager.shared.getProductsV5()
+
       return true
    }
 

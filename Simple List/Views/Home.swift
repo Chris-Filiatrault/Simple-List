@@ -60,79 +60,85 @@ struct Home: View {
    
    var body: some View {
       
-      GeometryReader { geometry in
-         NavigationView {
-            VStack(spacing: 0) {
+      NavigationView {
+         VStack(spacing: 0) {
+            
+            // ===Enter item textfield===
+            ZStack(alignment: .leading) {
                
-               // ===Enter item textfield===
-               ZStack(alignment: .leading) {
-                  
-                  if self.textfieldValue.isEmpty {
-                     Text("Tap to enter an item...")
-                        .foregroundColor(Color("textfield"))
+               if self.textfieldValue.isEmpty {
+                  Text("Tap to enter an item...")
+                     .foregroundColor(Color("textfield"))
+               }
+               
+               TextField("", text: self.$textfieldValue, onEditingChanged: { changed in
+                  withAnimation {
+                     print(self.isEditMode)
+                     self.globalVariables.textfieldActive.toggle()
+                     self.isEditMode = .inactive
+                     
+                     
+                  }
+               }, onCommit: {
+                  if self.textfieldValue != "" {
+                     addNewItem(itemName: self.$textfieldValue)
+                     self.textfieldValue = ""
+                     withAnimation { self.globalVariables.itemAdded.toggle() }
+                  }
+               })
+            }
+            .padding(.horizontal, 5)
+            .font(.headline)
+            .padding()
+            .padding(.top, 5)
+            .padding(.vertical, 10)
+            .background(Color("listRowBackground"))
+               
+               
+               
+               // ===Navigation bar===
+               .navigationBarTitle("", displayMode: .inline)
+               
+               // ===Nav bar items===
+               .navigationBarItems(leading:
+                  VStack {
+                     if self.globalVariables.textfieldActive == false {
+                        
+                        EditButton()
+                           .padding()
+                           .offset(x: -5)
+                     }
                   }
                   
-                  TextField("", text: self.$textfieldValue, onEditingChanged: { changed in
-                     withAnimation {
-                        print(self.isEditMode)
-                        self.globalVariables.textfieldActive.toggle()
-                        self.isEditMode = .inactive
-                        
-                        
-                     }
-                  }, onCommit: {
-                     if self.textfieldValue != "" {
-                        addNewItem(itemName: self.$textfieldValue)
-                        self.textfieldValue = ""
-                        withAnimation { self.globalVariables.itemAdded.toggle() }
-                     }
-                  })
-               }
-               .padding(.horizontal, 5)
-               .font(.headline)
-               .padding()
-               .padding(.top, 5)
-               .padding(.vertical, 10)
-               .background(Color("listRowBackground"))
-                  
-                  
-                  
-                  
-                  // ===Navigation bar===
-                  .navigationBarTitle("", displayMode: .inline)
-                  
-                  // ===Nav bar items===
-                  .navigationBarItems(leading:
-                     VStack {
-                        if self.globalVariables.textfieldActive == false {
-                           
-                           EditButton()
-                              .padding()
-                              .offset(x: -5)
-                           
-                        }
-                     }
-                     
-                     ,trailing:
-                     TrailingNavBarButtons(textfieldValue: self.$textfieldValue, isEditMode: self.$isEditMode))
-                  .environment(\.editMode, self.$isEditMode)
-               
-               
-               //  ===List===
-               ListView(isEditMode: self.$isEditMode)
-               
-                              if UserDefaults.standard.object(forKey: "purchased") as? Bool ?? true != true {
-                              AdView()
-                                 .frame(width: 320, height: 50, alignment: .center)
-                                 .padding(.top, 5)
-                              }
+                  ,trailing:
+                  TrailingNavBarButtons(textfieldValue: self.$textfieldValue, isEditMode: self.$isEditMode))
+               .environment(\.editMode, self.$isEditMode)
+            
+            
+            //  ===List===
+            ListView(isEditMode: self.$isEditMode)
+            
+            if globalVariables.textfieldActive == false {
+               AdView()
+                  .frame(width: 320, height: 50, alignment: .center)
+                  .padding(.top, 5)
                
             }
-               
-            .background(Color("background").edgesIgnoringSafeArea(.all))
-         } // End of NavView
-            .navigationViewStyle(StackNavigationViewStyle())
-      }
+            
+            
+            //// Use this after the in-app purchase to remove ads has been recorded in UserDefaults
+            //               if UserDefaults.standard.object(forKey: "purchased") as? Bool ?? true != true {
+            //                  AdView()
+            //                     .frame(width: 320, height: 50, alignment: .center)
+            //                     .padding(.top, 5)
+            //               }
+            
+            
+         }
+         .background(Color("background").edgesIgnoringSafeArea(.all))
+      } // End of NavView
+         .navigationViewStyle(StackNavigationViewStyle())
+      
       
    }
 }
