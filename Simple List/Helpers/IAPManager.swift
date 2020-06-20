@@ -29,6 +29,7 @@ import Combine
 import StoreKit
 
 
+
 final class ProductsDB: ObservableObject, Identifiable {
 
    static let shared = ProductsDB()
@@ -68,7 +69,8 @@ class IAPManager: NSObject {
       SKPaymentQueue.default().remove(self)
    }
 
-   // Get the store kit product version
+   // Get the products from App Store Connect
+   // The extension below adds functionality to SKProductsRequest
    func getProductsV5() {
       let productIDs = Set(returnProductIDs())
       let request = SKProductsRequest(productIdentifiers: Set(productIDs))
@@ -80,9 +82,8 @@ class IAPManager: NSObject {
 
    // This function returns the IDs created on App Store Connect
    // Note that if I wanted to add more in-app purchases later, I'd have to avoid hard-coding in the IDs like below, to avoid the need to re-release the app (lose all reviews etc presumably)
-   // Included "This_ID_doesn't_exist" to test the class's ability to handle errors
    func returnProductIDs() -> [String] {
-      return ["com.cfiliatrault.Simple_List_test_consumable"]
+      return ["com.cfiliatrault_Simple_List_test"]
    }
 
 
@@ -126,6 +127,7 @@ class IAPManager: NSObject {
          let payment = SKPayment(product: product)
          SKPaymentQueue.default().add(payment)
          print("Payment added to queue for \(product.localizedTitle)")
+         UserDefaults.standard.set(true, forKey: "purchased")
       }
       print("totalRestoredPurchases: \(totalRestoredPurchases)")
       return true
@@ -141,7 +143,7 @@ extension IAPManager: SKProductsRequestDelegate, SKRequestDelegate {
 
       if !goodProducts.isEmpty {
          ProductsDB.shared.items = response.products
-         print("bon ", ProductsDB.shared.items)
+         print("Got products: ", ProductsDB.shared.items)
       }
 
       print("badProducts ", badProducts)
@@ -176,6 +178,7 @@ extension IAPManager: SKPaymentTransactionObserver {
             purchasePublisher.send(("Restored ", true))
             UserDefaults.standard.set(true, forKey: "purchased")
             print("Successfully restored")
+            
          case .failed:
             if let error = transaction.error as? SKError {
                purchasePublisher.send(("Payment Error \(error.code) ", false))
@@ -188,6 +191,7 @@ extension IAPManager: SKPaymentTransactionObserver {
          case .purchasing:
             print("working on it...")
             purchasePublisher.send(("Payment in Process ", false))
+            
          default:
             break
          }

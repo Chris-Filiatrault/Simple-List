@@ -17,6 +17,7 @@ class GlobalVariableClass: ObservableObject {
    @Published var textfieldActive: Bool = false
    @Published var itemAdded: Bool = true // for refreshing list state
    //@Published var defaults = UserDefaults.standard
+   @Published var removeAdsPurchaseRestored: Bool = false
    
    
 //   @Published var paidToRemoveAds: Bool {

@@ -16,15 +16,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
       // Override point for customization after application launch.
+      IAPManager.shared.startObserving()
       
       GADMobileAds.sharedInstance().start(completionHandler: nil)
-      
-//      GADMobileAds.sharedInstance().disableAutomatedInAppPurchaseReporting()
-      
-// Add this back when implementing the in-app purchase to remove ads
-//      IAPManager.shared.getProductsV5()
+      GADMobileAds.sharedInstance().disableAutomatedInAppPurchaseReporting()
+      IAPManager.shared.getProductsV5()
 
       return true
+   }
+   
+   func applicationWillTerminate(_ application: UIApplication) {
+     IAPManager.shared.stopObserving()
    }
 
    // MARK: UISceneSession Lifecycle

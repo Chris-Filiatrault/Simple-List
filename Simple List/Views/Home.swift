@@ -16,6 +16,7 @@ struct Home: View {
    @State var textfieldValue: String = ""
    @State var showAddButton: Bool = false
    @State var isEditMode: EditMode = .inactive
+   @State var paid: Bool = false
    
    init() {
       
@@ -51,8 +52,6 @@ struct Home: View {
       catch let error as NSError {
          print("Could not delete. \(error), \(error.userInfo)")
       }
-      
-      UserDefaults.standard.set(false, forKey: "purchased")
       
    }
    
@@ -118,20 +117,20 @@ struct Home: View {
             //  ===List===
             ListView(isEditMode: self.$isEditMode)
             
-            if globalVariables.textfieldActive == false {
-               AdView()
-                  .frame(width: 320, height: 50, alignment: .center)
-                  .padding(.top, 5)
-               
-            }
+//            if globalVariables.textfieldActive == false {
+//               AdView()
+//                  .frame(width: 320, height: 50, alignment: .center)
+//                  .padding(.top, 5)
+//               
+//            }
             
             
-            //// Use this after the in-app purchase to remove ads has been recorded in UserDefaults
-            //               if UserDefaults.standard.object(forKey: "purchased") as? Bool ?? true != true {
-            //                  AdView()
-            //                     .frame(width: 320, height: 50, alignment: .center)
-            //                     .padding(.top, 5)
-            //               }
+            // Use this after the in-app purchase to remove ads has been recorded in UserDefaults
+                           if UserDefaults.standard.object(forKey: "purchased") as? Bool ?? nil != true {
+                              AdView()
+                                 .frame(width: 320, height: 50, alignment: .center)
+                                 .padding(.top, 5)
+                           }
             
             
          }
