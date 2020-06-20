@@ -8,15 +8,25 @@
 
 import UIKit
 import CoreData
+import GoogleMobileAds
+import AdSupport
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
       // Override point for customization after application launch.
+      IAPManager.shared.startObserving()
+      
+      GADMobileAds.sharedInstance().start(completionHandler: nil)
+      GADMobileAds.sharedInstance().disableAutomatedInAppPurchaseReporting()
+      IAPManager.shared.getProductsV5()
+
       return true
+   }
+   
+   func applicationWillTerminate(_ application: UIApplication) {
+     IAPManager.shared.stopObserving()
    }
 
    // MARK: UISceneSession Lifecycle
@@ -43,11 +53,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         error conditions that could cause the creation of the store to fail.
        */
        let container = NSPersistentCloudKitContainer(name: "Simple_List")
+
+      // Use the persistent containers ability to check for changes, so we can pull/push changes when the order of items is changed
+      guard let description = container.persistentStoreDescriptions.first else {
+         fatalError("No descriptions found")
+      }
+      description.setOption(true as NSObject, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
+
+
        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
            if let error = error as NSError? {
                // Replace this implementation with code to handle the error appropriately.
                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                
+
                /*
                 Typical reasons for an error here include:
                 * The parent directory does not exist, cannot be created, or disallows writing.
@@ -59,11 +77,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                fatalError("Unresolved error \(error), \(error.userInfo)")
            }
        })
+
+      // Allow conflicts to be merged
+      container.viewContext.automaticallyMergesChangesFromParent = true
+
+      // Make the iCloud store the source of truth
+      container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+
+
+      NotificationCenter.default.addObserver(self, selector: #selector(self.processUpdate), name: .NSPersistentStoreRemoteChange, object: nil)
+
        return container
    }()
 
    // MARK: - Core Data Saving support
-
    func saveContext () {
        let context = persistentContainer.viewContext
        if context.hasChanges {
@@ -77,6 +104,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
            }
        }
    }
+
+   
+   // Function for performing 
+   @objc
+   func processUpdate(notification: NSNotification) {
+      operationQueue.addOperation {
+         
+         let context = self.persistentContainer.newBackgroundContext()
+         context.performAndWait {
+            
+            // Can access Item.getItemsFetchRequest() to make changes to items upon incoming changes to the data
+            
+         }
+      }
+   }
+
+
+   // Operation cue, for performing changes
+   // Only allow 1 operation at a time, to avoid syncing issues
+   lazy var operationQueue: OperationQueue = {
+      var queue = OperationQueue()
+      queue.maxConcurrentOperationCount = 1
+      return queue
+   }()
 
 }
 
