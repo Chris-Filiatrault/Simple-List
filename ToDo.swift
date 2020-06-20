@@ -5,7 +5,7 @@
  ------------------
  ====== NEXT ======
  ------------------
- 
+ New
  - Create the final in-app purchase item on the app store
  - Find a way to instantly remove ads once a purchase is made
  - Make the buy view look much nicer. Do some research on what makes users most likely to make the purchase.
