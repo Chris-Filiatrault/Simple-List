@@ -33,7 +33,6 @@ struct NavigationConfigurator: UIViewControllerRepresentable {
 }
 
 
-
 extension UIApplication {
     func endEditing(_ force: Bool) {
         self.windows

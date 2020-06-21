@@ -18,8 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       // Override point for customization after application launch.
       
       
-//      IAPManager.shared.startObserving()
-//      IAPManager.shared.getProductsV5()
+      IAPManager.shared.startObserving()
+      IAPManager.shared.getProductsV5()
       
       GADMobileAds.sharedInstance().start(completionHandler: nil)
       GADMobileAds.sharedInstance().disableAutomatedInAppPurchaseReporting()
@@ -27,9 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       return true
    }
    
-//   func applicationWillTerminate(_ application: UIApplication) {
-//     IAPManager.shared.stopObserving()
-//   }
+   func applicationWillTerminate(_ application: UIApplication) {
+     IAPManager.shared.stopObserving()
+   }
 
    // MARK: UISceneSession Lifecycle
 

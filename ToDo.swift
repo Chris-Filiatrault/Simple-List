@@ -1,33 +1,31 @@
 
 /*
- 
+ === SWITCH ADMOB ID BEFORE UPLOADING NEW VERSION===
 
  ------------------
  ====== NEXT ======
  ------------------
- - Create the final in-app purchase item on ASC ✅
- 
- - Submit a new build without the in-app purchase, to upload the new privacy policy
- 
- - Make information button easier to press
- 
- - Error handling anywhere that calls products.items[0], in the event that AppDelegate can't load the items from the app store
- 
- - Find a way to instantly remove ads once a purchase is made
- 
- - Make the buy view look much nicer. Do some research on what makes users most likely to make the purchase.
  
 
+ - Find a way to instantly remove ads once a purchase is made
  
- ----------------------------------
- ===== Things for later =====
- ----------------------------------
+ - Do some research on what makes users most likely to make the purchase.
  
- - Fix glitchy textfield when typing in Japanese
+ - Make sure ads view is removed when the textfield is active
+
+ - Final checks to ensure in-app purchases are working
  
  - Create more localised Display Names for the in-app purchase on App Store Connect
  
  - Try and provide users a confirmation alert when purchases are restored using the built in methods from store-kit, otherwise do it your self (not preferred)
+ 
+ ----------------------------------
+ ===== Things for later =====
+ ----------------------------------
+
+ - Start work on Mac version
+ 
+ - Make Japanese version of Simple List
  
  - Animation issue when moving an item one spot above
  
@@ -37,7 +35,6 @@
  
  - Swipe down to dismiss keyboard (without breaking other functions. See stackoverflow question I asked)
 
- 
  
  
  

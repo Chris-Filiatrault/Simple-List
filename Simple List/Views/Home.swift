@@ -115,19 +115,12 @@ struct Home: View {
             //  ===List===
             ListView(isEditMode: self.$isEditMode)
             
-            
-            if globalVariables.textfieldActive == false {
-               AdView()
-                  .frame(width: 320, height: 50, alignment: .center)
-                  .padding(.top, 5)
-            }
-            
-//            // Use this after the in-app purchase to remove ads has been recorded in UserDefaults
-//            if UserDefaults.standard.object(forKey: "purchased") as? Bool ?? nil != true {
-//                              AdView()
-//                                 .frame(width: 320, height: 50, alignment: .center)
-//                                 .padding(.top, 5)
-//                           }
+            // Use this after the in-app purchase to remove ads has been recorded in UserDefaults
+            if UserDefaults.standard.object(forKey: "purchased") as? Bool ?? nil != true {
+                              AdView()
+                                 .frame(width: 320, height: 50, alignment: .center)
+                                 .padding(.top, 5)
+                           }
             
             
          }
