@@ -42,6 +42,7 @@ struct Row: View {
          
          if isEditMode == .active {
             Spacer()
+            
             Divider()
             
             

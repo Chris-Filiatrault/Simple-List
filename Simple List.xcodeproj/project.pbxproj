@@ -67,7 +67,7 @@
 		3F254C79CEE908BFD42BA13D /* Pods-Simple ListTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Simple ListTests.release.xcconfig"; path = "Target Support Files/Pods-Simple ListTests/Pods-Simple ListTests.release.xcconfig"; sourceTree = "<group>"; };
 		5F39C66B4012F7D4B5799CE0 /* Pods_Simple_List_Simple_ListUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Simple_List_Simple_ListUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AE8C91E7A82DC1AA73C0A7D /* Pods-Simple List.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Simple List.release.xcconfig"; path = "Target Support Files/Pods-Simple List/Pods-Simple List.release.xcconfig"; sourceTree = "<group>"; };
-		6D06DB1D249CC01D00F0A019 /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
+		6D06DB1D249CC01D00F0A019 /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IAPManager.swift; path = ../Helpers/IAPManager.swift; sourceTree = "<group>"; };
 		6D2B1F9924904A070025E786 /* Simple List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Simple List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D2B1F9C24904A070025E786 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6D2B1F9E24904A070025E786 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -232,7 +232,6 @@
 		6D2B201A249050470025E786 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				6D06DB1D249CC01D00F0A019 /* IAPManager.swift */,
 				6D2B201B249050550025E786 /* Globals.swift */,
 				6D2B201D2490505E0025E786 /* Functions.swift */,
 				6D2B201F249050690025E786 /* Extensions.swift */,
@@ -245,8 +244,6 @@
 			isa = PBXGroup;
 			children = (
 				6D2B2024249051400025E786 /* Misc.swift */,
-				6DB0B0162499B95F0020CCAB /* Settings.swift */,
-				6DB0B0182499B9900020CCAB /* SettingsView.swift */,
 			);
 			path = "Misc items";
 			sourceTree = "<group>";
@@ -257,6 +254,9 @@
 				6DE77BF124988FE6009DF678 /* RemoveAdsView.swift */,
 				6D6672242498DA6E00EA7058 /* BuyView.swift */,
 				6D6672262498DB6B00EA7058 /* TestHome.swift */,
+				6D06DB1D249CC01D00F0A019 /* IAPManager.swift */,
+				6DB0B0162499B95F0020CCAB /* Settings.swift */,
+				6DB0B0182499B9900020CCAB /* SettingsView.swift */,
 			);
 			path = "In-app purchase";
 			sourceTree = "<group>";

@@ -16,18 +16,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
       // Override point for customization after application launch.
-      IAPManager.shared.startObserving()
+      
+      
+//      IAPManager.shared.startObserving()
+//      IAPManager.shared.getProductsV5()
       
       GADMobileAds.sharedInstance().start(completionHandler: nil)
       GADMobileAds.sharedInstance().disableAutomatedInAppPurchaseReporting()
-      IAPManager.shared.getProductsV5()
 
       return true
    }
    
-   func applicationWillTerminate(_ application: UIApplication) {
-     IAPManager.shared.stopObserving()
-   }
+//   func applicationWillTerminate(_ application: UIApplication) {
+//     IAPManager.shared.stopObserving()
+//   }
 
    // MARK: UISceneSession Lifecycle
 
