@@ -13,7 +13,7 @@ struct ListView: View {
    @EnvironmentObject var globalVariables: GlobalVariableClass
    
    @Binding var isEditMode: EditMode
-
+ 
    @FetchRequest(entity: Item.entity(), sortDescriptors: [
       NSSortDescriptor(keyPath: \Item.position, ascending: false)], predicate: NSPredicate(format: "shownInList == true")) var itemsFromFetchRequest: FetchedResults<Item>
 

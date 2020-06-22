@@ -16,6 +16,8 @@ struct Home: View {
    @State var textfieldValue: String = ""
    @State var showAddButton: Bool = false
    @State var isEditMode: EditMode = .inactive
+   @State var showRemoveAdsView: Bool = false
+   
    
    init() {
       
@@ -93,35 +95,63 @@ struct Home: View {
             .background(Color("listRowBackground"))
                
                
-               
                // ===Navigation bar===
                .navigationBarTitle("", displayMode: .inline)
                
                // ===Nav bar items===
                .navigationBarItems(leading:
+                  HStack {
+                     
+                     // Edit button
+                     VStack {
+                        if self.globalVariables.textfieldActive == false {
+                           EditButton()
+                              .padding()
+                              .offset(x: -5)
+                        }
+                     }
+                     
+                     // Changing buttons
+                     ChangingButtons(textfieldValue: self.$textfieldValue, isEditMode: self.$isEditMode)
+                     
+                  },trailing:
+                  
+                  // Info button for purchasing
                   VStack {
-                     if self.globalVariables.textfieldActive == false {
+                     if self.globalVariables.textfieldActive == false &&
+                        UserDefaults.standard.object(forKey: "purchased") as? Bool ?? nil != true {
                         
-                        EditButton()
-                           .padding()
-                           .offset(x: -5)
+                        Button(action: {
+                           self.isEditMode = .inactive
+                           self.showRemoveAdsView = true
+                        }) {
+                           Image(systemName: "info.circle")
+                              .imageScale(.large)
+                        }
+                        .padding()
+                        .sheet(isPresented: self.$showRemoveAdsView){
+                           RemoveAdsView(showRemoveAdsView: self.$showRemoveAdsView)
+                        }
                      }
                   }
-                  ,trailing:
-                  TrailingNavBarButtons(textfieldValue: self.$textfieldValue, isEditMode: self.$isEditMode))
-               .environment(\.editMode, self.$isEditMode)
+                  
+            )
+            .environment(\.editMode, self.$isEditMode)
             
             
             //  ===List===
             ListView(isEditMode: self.$isEditMode)
             
-            // Use this after the in-app purchase to remove ads has been recorded in UserDefaults
-            if UserDefaults.standard.object(forKey: "purchased") as? Bool ?? nil != true {
-                              AdView()
-                                 .frame(width: 320, height: 50, alignment: .center)
-                                 .padding(.top, 5)
-                           }
             
+            // ===Ad View===
+            if UserDefaults.standard.object(forKey: "purchased") as? Bool ?? nil != true && self.globalVariables.textfieldActive == false {
+               AdView()
+                  .frame(width: 320, height: 50, alignment: .center)
+                  .padding(.top, 5)
+            }
+            else if UserDefaults.standard.object(forKey: "purchased") as? Bool ?? nil == true {
+               // Show nothing
+            }
             
          }
          .background(Color("background").edgesIgnoringSafeArea(.all))

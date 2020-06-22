@@ -5,15 +5,11 @@
  ------------------
  ====== NEXT ======
  ------------------
- 
 
- - Find a way to instantly remove ads once a purchase is made
  
- - Do some research on what makes users most likely to make the purchase.
- 
- - Make sure ads view is removed when the textfield is active
+ - Dismiss RemoveAdView sheet after a purchase/restore is completed
 
- - Final checks to ensure in-app purchases are working
+ - Spinner loading view when purchasing items
  
  - Create more localised Display Names for the in-app purchase on App Store Connect
  

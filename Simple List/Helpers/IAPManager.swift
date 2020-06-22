@@ -127,7 +127,6 @@ class IAPManager: NSObject {
          let payment = SKPayment(product: product)
          SKPaymentQueue.default().add(payment)
          print("Payment added to queue for \(product.localizedTitle)")
-         UserDefaults.standard.set(true, forKey: "purchased")
       }
       print("totalRestoredPurchases: \(totalRestoredPurchases)")
       return true
@@ -170,8 +169,8 @@ extension IAPManager: SKPaymentTransactionObserver {
          case .purchased:
             SKPaymentQueue.default().finishTransaction(transaction)
             purchasePublisher.send(("Purchased ", true))
-            print("Successfully purchased")
             UserDefaults.standard.set(true, forKey: "purchased")
+            print("Successfully purchased")
          case .restored:
             totalRestoredPurchases += 1
             SKPaymentQueue.default().finishTransaction(transaction)
