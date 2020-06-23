@@ -25,7 +25,7 @@ struct AdView : UIViewRepresentable {
 
       let banner = GADBannerView(adSize: kGADAdSizeBanner)
       // ==== UPDATE BEFORE RELEASE ====
-      banner.adUnitID = "ca-app-pub-8331624426045290/4014482304"
+      banner.adUnitID = "ca-app-pub-3940256099942544/2934735716"
       banner.rootViewController = UIApplication.shared.windows.first?.rootViewController
       banner.load(GADRequest())
       

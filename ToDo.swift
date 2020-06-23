@@ -5,7 +5,6 @@
  ------------------
  ====== NEXT ======
  ------------------
-
  
  - Dismiss RemoveAdView sheet after a purchase/restore is completed
 
@@ -31,6 +30,7 @@
  
  - Swipe down to dismiss keyboard (without breaking other functions. See stackoverflow question I asked)
 
+ - Fix background colour not going into safe area after rotating in RemoveAdView on curved iPhone screens (11, 11 Pro etc)
  
  
  
