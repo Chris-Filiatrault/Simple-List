@@ -43,7 +43,7 @@ final class ProductsDB: ObservableObject, Identifiable {
 }
 
 class IAPManager: NSObject {
-
+   
    // Singleton IAPManager to ensure we always refer to the same one
    static let shared = IAPManager()
    var totalRestoredPurchases: Int = 0
@@ -177,7 +177,6 @@ extension IAPManager: SKPaymentTransactionObserver {
             purchasePublisher.send(("Restored ", true))
             UserDefaults.standard.set(true, forKey: "purchased")
             print("Successfully restored")
-            
          case .failed:
             if let error = transaction.error as? SKError {
                purchasePublisher.send(("Payment Error \(error.code) ", false))

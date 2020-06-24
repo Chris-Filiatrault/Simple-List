@@ -17,6 +17,7 @@ struct Home: View {
    @State var showAddButton: Bool = false
    @State var isEditMode: EditMode = .inactive
    @State var showRemoveAdsView: Bool = false
+   @State var purchaseMade: Bool = false
    
    
    init() {
@@ -116,11 +117,11 @@ struct Home: View {
                      
                   },trailing:
                   
-                  // Info button for purchasing
+                  // Sheet implentation
                   VStack {
                      if self.globalVariables.textfieldActive == false &&
                         UserDefaults.standard.object(forKey: "purchased") as? Bool ?? nil != true {
-                        
+
                         Button(action: {
                            self.isEditMode = .inactive
                            self.showRemoveAdsView = true
@@ -130,7 +131,7 @@ struct Home: View {
                         }
                         .padding()
                         .sheet(isPresented: self.$showRemoveAdsView){
-                           RemoveAdsView(showRemoveAdsView: self.$showRemoveAdsView)
+                           RemoveAdsView(showRemoveAdsView: self.$showRemoveAdsView, purchaseMade: self.$purchaseMade)
                         }
                      }
                   }
@@ -154,9 +155,14 @@ struct Home: View {
             }
             
          }
+            
          .background(Color("background").edgesIgnoringSafeArea(.all))
+            .alert(isPresented: self.$purchaseMade) {
+               Alert(title: Text("Thanks for your support! 😁"), dismissButton: .default(Text("Done")))
+         }
       } // End of NavView
          .navigationViewStyle(StackNavigationViewStyle())
+      
       
       
    }

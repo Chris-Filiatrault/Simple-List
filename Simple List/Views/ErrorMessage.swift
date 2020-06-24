@@ -15,7 +15,7 @@ struct ErrorMessage: View {
          VStack(alignment: .leading) {
             
          
-      Text("😵 Oops! An error occurred! 😵")
+      Text("Oops! An error occurred 😵")
          .font(.title)
          .padding(.vertical)
          

@@ -11,9 +11,14 @@ import SwiftUI
 
 struct RemoveAdsView: View {
    
+   @State var restorePurchaseInfoAlert: Bool = false
    @Binding var showRemoveAdsView: Bool
+   @Binding var purchaseMade: Bool
+
    @ObservedObject var products = ProductsDB.shared
-   @EnvironmentObject var globalVariables: GlobalVariableClass
+   @ObservedObject var globalVariables = GlobalVariableClass()
+
+
    let backgroundColour: Color = Color(red: 0, green: 144/255, blue: 158/255, opacity: 1)
    
    
@@ -24,123 +29,119 @@ struct RemoveAdsView: View {
             
             VStack {
                
-               // Show error message if products fail to load from App Store Connect
+               // ==========================================================================
+               // === Show error message if products fail to load from App Store Connect ===
+               // ==========================================================================
                if self.products.items.isEmpty {
                   ErrorMessage()
                }
+               
                   
-                  // Show the main view if the products loaded
+               // =================================================
+               // === Show the main view if the products loaded ===
+               // =================================================
                else if !self.products.items.isEmpty {
-                     VStack {
-                        Spacer()
-                        
-//
-//                     if UserDefaults.standard.object(forKey: "purchased") as? Bool ?? nil != true {
-//                        AdView()
-//                           .frame(width: 320, height: 50, alignment: .center)
-//                           .padding(.top, 5)
-//                     }
-//                     else if UserDefaults.standard.object(forKey: "purchased") as? Bool ?? nil == true {
-//                        // Show nothing
-//                     }
-//
-//                        Spacer()
-                        
-                        // Buttons
-                        VStack {
-                           
-                           Text("Remove Ads for \(IAPManager.shared.formatPrice(for: self.products.items[0]) ?? "")")
-                              .font(.title)
-//                              .padding(.vertical, 10)
-                           
-                           
-                           // Purchase/remove button
-                           Button(action: {
-                              let removeAdsProduct = self.products.items[0]
-                              IAPManager.shared.purchaseV5(product: removeAdsProduct)
-                           }) {
-                              Text("Support my work")
-                                 .bold()
-                                 .frame(width: geometry.size.width * 0.6)
-                                 .font(.subheadline)
-                                 .padding(10)
-                                 .background(Color("blueButton"))
-                                 .foregroundColor(.white)
-                                 .cornerRadius(15)
-                                 .transition(.scale)
-                                 .edgesIgnoringSafeArea(.horizontal)                              }
-                              .contentShape(Rectangle())
-                              .padding(.vertical, 10)
-                           
-                           
-                           HStack {
-                              // Restore purchase button
-                              Button(action: {
-                                 IAPManager.shared.restorePurchasesV5()
-                              }) {
-                                 Text("Restore purchase")
-                                    .bold()
-                                    .cornerRadius(20)
-                                    .font(.subheadline)
-                                    .frame(minWidth: 50)
-                              }.contentShape(Rectangle())
-                              
-                              
-                              Spacer()
-                              
-                              // Cancel button
-                              Button(action: {
-                                 self.showRemoveAdsView.toggle()
-                              }) {
-                                 Text("Cancel")
-                                    .bold()
-                                    .cornerRadius(20)
-                                    .font(.subheadline)
-                                    .frame(minWidth: 50)
-                              }.contentShape(Rectangle())
-                              
-                           }
-                           .padding(.horizontal, geometry.size.width * 0.2)
-                           
-                        }
-                        
-                        Spacer()
-                        Divider()
-                        Spacer()
-                        
-                        // Photo view
-                        VStack {
-                           Text("I hope you have been enjoying the app! 😁")
-                             .font(.headline)
-                             .padding(.vertical, 10)
-                           
-                           Image("chris-photo")
-                              .resizable()
-                              .aspectRatio(contentMode:.fit)
-                              .frame(width: 250, height: 250)
-                              .clipShape(Circle())
-                              .padding(.vertical, 10)
-                              .overlay(
-                                 Circle().stroke(Color("blackWhiteFont"), lineWidth: 2))
-                           
-                              
-                           Text("Chris Filiatrault")
-                              .font(.title)
-                           
-                           Text("Creator of Simple List")
-                              .font(.headline)
-                              .padding(.bottom, 10)
-                        }
-                        
+                  VStack {
                      
-                        
                      Spacer()
-                     } // End of Content VStack
-                        .padding()
-                     //                        .padding(.top, geometry.size.height * 0.15)
+
                      
+                     // Buttons
+                     VStack {
+                        
+                        Text("Remove Ads for \(IAPManager.shared.formatPrice(for: self.products.items[0]) ?? "")")
+                           .font(.title)
+                        //                              .padding(.vertical, 10)
+                        
+                        
+                        // Purchase/remove button
+                        Button(action: {
+                           let removeAdsProduct = self.products.items[0]
+                           IAPManager.shared.purchaseV5(product: removeAdsProduct)
+                        }) {
+                           Text("Remove")
+                              .bold()
+                              .frame(minWidth: 100, maxWidth: 200)
+                              .font(.subheadline)
+                              .padding(10)
+                              .background(Color("blueButton"))
+                              .foregroundColor(.white)
+                              .cornerRadius(15)
+                              .transition(.scale)
+                              .edgesIgnoringSafeArea(.horizontal)                              }
+                           .contentShape(Rectangle())
+                           .padding(.vertical, 5)
+                        
+                        
+                        HStack {
+                        // Restore purchase button
+                        Button(action: {
+                           IAPManager.shared.restorePurchasesV5()
+                        }) {
+                           Text("Restore purchase")
+                              .bold()
+                              .cornerRadius(20)
+                              .font(.subheadline)
+                              .padding(5)
+                              .frame(minWidth: 50)
+                        }.contentShape(Rectangle())
+                        
+                     
+                        // Question mark button
+                           Button(action: {
+                              self.restorePurchaseInfoAlert = true
+                           }) {
+                              Image(systemName: "questionmark.circle")
+                                 .foregroundColor(Color("restorePurchaseButton"))
+                                 .padding(5)
+                           }
+                           
+                        }
+                        
+                        
+                        
+                     } // End of buttons
+                     
+                     Spacer()
+                     Divider().padding(.vertical, 3)
+                     Spacer()
+                     
+                     // Photo view
+                     VStack {
+                        Text("Help me buy my next coffee! ☕️")
+                           .font(.headline)
+                           .padding(.vertical, 5)
+                        
+                        Image("chris-photo")
+                           .resizable()
+                           .aspectRatio(contentMode:.fit)
+                           .clipShape(Circle())
+                           .padding(.vertical, 7)
+                           .overlay(
+                              Circle().stroke(Color("blackWhiteFont"), lineWidth: 2))
+                        .frame(minWidth: 150, maxWidth: 250, minHeight: 150, maxHeight: 250)
+                        
+                        
+                        Text("Chris Filiatrault")
+                           .font(.title)
+                        
+                        Text("Creator of Simple List")
+                           .font(.headline)
+                           .padding(.bottom, 10)
+                     }
+                     
+                     Spacer()
+                  } // End of Content VStack
+                     .padding()
+                     .alert(isPresented: self.$restorePurchaseInfoAlert) {
+                        Alert(title: Text("Information"), message: Text("If you have paid to remove ads on another device, you can also remove the ads on this device by restoring the purchase."), dismissButton: .default(Text("Done")))
+                  }
                   
-                  
+               }
+            }
+            .onDisappear {
+               if UserDefaults.standard.object(forKey: "purchased") as? Bool ?? nil == true {
+                  self.purchaseMade = true
                }
             }
                
@@ -161,137 +162,3 @@ struct RemoveAdsView: View {
    }
 }
 
-
-
-
-
-
-//               .background(backgroundColour.edgesIgnoringSafeArea(.all))
-
-
-////
-////  RemoveAdsView.swift
-////  Simple List
-////
-////  Created by Chris Filiatrault on 16/6/20.
-////  Copyright © 2020 Chris Filiatrault. All rights reserved.
-////
-//
-//
-//
-//
-//import SwiftUI
-//
-//struct RemoveAdsView: View {
-//
-//   @Binding var showRemoveAdsView: Bool
-//   @ObservedObject var products = ProductsDB.shared
-//   @EnvironmentObject var globalVariables: GlobalVariableClass
-//
-//
-//
-//   var body: some View {
-//
-//      NavigationView {
-//         GeometryReader { geometry in
-//            VStack {
-//               if !self.products.items.isEmpty {
-//                  Text("Remove Ads for \(IAPManager.shared.formatPrice(for: self.products.items[0]) ?? "")")
-//                     .bold()
-//               } else {
-//                  // This should be an alert, not the text on the page
-//                  Text("An error occurred. \nPlease ensure you're connected to the internet, restart the app and try again.")
-//               }
-//
-//
-//               if !self.products.items.isEmpty {
-//                  // ===Buttons===
-//                  HStack(alignment: .center) {
-//
-//                     // Cancel button
-//                     Button(action: {
-//                        self.showRemoveAdsView.toggle()
-//                     }) {
-//                        Text("Cancel")
-//                           .bold()
-//                           .cornerRadius(20)
-//                           .font(.subheadline)
-//                           .frame(minWidth: 50)
-//                     }.contentShape(Rectangle())
-//
-//                     // Purchase/remove button
-//                     Button(action: {
-//                        if !self.products.items.isEmpty {
-//                           let removeAdsProduct = self.products.items[0]
-//                           IAPManager.shared.purchaseV5(product: removeAdsProduct)
-//
-//                        }
-//                     }) {
-//                        Text("Remove")
-//                           .bold()
-//                           .frame(minWidth: 50)
-//                           .font(.subheadline)
-//                           .padding(10)
-//                           .background(Color("blueButton"))
-//                           .foregroundColor(.white)
-//                           .cornerRadius(10)
-//                           .transition(.scale)
-//                           .edgesIgnoringSafeArea(.horizontal)
-//                     }
-//                     .contentShape(Rectangle())
-//                     .padding(.leading, 20)
-//
-//                  }
-//                  .padding(.top, 10)
-//
-//                  // Restore purchase button
-//                  Button(action: {
-//                     IAPManager.shared.restorePurchasesV5()
-//                  }) {
-//                     Text("Restore purchase")
-//                        .bold()
-//                        .cornerRadius(20)
-//                        .font(.subheadline)
-//                        .frame(minWidth: 50)
-//                  }.contentShape(Rectangle())
-//                     .padding()
-//               }
-//
-//               Spacer()
-//
-//               if UserDefaults.standard.object(forKey: "purchased") as? Bool ?? nil != true {
-//                  AdView()
-//                     .frame(width: 320, height: 50, alignment: .center)
-//                     .padding(.top, 5)
-//               }
-//               else if UserDefaults.standard.object(forKey: "purchased") as? Bool ?? nil == true {
-//                  // Show nothing
-//               }
-//
-//            }
-//            .padding()
-//            .padding(.top, geometry.size.height * 0.15)
-//
-//         }
-//
-//         .navigationBarTitle("", displayMode: .inline)
-//         .navigationBarItems(leading:
-//            Button(action: {
-//               self.showRemoveAdsView.toggle()
-//            }) {
-//               Text("Cancel")
-//                  .padding(EdgeInsets(top: 10, leading: 5, bottom: 10, trailing: 15))
-//            }
-//         )
-//         .background(Color("background").edgesIgnoringSafeArea(.all))
-//
-//
-//      }
-//      .environment(\.horizontalSizeClass, .compact)
-//
-//   }
-//}
-//
-//
-//
-//
