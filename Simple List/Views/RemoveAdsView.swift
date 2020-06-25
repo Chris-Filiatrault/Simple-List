@@ -134,7 +134,7 @@ struct RemoveAdsView: View {
                   } // End of Content VStack
                      .padding()
                      .alert(isPresented: self.$restorePurchaseInfoAlert) {
-                        Alert(title: Text("Information"), message: Text("If you have paid to remove ads on another device, you can also remove the ads on this device by restoring the purchase."), dismissButton: .default(Text("Done")))
+                        Alert(title: Text("Information"), message: Text("If you have paid to remove ads on another device, you can remove the ads on this device for free by restoring the purchase."), dismissButton: .default(Text("Done")))
                   }
                   
                }

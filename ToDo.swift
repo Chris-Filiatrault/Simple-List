@@ -5,6 +5,7 @@
  ====== Before next release ======
  ---------------------------------
  
+ Version in progress: 1.3.3
  
  
  ---

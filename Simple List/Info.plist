@@ -21,7 +21,7 @@
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-8331624426045290~5019801581</string>
 	<key>LSRequiresIPhoneOS</key>
-	<true/>
+	<false/>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
