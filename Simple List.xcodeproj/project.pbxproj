@@ -226,8 +226,8 @@
 				6DDD8319249461E900D347C3 /* EditNameView.swift */,
 				6D2B2018249050400025E786 /* ChangingButtons.swift */,
 				6D31227B24A21802009860F8 /* ErrorMessage.swift */,
-				6DB0B01A2499FD8F0020CCAB /* AdView.swift */,
 				6DE77BF124988FE6009DF678 /* RemoveAdsView.swift */,
+				6DB0B01A2499FD8F0020CCAB /* AdView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -647,6 +647,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -700,6 +701,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -720,7 +722,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.3;
+				MARKETING_VERSION = 1.3.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.cfiliatrault.Simple-List";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -744,7 +746,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.3;
+				MARKETING_VERSION = 1.3.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.cfiliatrault.Simple-List";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

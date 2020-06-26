@@ -7,12 +7,7 @@
 //
 
 // Simple list banner ad ID
-// Put it in place when pushing to production
 // ca-app-pub-8331624426045290/4014482304
-
-// Otherwise use the test banner ad id
-// ca-app-pub-3940256099942544/2934735716
-
 
 
 import SwiftUI
