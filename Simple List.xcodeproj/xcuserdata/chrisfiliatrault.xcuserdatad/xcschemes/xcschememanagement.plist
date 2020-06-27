@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Simple List iPad.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>Simple List.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -43,6 +48,11 @@
 			<true/>
 		</dict>
 		<key>6D615D3E249A26F30000DD31</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6DE58D3324A75D4300141896</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -21,11 +21,27 @@ struct EditNameView: View {
 
          VStack {
 
-            Text("Rename \"\(self.thisItem.wrappedName)\" to...")
+            Text("Rename item")
                .font(.title)
-               .padding(.top)
+               .padding(.vertical)
+             
+            VStack(alignment: .leading) {
+            Text("Old name:")
+               .font(.headline)
+               .padding(.vertical, 4)
+            
+            Text("\(self.thisItem.wrappedName)")
+               .padding(.vertical, 4)
+               .fixedSize(horizontal: false, vertical: true)
+            }
 
-
+            Divider()
+            
+            Text("Enter new name:")
+               .font(.headline)
+               .offset(y: 4)
+            
+            
             // ===Enter item textfield===
             TextField("Enter new name...", text: self.$newName, onCommit: {
                         if self.newName != "" {
@@ -40,6 +56,7 @@ struct EditNameView: View {
                .padding(5)
                .cornerRadius(5)
                .padding(.bottom, 10)
+            
 
 
 
@@ -87,7 +104,8 @@ struct EditNameView: View {
             }
 
          }
-         .padding(.bottom, geometry.size.height * 0.65)
+//            .modifier(AdaptsToSoftwareKeyboard())
+         .padding(.bottom, geometry.size.height * 0.55)
          .padding()
             }
 
