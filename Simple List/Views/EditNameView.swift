@@ -20,27 +20,19 @@ struct EditNameView: View {
       GeometryReader { geometry in
 
          VStack {
-
-            Text("Rename item")
-               .font(.title)
-               .padding(.vertical)
-             
-            VStack(alignment: .leading) {
-            Text("Old name:")
-               .font(.headline)
-               .padding(.vertical, 4)
             
-            Text("\(self.thisItem.wrappedName)")
-               .padding(.vertical, 4)
-               .fixedSize(horizontal: false, vertical: true)
+            VStack {
+               
+            Text("Rename ")
+               + Text("\(self.thisItem.wrappedName)")
+                  .bold()
+               + Text(" to:")
+            
             }
-
-            Divider()
+            .font(.title)
+            .fixedSize(horizontal: false, vertical: true)
             
-            Text("Enter new name:")
-               .font(.headline)
-               .offset(y: 4)
-            
+               
             
             // ===Enter item textfield===
             TextField("Enter new name...", text: self.$newName, onCommit: {
@@ -56,6 +48,7 @@ struct EditNameView: View {
                .padding(5)
                .cornerRadius(5)
                .padding(.bottom, 10)
+            
             
 
 
