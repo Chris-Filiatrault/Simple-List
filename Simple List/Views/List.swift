@@ -15,7 +15,7 @@ struct ListView: View {
    @Binding var isEditMode: EditMode
  
    @FetchRequest(entity: Item.entity(), sortDescriptors: [
-      NSSortDescriptor(keyPath: \Item.position, ascending: false)], predicate: NSPredicate(format: "shownInList == true")) var itemsFromFetchRequest: FetchedResults<Item>
+      NSSortDescriptor(keyPath: \Item.position, ascending: true)]) var itemsFromFetchRequest: FetchedResults<Item>
 
 
    var body: some View {

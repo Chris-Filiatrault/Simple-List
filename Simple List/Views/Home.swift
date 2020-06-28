@@ -19,6 +19,8 @@ struct Home: View {
    @State var showRemoveAdsView: Bool = false
    @State var purchaseMade: Bool = false
    
+   let itemNames: [String] = ["Zero", "One", "Two", "Three", "Four"]
+   let itemPositions: [Int] = [0,1,2,3,4]
    
    init() {
       
@@ -54,6 +56,25 @@ struct Home: View {
       catch let error as NSError {
          print("Could not delete. \(error), \(error.userInfo)")
       }
+      
+      
+      
+      // Code for initialising with Five test items
+      resetMOC()
+      
+      let entity = NSEntityDescription.entity(forEntityName: "Item", in: managedContext)!
+      
+      for position in itemPositions {
+      let newItem = Item(entity: entity, insertInto: managedContext)
+      newItem.name = itemNames[position]
+      newItem.position = Int32(position)
+      newItem.dateAdded = Date()
+      newItem.markedOff = false
+      newItem.id = UUID()
+      }
+      
+      
+      
       
    }
    
@@ -111,13 +132,12 @@ struct Home: View {
                               .offset(x: -5)
                         }
                      }
-                     
                      // Changing buttons
                      ChangingButtons(textfieldValue: self.$textfieldValue, isEditMode: self.$isEditMode)
-                     
+                  
                   },trailing:
                   
-                  // Sheet implentation
+                  HStack {
                   VStack {
                      if self.globalVariables.textfieldActive == false &&
                         UserDefaults.standard.object(forKey: "purchased") as? Bool ?? nil != true {
@@ -136,6 +156,13 @@ struct Home: View {
                      }
                   }
                   
+                     Button(action: {
+                        resetMOC()
+                     }) {
+                        Text("Del")
+                        .padding()
+                     }
+                  }
             )
             .environment(\.editMode, self.$isEditMode)
             

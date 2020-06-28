@@ -28,7 +28,7 @@ func addNewItem(itemName: Binding<String>) {
    newItem.dateAdded = Date()
    newItem.markedOff = false
    newItem.id = UUID()
-   newItem.shownInList = true
+   
    
    let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Item")
    fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Item.position, ascending: false)]
@@ -38,12 +38,16 @@ func addNewItem(itemName: Binding<String>) {
       
       let items = fetchReturn as! [Item]
       
+      
+      // If new item is the first, set position = 1
       if items.count == 1 {
-         newItem.position = 1
-         print("Set position = 1")
-      } else {
-         print("Set position = items[0].position = \(items[0].wrappedName) * 1.1")
-         newItem.position = items[0].position * 1.1
+         newItem.position = 0
+         print("Set position = 0")
+      }
+      else {
+         // If item is not the first in the list, set position to the value of the top item + 1
+         print("Set position = items[0].position = \(items[0].wrappedName) + 1")
+         newItem.position = items[0].position + 1
       }
       
       
@@ -175,7 +179,7 @@ func deleteSwipedItem(at offsets: IndexSet) {
    
    let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Item")
    fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Item.position, ascending: false)]
-   fetchRequest.predicate = NSPredicate(format: "shownInList = true")
+   
    
    
    do {
@@ -203,7 +207,7 @@ func deleteSwipedItem(at offsets: IndexSet) {
 
 
 
-func move(at offsets: IndexSet, to destination: Int) {
+func movePreviousVersionDontUse(at offsets: IndexSet, to destination: Int) {
    
    guard let appDelegate =
       UIApplication.shared.delegate as? AppDelegate else {
@@ -226,13 +230,19 @@ func move(at offsets: IndexSet, to destination: Int) {
          
          // Item is moving to last position
          if destination == items.count {
-            movedItem.position = items[destination - 1].position * 0.999999
+            movedItem.position = items[destination - 1].position
+            for item in items {
+               if item != movedItem {
+                  item.position += 1
+               }
+            }
             
-            // Item is moving to first position
+         // Item is moving to first position
          } else if destination == 0 {
-            movedItem.position = items[0].position * 1.001
+            movedItem.position = items[0].position + 1
             
-            // Item is moving in between first and last positions
+         
+         // Item is moving in between first and last positions
          } else {
             let priorItem: Item = items[destination - 1]
             let followingItem: Item = items[destination]
@@ -252,6 +262,138 @@ func move(at offsets: IndexSet, to destination: Int) {
       print("Could not fetch. \(error), \(error.userInfo)")
    }
 }
+
+
+
+func move(IndexSet: IndexSet, destination: Int) {
+   
+   guard let appDelegate =
+      UIApplication.shared.delegate as? AppDelegate else {
+         return
+   }
+   
+   let managedContext =
+      appDelegate.persistentContainer.viewContext
+   
+   
+   let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Item")
+   fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Item.position, ascending: true)]
+   
+   
+   do {
+      let items = try managedContext.fetch(fetchRequest) as! [Item]
+      
+      let firstIndex = IndexSet.min()!
+      let lastIndex = IndexSet.max()!
+      
+      print(firstIndex)
+      print(lastIndex)
+      
+      let firstRowToReorder = (firstIndex < destination) ? firstIndex : destination
+      let lastRowToReorder = (lastIndex > (destination-1)) ? lastIndex : (destination-1)
+      
+      if firstRowToReorder != lastRowToReorder {
+           
+           var newOrder = firstRowToReorder
+           if newOrder < firstIndex {
+               // Moving dragged items up, so re-order dragged items first
+               
+               // Re-order dragged items
+               for index in IndexSet {
+                   items[index].setValue(newOrder, forKey: "position")
+                   newOrder = newOrder + 1
+               }
+               
+               // Re-order non-dragged items
+               for rowToMove in firstRowToReorder..<lastRowToReorder {
+                   if !IndexSet.contains(rowToMove) {
+                       items[rowToMove].setValue(newOrder, forKey: "position")
+                       newOrder = newOrder + 1
+                   }
+               }
+           } else {
+               // Moving dragged items down, so re-order dragged items last
+               
+               // Re-order non-dragged items
+               for rowToMove in firstRowToReorder...lastRowToReorder {
+                   if !IndexSet.contains(rowToMove) {
+                       items[rowToMove].setValue(newOrder, forKey: "position")
+                       newOrder = newOrder + 1
+                   }
+               }
+               
+               // Re-order dragged items
+               for index in IndexSet {
+                   items[index].setValue(newOrder, forKey: "position")
+                   newOrder = newOrder + 1
+               }
+           }
+      }
+      
+      
+      do {
+         try managedContext.save()
+         
+      } catch let error as NSError {
+         print("Could not delete. \(error), \(error.userInfo)")
+      }
+      
+   } catch let error as NSError {
+      print("Could not fetch. \(error), \(error.userInfo)")
+   }
+}
+
+
+
+
+//
+//private func reorder(IndexSet: IndexSet, to destination: Int, within: [T] ) {
+//
+//
+//    let firstIndex = IndexSet.min()!
+//    let lastIndex = IndexSet.max()!
+//
+//    let firstRowToReorder = (firstIndex < destination) ? firstIndex : destination
+//    let lastRowToReorder = (lastIndex > (destination-1)) ? lastIndex : (destination-1)
+//
+//    if firstRowToReorder != lastRowToReorder {
+//
+//         var newOrder = firstRowToReorder
+//         if newOrder < firstIndex {
+//             // Moving dragged items up, so re-order dragged items first
+//
+//             // Re-order dragged items
+//             for index in IndexSet {
+//                 within[index].setValue(newOrder, forKey: "order")
+//                 newOrder = newOrder + 1
+//             }
+//
+//             // Re-order non-dragged items
+//             for rowToMove in firstRowToReorder..<lastRowToReorder {
+//                 if !IndexSet.contains(rowToMove) {
+//                     within[rowToMove].setValue(newOrder, forKey: "order")
+//                     newOrder = newOrder + 1
+//                 }
+//             }
+//         } else {
+//             // Moving dragged items down, so re-order dragged items last
+//
+//             // Re-order non-dragged items
+//             for rowToMove in firstRowToReorder...lastRowToReorder {
+//                 if !IndexSet.contains(rowToMove) {
+//                     within[rowToMove].setValue(newOrder, forKey: "order")
+//                     newOrder = newOrder + 1
+//                 }
+//             }
+//
+//             // Re-order dragged items
+//             for index in IndexSet {
+//                 within[index].setValue(newOrder, forKey: "order")
+//                 newOrder = newOrder + 1
+//             }
+//         }
+//    }
+//}
 
 
 

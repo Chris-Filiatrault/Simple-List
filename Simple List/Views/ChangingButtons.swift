@@ -12,7 +12,7 @@ import SwiftUI
 struct ChangingButtons: View {
    
    @FetchRequest(entity: Item.entity(), sortDescriptors: [
-      NSSortDescriptor(keyPath: \Item.position, ascending: false)], predicate: NSPredicate(format: "shownInList == true && markedOff == true")) var tickedOffItems: FetchedResults<Item>
+      NSSortDescriptor(keyPath: \Item.position, ascending: false)]) var tickedOffItems: FetchedResults<Item>
    
    @EnvironmentObject var globalVariables: GlobalVariableClass
    

@@ -14,7 +14,7 @@ struct Row: View {
    
    var thisItem: Item
    @State var markedOff: Bool
-   @State var position: Double
+   @State var position: Int32
    @State var showEditNameView: Bool = false
    @Binding var isEditMode: EditMode
    
@@ -23,7 +23,7 @@ struct Row: View {
       
       HStack {
          
-//         Text("\(thisItem.position)")
+         Text("\(thisItem.position)")
          
          Button(action: {
             markOffItem(thisItem: self.thisItem)
