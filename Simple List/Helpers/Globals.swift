@@ -13,9 +13,10 @@ import Foundation
 //@EnvironmentObject var globalVariables: GlobalVariableClass
 
 class GlobalVariableClass: ObservableObject {
- 
+   @Published var scrollingProxy = ListScrollingProxy() // proxy helper
    @Published var textfieldActive: Bool = false
    @Published var itemAdded: Bool = true // for refreshing list state
+   @State var isEdit: EditMode = .inactive
 }
 
 

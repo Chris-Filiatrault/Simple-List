@@ -19,6 +19,8 @@ struct Home: View {
    @State var showRemoveAdsView: Bool = false
    @State var purchaseMade: Bool = false
    
+   
+   
    let itemNames: [String] = ["Zero", "One", "Two", "Three", "Four"]
    let itemPositions: [Int] = [0,1,2,3,4]
    
@@ -60,21 +62,18 @@ struct Home: View {
       
       
       // Code for initialising with Five test items
-      resetMOC()
+//      resetMOC()
       
-      let entity = NSEntityDescription.entity(forEntityName: "Item", in: managedContext)!
-      
-      for position in itemPositions {
-      let newItem = Item(entity: entity, insertInto: managedContext)
-      newItem.name = itemNames[position]
-      newItem.position = Int32(position)
-      newItem.dateAdded = Date()
-      newItem.markedOff = false
-      newItem.id = UUID()
-      }
-      
-      
-      
+//      let entity = NSEntityDescription.entity(forEntityName: "Item", in: managedContext)!
+//
+//      for position in itemPositions {
+//      let newItem = Item(entity: entity, insertInto: managedContext)
+//      newItem.name = itemNames[position]
+//      newItem.position = Int32(position)
+//      newItem.dateAdded = Date()
+//      newItem.markedOff = false
+//      newItem.id = UUID()
+//      }
       
    }
    
@@ -104,6 +103,7 @@ struct Home: View {
                }, onCommit: {
                   if self.textfieldValue != "" {
                      addNewItem(itemName: self.$textfieldValue)
+                     self.globalVariables.scrollingProxy.scrollTo(.point(point: CGPoint(x: 50, y: 50)))
                      self.textfieldValue = ""
                      withAnimation { self.globalVariables.itemAdded.toggle() }
                   }

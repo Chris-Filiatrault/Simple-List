@@ -9,9 +9,8 @@
 import SwiftUI
 
 struct ListView: View {
-
-   @EnvironmentObject var globalVariables: GlobalVariableClass
    
+   @EnvironmentObject var globalVariables: GlobalVariableClass
    @Binding var isEditMode: EditMode
  
    @FetchRequest(entity: Item.entity(), sortDescriptors: [
@@ -24,39 +23,54 @@ struct ListView: View {
          if itemsFromFetchRequest.count >= 1 {
             Divider()
          }
+//
+//         if globalVariables.itemAdded == true {
+//            List {
+//               ForEach(itemsFromFetchRequest, id: \.self) { item in
+//                  VStack(spacing: 0) {
+//
+//                     Row(thisItem: item, markedOff: item.markedOff, position: item.position, isEditMode: self.$isEditMode)
+//
+//                  }
+//               }
+//               .onMove(perform: move)
+//               .onDelete(perform: deleteSwipedItem)
+//               .listRowBackground(Color("listRowBackground").edgesIgnoringSafeArea(.horizontal))
+//            }.environment(\.editMode, self.$isEditMode)
+//         }
+//
+//         else if globalVariables.itemAdded == false {
+//           List {
+//            ForEach(itemsFromFetchRequest, id: \.self) { item in
+//                  VStack(spacing: 0) {
+//
+//                     Row(thisItem: item, markedOff: item.markedOff, position: item.position, isEditMode: self.$isEditMode)
+//
+//
+//                  }
+//               }
+//               .onMove(perform: move)
+//               .onDelete(perform: deleteSwipedItem)
+//               .listRowBackground(Color("listRowBackground").edgesIgnoringSafeArea(.horizontal))
+//            }.environment(\.editMode, self.$isEditMode)
+//
+//         }
 
-         if globalVariables.itemAdded == true {
-            List {
-               ForEach(itemsFromFetchRequest, id: \.self) { item in
-                  VStack(spacing: 0) {
-
-                     Row(thisItem: item, markedOff: item.markedOff, position: item.position, isEditMode: self.$isEditMode)
-                          
-                  }
-               }
-               .onMove(perform: move)
-               .onDelete(perform: deleteSwipedItem)
-               .listRowBackground(Color("listRowBackground").edgesIgnoringSafeArea(.horizontal))
-            }.environment(\.editMode, self.$isEditMode)
-         }
-
-         else if globalVariables.itemAdded == false {
-           List {
+         
+         
+         List {
             ForEach(itemsFromFetchRequest, id: \.self) { item in
-                  VStack(spacing: 0) {
 
-                     Row(thisItem: item, markedOff: item.markedOff, position: item.position, isEditMode: self.$isEditMode)
-                        
-                     
-                  }
-               }
-               .onMove(perform: move)
-               .onDelete(perform: deleteSwipedItem)
-               .listRowBackground(Color("listRowBackground").edgesIgnoringSafeArea(.horizontal))
-            }.environment(\.editMode, self.$isEditMode)
+                  Row(thisItem: item, markedOff: item.markedOff, position: item.position, isEditMode: self.$isEditMode)
+                     .background(ListScrollingHelper(proxy: self.globalVariables.scrollingProxy))
 
-         }
-
+                       
+            }
+            .onMove(perform: move)
+            .onDelete(perform: deleteSwipedItem)
+            .listRowBackground(Color("listRowBackground").edgesIgnoringSafeArea(.horizontal))
+         }.environment(\.editMode, self.$isEditMode)
+         
       }
       .modifier(AdaptsToSoftwareKeyboard())
 

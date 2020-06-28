@@ -58,6 +58,7 @@ struct ChangingButtons: View {
                
                Button(action: {
                   if self.textfieldValue == "" {
+                     self.globalVariables.scrollingProxy.scrollTo(.point(point: CGPoint(x: 50, y: 50)))
                      UIApplication.shared.endEditing()
                   } else if self.textfieldValue != "" {
                      addNewItem(itemName: self.$textfieldValue)
