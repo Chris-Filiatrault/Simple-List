@@ -12,7 +12,9 @@ import SwiftUI
 struct ChangingButtons: View {
    
    @FetchRequest(entity: Item.entity(), sortDescriptors: [
-      NSSortDescriptor(keyPath: \Item.position, ascending: false)]) var tickedOffItems: FetchedResults<Item>
+      NSSortDescriptor(keyPath: \Item.position, ascending: false)],
+      predicate: NSPredicate(format: "markedOff == true")
+   ) var tickedOffItems: FetchedResults<Item>
    
    @EnvironmentObject var globalVariables: GlobalVariableClass
    
@@ -36,13 +38,13 @@ struct ChangingButtons: View {
                }) {
                   Image(systemName: "trash")
                      .imageScale(.large)
-//                     .foregroundColor(.red)
+                     .foregroundColor(Color("navBarFont"))
                }
                .padding()
                .alert(isPresented: $confirmDeleteItemsAlert) {
                   Alert(
                      title: Text(
-                        tickedOffItems.count > 1 ? "Delete \(tickedOffItems.count) items?" : "Delete \(tickedOffItems.count) item?"),
+                        tickedOffItems.count > 1 ? "Delete \(tickedOffItems.count) marked off items?" : "Delete \(tickedOffItems.count) item?"),
                      primaryButton: .default(Text("Cancel")),
                      secondaryButton: .destructive(Text("Delete")) { deleteItems() }
                   )
@@ -52,21 +54,25 @@ struct ChangingButtons: View {
          }
             
             
-            // Add button
+         // Done/Add button
          else if globalVariables.textfieldActive == true {
             HStack {
                
                Button(action: {
                   if self.textfieldValue == "" {
-                     self.globalVariables.scrollingProxy.scrollTo(.point(point: CGPoint(x: 50, y: 50)))
                      UIApplication.shared.endEditing()
+                     withAnimation {                        
+                     self.globalVariables.textfieldActive = false
+                     }
+                     print(self.globalVariables.textfieldActive)
                   } else if self.textfieldValue != "" {
                      addNewItem(itemName: self.$textfieldValue)
                      self.textfieldValue = ""
-                     withAnimation { self.globalVariables.itemAdded.toggle() }
+                     self.globalVariables.scrollingProxy.scrollTo(.top)
                   }
                }) {
                   Text(self.textfieldValue == "" ? "Done" : "Add")
+                  .foregroundColor(Color("navBarFont"))
                }.padding()
                
                Text("").padding()
@@ -83,7 +89,8 @@ struct ChangingButtons: View {
                   UIApplication.shared.endEditing()
                   
                }) {
-                  Text("Done")
+                  Text("Rename")
+                  .foregroundColor(Color("navBarFont"))
                   
                }.padding()
                

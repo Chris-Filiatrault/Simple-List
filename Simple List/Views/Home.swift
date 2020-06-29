@@ -15,11 +15,12 @@ struct Home: View {
    
    @State var textfieldValue: String = ""
    @State var showAddButton: Bool = false
-   @State var isEditMode: EditMode = .inactive
    @State var showRemoveAdsView: Bool = false
    @State var purchaseMade: Bool = false
+   @State var japaneseTextfieldValue: String = ""
+   @State var isEditMode: EditMode = .inactive
    
-   
+   let standardDarkBlueUIColor: UIColor = UIColor(red: 0/255, green: 10/255, blue: 30/255, alpha: 1)
    
    let itemNames: [String] = ["Zero", "One", "Two", "Three", "Four"]
    let itemPositions: [Int] = [0,1,2,3,4]
@@ -62,18 +63,18 @@ struct Home: View {
       
       
       // Code for initialising with Five test items
-//      resetMOC()
+      //      resetMOC()
       
-//      let entity = NSEntityDescription.entity(forEntityName: "Item", in: managedContext)!
-//
-//      for position in itemPositions {
-//      let newItem = Item(entity: entity, insertInto: managedContext)
-//      newItem.name = itemNames[position]
-//      newItem.position = Int32(position)
-//      newItem.dateAdded = Date()
-//      newItem.markedOff = false
-//      newItem.id = UUID()
-//      }
+      //      let entity = NSEntityDescription.entity(forEntityName: "Item", in: managedContext)!
+      //
+      //      for position in itemPositions {
+      //      let newItem = Item(entity: entity, insertInto: managedContext)
+      //      newItem.name = itemNames[position]
+      //      newItem.position = Int32(position)
+      //      newItem.dateAdded = Date()
+      //      newItem.markedOff = false
+      //      newItem.id = UUID()
+      //      }
       
    }
    
@@ -83,42 +84,29 @@ struct Home: View {
       
       NavigationView {
          VStack(spacing: 0) {
-            
-            // ===Enter item textfield===
-            ZStack(alignment: .leading) {
-               
-               if self.textfieldValue.isEmpty {
-                  Text("Tap to enter an item...")
-                     .foregroundColor(Color("textfield"))
+
+            // TextField
+            TextField("Add item", text: self.$textfieldValue, onEditingChanged: { changed in
+               withAnimation {
+               self.isEditMode = .inactive
                }
-               
-               TextField("", text: self.$textfieldValue, onEditingChanged: { changed in
-                  withAnimation {
-                     print(self.isEditMode)
-                     self.globalVariables.textfieldActive.toggle()
-                     self.isEditMode = .inactive
-                     
-                     
-                  }
-               }, onCommit: {
-                  if self.textfieldValue != "" {
-                     addNewItem(itemName: self.$textfieldValue)
-                     self.globalVariables.scrollingProxy.scrollTo(.point(point: CGPoint(x: 50, y: 50)))
-                     self.textfieldValue = ""
-                     withAnimation { self.globalVariables.itemAdded.toggle() }
-                  }
-               })
-            }
-            .padding(.horizontal, 5)
-            .font(.headline)
-            .padding()
-            .padding(.top, 5)
-            .padding(.vertical, 10)
-            .background(Color("listRowBackground"))
+               self.globalVariables.textfieldActive.toggle()
+            }, onCommit: {
+               if self.textfieldValue != "" {
+                  addNewItem(itemName: self.$textfieldValue)
+                  self.globalVariables.scrollingProxy.scrollTo(.top)
+                  self.textfieldValue = ""
+               }
+            })
+            .textFieldStyle(RoundedBorderTextFieldStyle())
+               .padding()
                
                
                // ===Navigation bar===
                .navigationBarTitle("", displayMode: .inline)
+               .background(NavigationConfigurator { nc in
+                  nc.navigationBar.barTintColor = self.standardDarkBlueUIColor
+               })
                
                // ===Nav bar items===
                .navigationBarItems(leading:
@@ -130,41 +118,46 @@ struct Home: View {
                            EditButton()
                               .padding()
                               .offset(x: -5)
+                              .foregroundColor(Color("navBarFont"))
                         }
                      }
-                     // Changing buttons
-                     ChangingButtons(textfieldValue: self.$textfieldValue, isEditMode: self.$isEditMode)
-                  
-                  },trailing:
-                  
-                  HStack {
-                  VStack {
-                     if self.globalVariables.textfieldActive == false &&
-                        UserDefaults.standard.object(forKey: "purchased") as? Bool ?? nil != true {
-
-                        Button(action: {
-                           self.isEditMode = .inactive
-                           self.showRemoveAdsView = true
-                        }) {
-                           Image(systemName: "info.circle")
-                              .imageScale(.large)
-                        }
-                        .padding()
-                        .sheet(isPresented: self.$showRemoveAdsView){
-                           RemoveAdsView(showRemoveAdsView: self.$showRemoveAdsView, purchaseMade: self.$purchaseMade)
-                        }
-                     }
-                  }
-                  
+                     
                      Button(action: {
                         resetMOC()
                      }) {
                         Text("Del")
-                        .padding()
+                           .padding()
+                           .foregroundColor(Color("navBarFont"))
                      }
+
+                     
+                  },trailing:
+                  
+                  HStack {
+                     VStack {
+                        if self.globalVariables.textfieldActive == false &&
+                           UserDefaults.standard.object(forKey: "purchased") as? Bool ?? nil != true {
+                           
+                           Button(action: {
+                              self.isEditMode = .inactive
+                              self.showRemoveAdsView = true
+                           }) {
+                              Image(systemName: "info.circle")
+                                 .imageScale(.large)
+                                 .foregroundColor(Color("navBarFont"))
+                           }
+                           .padding()
+                           .sheet(isPresented: self.$showRemoveAdsView){
+                              RemoveAdsView(showRemoveAdsView: self.$showRemoveAdsView, purchaseMade: self.$purchaseMade)
+                           }
+                        }
+                     }
+                     
+                     // Changing buttons
+                     ChangingButtons(textfieldValue: self.$textfieldValue, isEditMode: self.$isEditMode)
                   }
             )
-            .environment(\.editMode, self.$isEditMode)
+               .environment(\.editMode, self.$isEditMode)
             
             
             //  ===List===
@@ -180,12 +173,11 @@ struct Home: View {
             else if UserDefaults.standard.object(forKey: "purchased") as? Bool ?? nil == true {
                // Show nothing
             }
-            
+         
          }
-            
-         .background(Color("background").edgesIgnoringSafeArea(.all))
-            .alert(isPresented: self.$purchaseMade) {
-               Alert(title: Text("Thanks for your support! 😁"), dismissButton: .default(Text("Done")))
+         .background(Color("listRowBackground").edgesIgnoringSafeArea(.all))
+         .alert(isPresented: self.$purchaseMade) {
+            Alert(title: Text("Thanks for your support! 😁"), dismissButton: .default(Text("Done")))
          }
       } // End of NavView
          .navigationViewStyle(StackNavigationViewStyle())

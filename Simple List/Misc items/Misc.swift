@@ -394,3 +394,44 @@
 //
 //
 //
+
+
+
+
+
+
+
+//            // ===Enter item textfield===
+//            ZStack(alignment: .leading) {
+//
+//               if self.textfieldValue.isEmpty && !globalVariables.textfieldActive {
+//                  Image(systemName: "plus.circle")
+//                     .imageScale(.large)
+//                     .foregroundColor(.green)
+////                  Text("Tap to enter an item...")
+////                     .foregroundColor(Color("textfield"))
+//               }
+//
+//               TextField("", text: self.$textfieldValue, onEditingChanged: { changed in
+//                  withAnimation {
+//                     print(self.isEditMode)
+//                     self.globalVariables.textfieldActive.toggle()
+//                     self.isEditMode = .inactive
+//                  }
+//               }, onCommit: {
+//                  if self.textfieldValue != "" {
+//                     addNewItem(itemName: self.$textfieldValue)
+//                     self.globalVariables.scrollingProxy.scrollTo(.top)
+//                     self.textfieldValue = ""
+//                     withAnimation { self.globalVariables.itemAdded.toggle() }
+//                  }
+//               })
+//            }
+//            .padding(.horizontal, 5)
+//            .font(.headline)
+//            .padding()
+//            .padding(.vertical, 5)
+////            .padding(.vertical, 10)
+//               .background(Color(.blue))
+////            .background(Color("listRowBackground"))
+

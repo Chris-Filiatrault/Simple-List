@@ -35,17 +35,17 @@ class ListScrollingProxy {
             scrollView = view.enclosingScrollView()
         }
     }
-
-    func scrollTo(_ action: Action) {
-        if let scroller = scrollView {
-            var rect = CGRect(origin: .zero, size: CGSize(width: 1, height: 1))
-            switch action {
-                case .end:
-                    rect.origin.y = scroller.contentSize.height +
-                        scroller.contentInset.bottom + scroller.contentInset.top - 1
-                case .point(let point):
-                    rect.origin.y = point.y
-                default: {
+   
+   func scrollTo(_ action: Action) {
+      if let scroller = scrollView {
+         var rect = CGRect(origin: .zero, size: CGSize(width: 1, height: 1))
+         switch action {
+         case .end:
+            rect.origin.y = scroller.contentSize.height +
+               scroller.contentInset.bottom + scroller.contentInset.top - 1
+         case .point(let point):
+            rect.origin.y = point.y
+         default: {
                     // default goes to top
                 }()
             }
@@ -66,3 +66,4 @@ extension UIView {
         return nil
     }
 }
+

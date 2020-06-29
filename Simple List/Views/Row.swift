@@ -51,7 +51,6 @@ struct Row: View {
             Image(systemName: "square.and.pencil")
                .imageScale(.large)
                .foregroundColor(.blue)
-               
                .onTapGesture {
                   self.showEditNameView.toggle()
             }
