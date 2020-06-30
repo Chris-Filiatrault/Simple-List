@@ -125,7 +125,7 @@ struct RemoveAdsView: View {
                         Text("Chris Filiatrault")
                            .font(.title)
                         
-                        Text("Creator of Simple List")
+                        Text("Creator of iShop")
                            .font(.headline)
                            .padding(.bottom, 10)
                      }

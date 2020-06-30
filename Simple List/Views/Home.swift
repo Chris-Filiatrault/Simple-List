@@ -127,36 +127,6 @@ struct Home: View {
                         }
                      }
                      
-                     // Add new
-                     Button(action: {
-                        
-                        resetMOC()
-                        
-                        guard let appDelegate =
-                           UIApplication.shared.delegate as? AppDelegate else {
-                              return
-                        }
-                        
-                        let managedContext =
-                           appDelegate.persistentContainer.viewContext
-                        
-                        let entity = NSEntityDescription.entity(forEntityName: "Item", in: managedContext)!
-                        
-                        for position in self.itemPositions {
-                        let newItem = Item(entity: entity, insertInto: managedContext)
-                           newItem.name = self.itemNames[position]
-                        newItem.position = Int32(position)
-                        newItem.dateAdded = Date()
-                        newItem.markedOff = false
-                        newItem.id = UUID()
-                        }
-                     }) {
-                      Image(systemName: "arrow.clockwise")
-                        .imageScale(.large)
-                        .foregroundColor(Color("navBarFont"))
-                     }
-
-                     
                   },trailing:
                   
                   HStack {
@@ -212,3 +182,35 @@ struct Home: View {
       
    }
 }
+
+
+
+
+//// Add new
+//Button(action: {
+//
+//   resetMOC()
+//
+//   guard let appDelegate =
+//      UIApplication.shared.delegate as? AppDelegate else {
+//         return
+//   }
+//
+//   let managedContext =
+//      appDelegate.persistentContainer.viewContext
+//
+//   let entity = NSEntityDescription.entity(forEntityName: "Item", in: managedContext)!
+//
+//   for position in self.itemPositions {
+//   let newItem = Item(entity: entity, insertInto: managedContext)
+//      newItem.name = self.itemNames[position]
+//   newItem.position = Int32(position)
+//   newItem.dateAdded = Date()
+//   newItem.markedOff = false
+//   newItem.id = UUID()
+//   }
+//}) {
+// Image(systemName: "arrow.clockwise")
+//   .imageScale(.large)
+//   .foregroundColor(Color("navBarFont"))
+//}

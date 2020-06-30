@@ -17,7 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
       // Override point for customization after application launch.
       
-      print("Start observing")
       IAPManager.shared.startObserving()
       IAPManager.shared.getProductsV5()
       
@@ -116,7 +115,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          let context = self.persistentContainer.newBackgroundContext()
          context.performAndWait {
             
-            // Can access Item.getItemsFetchRequest() to make changes to items upon incoming changes to the data
             
          }
       }

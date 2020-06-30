@@ -39,7 +39,7 @@ struct EditNameView: View {
                         if self.newName != "" {
                            editName(thisItem: self.thisItem, itemNewName: self.newName)
                            self.showEditNameView.toggle()
-                           self.isEditMode = .inactive
+//                           self.isEditMode = .inactive
                            self.newName = ""
                         }
                print(self.showEditNameView)
@@ -58,8 +58,8 @@ struct EditNameView: View {
 
                // Cancel button
                Button(action: {
-                  self.showEditNameView.toggle()
-                  self.isEditMode = .inactive
+                  self.showEditNameView = false
+//                  self.isEditMode = .inactive
                   print(self.showEditNameView)
                }) {
                   Text("Cancel")
@@ -74,13 +74,11 @@ struct EditNameView: View {
                   if self.newName != "" {
                      editName(thisItem: self.thisItem, itemNewName: self.newName)
                      self.newName = ""
-                     self.isEditMode = .inactive
-                     self.showEditNameView.toggle()
+//                     self.isEditMode = .inactive
+                     self.showEditNameView = false
                   }
-                  print(self.showEditNameView)
-
                }) {
-                  Text("Done")
+                  Text("Rename")
                      .bold()
                      .frame(minWidth: 50)
                      .font(.subheadline)
@@ -97,9 +95,13 @@ struct EditNameView: View {
             }
 
          }
-//            .modifier(AdaptsToSoftwareKeyboard())
          .padding(.bottom, geometry.size.height * 0.55)
          .padding()
+         .onDisappear {
+            withAnimation {
+            self.isEditMode = .inactive
+            }
+         }
             }
 
          .navigationBarTitle("", displayMode: .inline)
@@ -107,7 +109,7 @@ struct EditNameView: View {
          .navigationBarItems(leading:
                Button(action: {
                   self.showEditNameView.toggle()
-                  self.isEditMode = .inactive
+//                  self.isEditMode = .inactive
                   print(self.showEditNameView)
                }) {
                   Text("Cancel")
