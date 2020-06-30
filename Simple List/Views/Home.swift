@@ -22,7 +22,7 @@ struct Home: View {
    
    let standardDarkBlueUIColor: UIColor = UIColor(red: 0/255, green: 10/255, blue: 30/255, alpha: 1)
    
-   let itemNames: [String] = ["Zero", "One", "Two", "Three", "Four"]
+   let itemNames: [String] = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve"]
    let itemPositions: [Int] = [0,1,2,3,4]
    
    init() {
@@ -62,19 +62,24 @@ struct Home: View {
       
       
       
-      // Code for initialising with Five test items
-      //      resetMOC()
       
-      //      let entity = NSEntityDescription.entity(forEntityName: "Item", in: managedContext)!
-      //
-      //      for position in itemPositions {
-      //      let newItem = Item(entity: entity, insertInto: managedContext)
-      //      newItem.name = itemNames[position]
-      //      newItem.position = Int32(position)
-      //      newItem.dateAdded = Date()
-      //      newItem.markedOff = false
-      //      newItem.id = UUID()
-      //      }
+//      
+//
+//      // Rest items for fixing move()
+//      resetMOC()
+//      let entity = NSEntityDescription.entity(forEntityName: "Item", in: managedContext)!
+//
+//
+//
+//      for position in self.itemPositions {
+//      let newItem = Item(entity: entity, insertInto: managedContext)
+//         newItem.name = self.itemNames[position]
+//      newItem.position = Int32(position)
+//      newItem.dateAdded = Date()
+//      newItem.markedOff = false
+//      newItem.id = UUID()
+//      }
+
       
    }
    
@@ -94,12 +99,12 @@ struct Home: View {
             }, onCommit: {
                if self.textfieldValue != "" {
                   addNewItem(itemName: self.$textfieldValue)
-                  self.globalVariables.scrollingProxy.scrollTo(.top)
+                  self.globalVariables.scrollingProxy.scrollTo(.end)
                   self.textfieldValue = ""
                }
             })
             .textFieldStyle(RoundedBorderTextFieldStyle())
-               .padding()
+            .padding()
                
                
                // ===Navigation bar===
@@ -122,12 +127,33 @@ struct Home: View {
                         }
                      }
                      
+                     // Add new
                      Button(action: {
+                        
                         resetMOC()
+                        
+                        guard let appDelegate =
+                           UIApplication.shared.delegate as? AppDelegate else {
+                              return
+                        }
+                        
+                        let managedContext =
+                           appDelegate.persistentContainer.viewContext
+                        
+                        let entity = NSEntityDescription.entity(forEntityName: "Item", in: managedContext)!
+                        
+                        for position in self.itemPositions {
+                        let newItem = Item(entity: entity, insertInto: managedContext)
+                           newItem.name = self.itemNames[position]
+                        newItem.position = Int32(position)
+                        newItem.dateAdded = Date()
+                        newItem.markedOff = false
+                        newItem.id = UUID()
+                        }
                      }) {
-                        Text("Del")
-                           .padding()
-                           .foregroundColor(Color("navBarFont"))
+                      Image(systemName: "arrow.clockwise")
+                        .imageScale(.large)
+                        .foregroundColor(Color("navBarFont"))
                      }
 
                      

@@ -9,7 +9,7 @@
 import SwiftUI
 import CoreData
 
-
+// ===ADD NEW ITEM===
 func addNewItem(itemName: Binding<String>) {
    
    guard let appDelegate =
@@ -69,8 +69,7 @@ func addNewItem(itemName: Binding<String>) {
 
 
 
-// ===MARK OFF ITEM===
-// Mark off the tick circle in a list as having been added to the users basket
+// Mark off the tick circle in the list
 func markOffItem(thisItem: Item) {
    
    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
@@ -88,7 +87,6 @@ func markOffItem(thisItem: Item) {
       print("Could not save checked off status. \(error), \(error.userInfo)")
    }
 }
-
 
 
 
@@ -115,7 +113,6 @@ func deleteItems() {
          }
       }
       
-      
       do {
          try managedContext.save()
          print("deleted successfully")
@@ -128,43 +125,6 @@ func deleteItems() {
    }
 }
 
-
-
-func deleteThisItem(thisItem: Item) {
-   
-   guard let appDelegate =
-      UIApplication.shared.delegate as? AppDelegate else {
-         return
-   }
-   
-   let managedContext =
-      appDelegate.persistentContainer.viewContext
-   
-   let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Item")
-   //fetchRequest.predicate = NSPredicate(format: "markedOff = %@", true)
-   
-   do {
-      let fetchReturn = try managedContext.fetch(fetchRequest)
-      let items = fetchReturn as! [Item]
-      
-      for item in items {
-         if item == thisItem {
-            managedContext.delete(item)
-         }
-      }
-      
-      
-      do {
-         try managedContext.save()
-         print("deleted successfully")
-      } catch let error as NSError {
-         print("Could not delete. \(error), \(error.userInfo)")
-      }
-      
-   } catch let error as NSError {
-      print("Could not fetch. \(error), \(error.userInfo)")
-   }
-}
 
 
 func deleteSwipedItem(at offsets: IndexSet) {
@@ -200,6 +160,156 @@ func deleteSwipedItem(at offsets: IndexSet) {
          print("Could not delete. \(error), \(error.userInfo)")
       }
       
+   } catch let error as NSError {
+      print("Could not fetch. \(error), \(error.userInfo)")
+   }
+}
+
+
+
+func editName(thisItem: Item, itemNewName: String) {
+   
+   guard let appDelegate =
+      UIApplication.shared.delegate as? AppDelegate else {
+         return
+   }
+   
+   let managedContext =
+      appDelegate.persistentContainer.viewContext
+   
+   let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Item")
+   
+   fetchRequest.predicate = NSPredicate(format: "id = %@", thisItem.id! as CVarArg)
+   
+   do {
+      let returnedItems = try managedContext.fetch(fetchRequest) as! [Item]
+      
+      if returnedItems.count == 1 {
+         let itemToEdit = returnedItems[0]
+         print("Got \(returnedItems.count) items and the first is \(itemToEdit.wrappedName)")
+         itemToEdit.name = itemNewName
+         print("Changed name to \(itemNewName)")
+      }
+      
+      do {
+         try managedContext.save()
+         print("updated successfully")
+      } catch let error as NSError {
+         print("Could not save. \(error), \(error.userInfo)")
+      }
+      
+   } catch let error as NSError {
+      print("Could not fetch. \(error), \(error.userInfo)")
+   }
+}
+
+
+
+func resetMOC() {
+   
+   guard let appDelegate =
+      UIApplication.shared.delegate as? AppDelegate else {
+         return
+   }
+   
+   let managedContext =
+      appDelegate.persistentContainer.viewContext
+   
+   let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Item")
+   
+   do {
+      let fetchReturn = try managedContext.fetch(fetchRequest)
+      let items = fetchReturn as! [Item]
+      
+      for item in items {
+         managedContext.delete(item)
+      }
+      
+      
+      do {
+         try managedContext.save()
+         print("deleted successfully")
+      } catch let error as NSError {
+         print("Could not delete. \(error), \(error.userInfo)")
+      }
+      
+   } catch let error as NSError {
+      print("Could not fetch. \(error), \(error.userInfo)")
+   }
+}
+
+
+
+func move(IndexSet: IndexSet, destination: Int) {
+
+   guard let appDelegate =
+      UIApplication.shared.delegate as? AppDelegate else {
+         return
+   }
+
+   let managedContext =
+      appDelegate.persistentContainer.viewContext
+
+
+   let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Item")
+   fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Item.position, ascending: true)]
+
+
+   do {
+      let items = try managedContext.fetch(fetchRequest) as! [Item]
+
+      let firstIndex = IndexSet.min()!
+      let lastIndex = IndexSet.max()!
+
+      let firstRowToReorder = (firstIndex < destination) ? firstIndex : destination
+      let lastRowToReorder = (lastIndex > (destination-1)) ? lastIndex : (destination-1)
+
+      if firstRowToReorder != lastRowToReorder {
+
+           var newOrder = firstRowToReorder
+           if newOrder < firstIndex {
+               // Moving dragged items up, so re-order dragged items first
+
+               // Re-order dragged items
+            for index in IndexSet {
+                   items[index].setValue(newOrder, forKey: "position")
+                   newOrder = newOrder + 1
+               }
+
+               // Re-order non-dragged items
+               for rowToMove in firstRowToReorder..<lastRowToReorder {
+                  if !IndexSet.contains(rowToMove) {
+                       items[rowToMove].setValue(newOrder, forKey: "position")
+                       newOrder = newOrder + 1
+                   }
+               }
+           } else {
+               // Moving dragged items down, so re-order dragged items last
+
+               // Re-order non-dragged items
+               for rowToMove in firstRowToReorder...lastRowToReorder {
+                  if !IndexSet.contains(rowToMove) {
+                       items[rowToMove].setValue(newOrder, forKey: "position")
+                       newOrder = newOrder + 1
+                   }
+               }
+
+               // Re-order dragged items
+            for index in IndexSet {
+                   items[index].setValue(newOrder, forKey: "position")
+                   newOrder = newOrder + 1
+               }
+           }
+      }
+
+
+      do {
+         try managedContext.save()
+
+      } catch let error as NSError {
+         print("Could not delete. \(error), \(error.userInfo)")
+      }
+
    } catch let error as NSError {
       print("Could not fetch. \(error), \(error.userInfo)")
    }
@@ -265,207 +375,39 @@ func movePreviousVersionDontUse(at offsets: IndexSet, to destination: Int) {
 
 
 
-func move(IndexSet: IndexSet, destination: Int) {
-   
-   guard let appDelegate =
-      UIApplication.shared.delegate as? AppDelegate else {
-         return
-   }
-   
-   let managedContext =
-      appDelegate.persistentContainer.viewContext
-   
-   
-   let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Item")
-   fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Item.position, ascending: true)]
-   
-   
-   do {
-      let items = try managedContext.fetch(fetchRequest) as! [Item]
-      
-      let firstIndex = IndexSet.min()!
-      let lastIndex = IndexSet.max()!
-      
-      print(firstIndex)
-      print(lastIndex)
-      
-      let firstRowToReorder = (firstIndex < destination) ? firstIndex : destination
-      let lastRowToReorder = (lastIndex > (destination-1)) ? lastIndex : (destination-1)
-      
-      if firstRowToReorder != lastRowToReorder {
-           
-           var newOrder = firstRowToReorder
-           if newOrder < firstIndex {
-               // Moving dragged items up, so re-order dragged items first
-               
-               // Re-order dragged items
-               for index in IndexSet {
-                   items[index].setValue(newOrder, forKey: "position")
-                   newOrder = newOrder + 1
-               }
-               
-               // Re-order non-dragged items
-               for rowToMove in firstRowToReorder..<lastRowToReorder {
-                   if !IndexSet.contains(rowToMove) {
-                       items[rowToMove].setValue(newOrder, forKey: "position")
-                       newOrder = newOrder + 1
-                   }
-               }
-           } else {
-               // Moving dragged items down, so re-order dragged items last
-               
-               // Re-order non-dragged items
-               for rowToMove in firstRowToReorder...lastRowToReorder {
-                   if !IndexSet.contains(rowToMove) {
-                       items[rowToMove].setValue(newOrder, forKey: "position")
-                       newOrder = newOrder + 1
-                   }
-               }
-               
-               // Re-order dragged items
-               for index in IndexSet {
-                   items[index].setValue(newOrder, forKey: "position")
-                   newOrder = newOrder + 1
-               }
-           }
-      }
-      
-      
-      do {
-         try managedContext.save()
-         
-      } catch let error as NSError {
-         print("Could not delete. \(error), \(error.userInfo)")
-      }
-      
-   } catch let error as NSError {
-      print("Could not fetch. \(error), \(error.userInfo)")
-   }
-}
 
-
-
-
+//func deleteThisItem(thisItem: Item) {
 //
-//private func reorder(IndexSet: IndexSet, to destination: Int, within: [T] ) {
+//   guard let appDelegate =
+//      UIApplication.shared.delegate as? AppDelegate else {
+//         return
+//   }
 //
+//   let managedContext =
+//      appDelegate.persistentContainer.viewContext
 //
-//    let firstIndex = IndexSet.min()!
-//    let lastIndex = IndexSet.max()!
+//   let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Item")
+//   //fetchRequest.predicate = NSPredicate(format: "markedOff = %@", true)
 //
-//    let firstRowToReorder = (firstIndex < destination) ? firstIndex : destination
-//    let lastRowToReorder = (lastIndex > (destination-1)) ? lastIndex : (destination-1)
+//   do {
+//      let fetchReturn = try managedContext.fetch(fetchRequest)
+//      let items = fetchReturn as! [Item]
 //
-//    if firstRowToReorder != lastRowToReorder {
-//
-//         var newOrder = firstRowToReorder
-//         if newOrder < firstIndex {
-//             // Moving dragged items up, so re-order dragged items first
-//
-//             // Re-order dragged items
-//             for index in IndexSet {
-//                 within[index].setValue(newOrder, forKey: "order")
-//                 newOrder = newOrder + 1
-//             }
-//
-//             // Re-order non-dragged items
-//             for rowToMove in firstRowToReorder..<lastRowToReorder {
-//                 if !IndexSet.contains(rowToMove) {
-//                     within[rowToMove].setValue(newOrder, forKey: "order")
-//                     newOrder = newOrder + 1
-//                 }
-//             }
-//         } else {
-//             // Moving dragged items down, so re-order dragged items last
-//
-//             // Re-order non-dragged items
-//             for rowToMove in firstRowToReorder...lastRowToReorder {
-//                 if !IndexSet.contains(rowToMove) {
-//                     within[rowToMove].setValue(newOrder, forKey: "order")
-//                     newOrder = newOrder + 1
-//                 }
-//             }
-//
-//             // Re-order dragged items
-//             for index in IndexSet {
-//                 within[index].setValue(newOrder, forKey: "order")
-//                 newOrder = newOrder + 1
-//             }
+//      for item in items {
+//         if item == thisItem {
+//            managedContext.delete(item)
 //         }
-//    }
+//      }
+//
+//
+//      do {
+//         try managedContext.save()
+//         print("deleted successfully")
+//      } catch let error as NSError {
+//         print("Could not delete. \(error), \(error.userInfo)")
+//      }
+//
+//   } catch let error as NSError {
+//      print("Could not fetch. \(error), \(error.userInfo)")
+//   }
 //}
-
-
-
-func editName(thisItem: Item, itemNewName: String) {
-   
-   guard let appDelegate =
-      UIApplication.shared.delegate as? AppDelegate else {
-         return
-   }
-   
-   let managedContext =
-      appDelegate.persistentContainer.viewContext
-   
-   let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Item")
-   
-   fetchRequest.predicate = NSPredicate(format: "id = %@", thisItem.id! as CVarArg)
-   
-   do {
-      let returnedItems = try managedContext.fetch(fetchRequest) as! [Item]
-      
-      if returnedItems.count == 1 {
-         let itemToEdit = returnedItems[0]
-         print("Got \(returnedItems.count) items and the first is \(itemToEdit.wrappedName)")
-         itemToEdit.name = itemNewName
-         print("Changed name to \(itemNewName)")
-      }
-      //let objectUpdate = fetchReturn[0] as! NSManagedObject
-      //objectUpdate.setValue(itemNewValue, forKey: "name")
-      
-      do {
-         try managedContext.save()
-         print("updated successfully")
-      } catch let error as NSError {
-         print("Could not save. \(error), \(error.userInfo)")
-      }
-      
-   } catch let error as NSError {
-      print("Could not fetch. \(error), \(error.userInfo)")
-   }
-}
-
-
-
-func resetMOC() {
-   
-   guard let appDelegate =
-      UIApplication.shared.delegate as? AppDelegate else {
-         return
-   }
-   
-   let managedContext =
-      appDelegate.persistentContainer.viewContext
-   
-   let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Item")
-   
-   do {
-      let fetchReturn = try managedContext.fetch(fetchRequest)
-      let items = fetchReturn as! [Item]
-      
-      for item in items {
-         managedContext.delete(item)
-      }
-      
-      
-      do {
-         try managedContext.save()
-         print("deleted successfully")
-      } catch let error as NSError {
-         print("Could not delete. \(error), \(error.userInfo)")
-      }
-      
-   } catch let error as NSError {
-      print("Could not fetch. \(error), \(error.userInfo)")
-   }
-}

@@ -421,7 +421,7 @@
 //               }, onCommit: {
 //                  if self.textfieldValue != "" {
 //                     addNewItem(itemName: self.$textfieldValue)
-//                     self.globalVariables.scrollingProxy.scrollTo(.top)
+//                     self.globalVariables.scrollingProxy.scrollTo(.end)
 //                     self.textfieldValue = ""
 //                     withAnimation { self.globalVariables.itemAdded.toggle() }
 //                  }

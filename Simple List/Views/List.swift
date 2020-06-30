@@ -14,7 +14,7 @@ struct ListView: View {
    @EnvironmentObject var globalVariables: GlobalVariableClass
    
    @FetchRequest(entity: Item.entity(), sortDescriptors: [
-      NSSortDescriptor(keyPath: \Item.position, ascending: false)
+      NSSortDescriptor(keyPath: \Item.position, ascending: true)
    ]) var itemsFromFetchRequest: FetchedResults<Item>
    
    var body: some View {
@@ -22,16 +22,22 @@ struct ListView: View {
          
          List {
             
-            Text("")
-               .listRowBackground(Color("listRowBackground").edgesIgnoringSafeArea(.horizontal))
+//            Text("")
+//               .listRowBackground(Color("listRowBackground").edgesIgnoringSafeArea(.horizontal))
             
             ForEach(self.itemsFromFetchRequest, id: \.self) { item in
                Row(thisItem: item, markedOff: item.markedOff, position: item.position, isEditMode: self.$isEditMode)
                   .background(ListScrollingHelper(proxy: self.globalVariables.scrollingProxy))
+
+
             }
             .onMove(perform: move)
             .onDelete(perform: deleteSwipedItem)
             .listRowBackground(Color("listRowBackground").edgesIgnoringSafeArea(.horizontal))
+       
+            Text("")
+            .listRowBackground(Color("listRowBackground").edgesIgnoringSafeArea(.horizontal))
+
          }.environment(\.editMode, self.$isEditMode)
          
       }

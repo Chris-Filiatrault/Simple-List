@@ -68,7 +68,7 @@ struct ChangingButtons: View {
                   } else if self.textfieldValue != "" {
                      addNewItem(itemName: self.$textfieldValue)
                      self.textfieldValue = ""
-                     self.globalVariables.scrollingProxy.scrollTo(.top)
+                     self.globalVariables.scrollingProxy.scrollTo(.end)
                   }
                }) {
                   Text(self.textfieldValue == "" ? "Done" : "Add")
