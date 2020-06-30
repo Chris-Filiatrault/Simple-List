@@ -71,11 +71,20 @@ struct ChangingButtons: View {
                      self.globalVariables.scrollingProxy.scrollTo(.end)
                   }
                }) {
-                  Text(self.textfieldValue == "" ? "Done" : "Add")
-                  .foregroundColor(Color("navBarFont"))
-               }.padding()
+                  if self.textfieldValue == "" {
+                     Text("Done")
+                        .foregroundColor(Color("navBarFont"))
+                        .padding()
+                  } else {
+                     Image(systemName: "plus.circle.fill")
+                        .imageScale(.large)
+                        .foregroundColor(.green)
+                        .padding()
+                  }
+//                  Text(self.textfieldValue == "" ? "Done" : "Add")
+               }
                
-               Text("").padding()
+//               Text("").padding()
             }
          }
             

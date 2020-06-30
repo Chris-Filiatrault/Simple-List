@@ -23,8 +23,6 @@ struct Row: View {
       
       HStack {
          
-         Text("\(thisItem.position)")
-         
          Button(action: {
             markOffItem(thisItem: self.thisItem)
             if self.globalVariables.textfieldActive == true {

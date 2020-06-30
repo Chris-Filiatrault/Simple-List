@@ -28,7 +28,7 @@ struct Home: View {
    init() {
       
       // To remove all separators in list:
-      //UITableView.appearance().separatorStyle = .none
+//      UITableView.appearance().separatorStyle = .none
       
       // To remove only extra separators below the list:
       UITableView.appearance().tableFooterView = UIView()
@@ -63,7 +63,7 @@ struct Home: View {
       
       
       
-//      
+//
 //
 //      // Rest items for fixing move()
 //      resetMOC()

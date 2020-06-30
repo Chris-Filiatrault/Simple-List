@@ -34,9 +34,11 @@ struct ListView: View {
             .onMove(perform: move)
             .onDelete(perform: deleteSwipedItem)
             .listRowBackground(Color("listRowBackground").edgesIgnoringSafeArea(.horizontal))
-       
+            
+            if self.itemsFromFetchRequest.count > 0 {
             Text("")
             .listRowBackground(Color("listRowBackground").edgesIgnoringSafeArea(.horizontal))
+            }
 
          }.environment(\.editMode, self.$isEditMode)
          

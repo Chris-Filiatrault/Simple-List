@@ -29,17 +29,14 @@ func addNewItem(itemName: Binding<String>) {
    newItem.markedOff = false
    newItem.id = UUID()
    
-   
    let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Item")
    fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Item.position, ascending: false)]
    
    do {
       let fetchReturn = try managedContext.fetch(fetchRequest)
-      
       let items = fetchReturn as! [Item]
       
-      
-      // If new item is the first, set position = 1
+      // If new item is the first, set position = 0
       if items.count == 1 {
          newItem.position = 0
          print("Set position = 0")
@@ -50,9 +47,6 @@ func addNewItem(itemName: Binding<String>) {
          newItem.position = items[0].position + 1
       }
       
-      
-      
-      
    } catch let error as NSError {
       print("Could not fetch. \(error), \(error.userInfo)")
    }
@@ -60,7 +54,6 @@ func addNewItem(itemName: Binding<String>) {
    do {
       try managedContext.save()
       print("saved successfully -- \(newItem.wrappedName)")
-      //self.loadItems()
    } catch let error as NSError {
       print("Could not save. \(error), \(error.userInfo)")
       
@@ -69,7 +62,6 @@ func addNewItem(itemName: Binding<String>) {
 
 
 
-// Mark off the tick circle in the list
 func markOffItem(thisItem: Item) {
    
    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
@@ -101,7 +93,6 @@ func deleteItems() {
       appDelegate.persistentContainer.viewContext
    
    let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Item")
-   //fetchRequest.predicate = NSPredicate(format: "markedOff = %@", true)
    
    do {
       let fetchReturn = try managedContext.fetch(fetchRequest)
@@ -138,7 +129,7 @@ func deleteSwipedItem(at offsets: IndexSet) {
       appDelegate.persistentContainer.viewContext
    
    let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Item")
-   fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Item.position, ascending: false)]
+   fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Item.position, ascending: true)]
    
    
    
@@ -146,11 +137,8 @@ func deleteSwipedItem(at offsets: IndexSet) {
       let fetchReturn = try managedContext.fetch(fetchRequest) as! [Item]
       
       for offset in offsets {
-         
          let item = fetchReturn[offset]
-         
          managedContext.delete(item)
-         
       }
       
       do {
@@ -196,41 +184,6 @@ func editName(thisItem: Item, itemNewName: String) {
          print("updated successfully")
       } catch let error as NSError {
          print("Could not save. \(error), \(error.userInfo)")
-      }
-      
-   } catch let error as NSError {
-      print("Could not fetch. \(error), \(error.userInfo)")
-   }
-}
-
-
-
-func resetMOC() {
-   
-   guard let appDelegate =
-      UIApplication.shared.delegate as? AppDelegate else {
-         return
-   }
-   
-   let managedContext =
-      appDelegate.persistentContainer.viewContext
-   
-   let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Item")
-   
-   do {
-      let fetchReturn = try managedContext.fetch(fetchRequest)
-      let items = fetchReturn as! [Item]
-      
-      for item in items {
-         managedContext.delete(item)
-      }
-      
-      
-      do {
-         try managedContext.save()
-         print("deleted successfully")
-      } catch let error as NSError {
-         print("Could not delete. \(error), \(error.userInfo)")
       }
       
    } catch let error as NSError {
@@ -317,7 +270,16 @@ func move(IndexSet: IndexSet, destination: Int) {
 
 
 
-func movePreviousVersionDontUse(at offsets: IndexSet, to destination: Int) {
+
+
+
+
+// ==============================================================
+// ====================== FOR TESTING ===========================
+// ==============================================================
+
+
+func resetMOC() {
    
    guard let appDelegate =
       UIApplication.shared.delegate as? AppDelegate else {
@@ -327,43 +289,20 @@ func movePreviousVersionDontUse(at offsets: IndexSet, to destination: Int) {
    let managedContext =
       appDelegate.persistentContainer.viewContext
    
-   
    let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Item")
-   fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Item.position, ascending: false)]
-   
    
    do {
-      let items = try managedContext.fetch(fetchRequest) as! [Item]
+      let fetchReturn = try managedContext.fetch(fetchRequest)
+      let items = fetchReturn as! [Item]
       
-      for offset in offsets {
-         let movedItem = items[offset]
-         
-         // Item is moving to last position
-         if destination == items.count {
-            movedItem.position = items[destination - 1].position
-            for item in items {
-               if item != movedItem {
-                  item.position += 1
-               }
-            }
-            
-         // Item is moving to first position
-         } else if destination == 0 {
-            movedItem.position = items[0].position + 1
-            
-         
-         // Item is moving in between first and last positions
-         } else {
-            let priorItem: Item = items[destination - 1]
-            let followingItem: Item = items[destination]
-            movedItem.position = (priorItem.position + followingItem.position) / 2
-         }
-         
+      for item in items {
+         managedContext.delete(item)
       }
+      
       
       do {
          try managedContext.save()
-         
+         print("deleted successfully")
       } catch let error as NSError {
          print("Could not delete. \(error), \(error.userInfo)")
       }
@@ -372,42 +311,3 @@ func movePreviousVersionDontUse(at offsets: IndexSet, to destination: Int) {
       print("Could not fetch. \(error), \(error.userInfo)")
    }
 }
-
-
-
-
-//func deleteThisItem(thisItem: Item) {
-//
-//   guard let appDelegate =
-//      UIApplication.shared.delegate as? AppDelegate else {
-//         return
-//   }
-//
-//   let managedContext =
-//      appDelegate.persistentContainer.viewContext
-//
-//   let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Item")
-//   //fetchRequest.predicate = NSPredicate(format: "markedOff = %@", true)
-//
-//   do {
-//      let fetchReturn = try managedContext.fetch(fetchRequest)
-//      let items = fetchReturn as! [Item]
-//
-//      for item in items {
-//         if item == thisItem {
-//            managedContext.delete(item)
-//         }
-//      }
-//
-//
-//      do {
-//         try managedContext.save()
-//         print("deleted successfully")
-//      } catch let error as NSError {
-//         print("Could not delete. \(error), \(error.userInfo)")
-//      }
-//
-//   } catch let error as NSError {
-//      print("Could not fetch. \(error), \(error.userInfo)")
-//   }
-//}
