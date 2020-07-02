@@ -75,7 +75,7 @@
 		6D06DB1D249CC01D00F0A019 /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
 		6D0889F724A9A0A400428F50 /* CustomTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextfield.swift; sourceTree = "<group>"; };
 		6D0889F924A9A2E800428F50 /* UIKitTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitTextField.swift; sourceTree = "<group>"; };
-		6D2B1F9924904A070025E786 /* iShop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iShop.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D2B1F9924904A070025E786 /* Simple List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Simple List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D2B1F9C24904A070025E786 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6D2B1F9E24904A070025E786 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		6D2B1FA124904A070025E786 /* Simple_List.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Simple_List.xcdatamodel; sourceTree = "<group>"; };
@@ -163,7 +163,7 @@
 		6D2B1F9A24904A070025E786 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6D2B1F9924904A070025E786 /* iShop.app */,
+				6D2B1F9924904A070025E786 /* Simple List.app */,
 				6D2B1FB224904A120025E786 /* Simple ListTests.xctest */,
 				6D2B1FBD24904A120025E786 /* Simple ListUITests.xctest */,
 			);
@@ -312,7 +312,7 @@
 			);
 			name = "Simple List";
 			productName = "Simple List";
-			productReference = 6D2B1F9924904A070025E786 /* iShop.app */;
+			productReference = 6D2B1F9924904A070025E786 /* Simple List.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6D2B1FB124904A120025E786 /* Simple ListTests */ = {
@@ -729,7 +729,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Simple List/Simple List.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Simple List/Preview Content\"";
 				DEVELOPMENT_TEAM = U29H955YLN;
 				ENABLE_PREVIEWS = YES;
@@ -739,9 +739,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.cfiliatrault.single-page-list-app";
-				PRODUCT_NAME = iShop;
+				MARKETING_VERSION = 2.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cfiliatrault.Simple-List";
+				PRODUCT_NAME = "Simple List";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -754,7 +754,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Simple List/Simple List.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Simple List/Preview Content\"";
 				DEVELOPMENT_TEAM = U29H955YLN;
 				ENABLE_PREVIEWS = YES;
@@ -764,9 +764,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.cfiliatrault.single-page-list-app";
-				PRODUCT_NAME = iShop;
+				MARKETING_VERSION = 2.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cfiliatrault.Simple-List";
+				PRODUCT_NAME = "Simple List";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

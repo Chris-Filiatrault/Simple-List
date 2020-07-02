@@ -23,7 +23,7 @@ struct ErrorMessage: View {
             .font(.headline)
             .padding(.vertical)
       
-         Text("If the problem persists, please contact the developer Chris Filiatrault at:\n\ncf-developer@hotmail.com")
+         Text("If the problem persists, please contact the developer Chris Filiatrault at:\n\nchris.filiatrault@outlook.com")
             .font(.headline)
             .padding(.vertical)
             

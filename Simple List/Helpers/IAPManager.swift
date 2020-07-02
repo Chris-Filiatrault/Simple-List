@@ -83,7 +83,7 @@ class IAPManager: NSObject {
    // This function returns the IDs created on App Store Connect
    // Note that if I wanted to add more in-app purchases later, I'd have to avoid hard-coding in the IDs like below, to avoid the need to re-release the app (lose all reviews etc presumably)
    func returnProductIDs() -> [String] {
-      return ["com.cfiliatrault_iShop_RemoveAds"]
+      return ["com.cfiliatrault_SimpleList_RemoveAds"]
    }
 
 

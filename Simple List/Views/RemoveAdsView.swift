@@ -108,9 +108,9 @@ struct RemoveAdsView: View {
                      
                      // Photo view
                      VStack {
-                        Text("Help me buy my next coffee! ☕️")
+                        Text("Thank you for your support!")
                            .font(.headline)
-                           .padding(.vertical, 5)
+                           .padding(.top, 10)
                         
                         Image("chris-photo")
                            .resizable()
@@ -125,7 +125,7 @@ struct RemoveAdsView: View {
                         Text("Chris Filiatrault")
                            .font(.title)
                         
-                        Text("Creator of iShop")
+                        Text("Creator of Simple List")
                            .font(.headline)
                            .padding(.bottom, 10)
                      }
