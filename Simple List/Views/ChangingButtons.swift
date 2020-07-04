@@ -12,9 +12,9 @@ import SwiftUI
 struct ChangingButtons: View {
    
    @FetchRequest(entity: Item.entity(), sortDescriptors: [
-      NSSortDescriptor(keyPath: \Item.position, ascending: false)],
-      predicate: NSPredicate(format: "markedOff == true")
-   ) var tickedOffItems: FetchedResults<Item>
+      NSSortDescriptor(keyPath: \Item.position, ascending: false)
+   ], predicate: NSPredicate(format: "markedOff == true"))
+   var tickedOffItems: FetchedResults<Item>
    
    @EnvironmentObject var globalVariables: GlobalVariableClass
    
@@ -44,27 +44,24 @@ struct ChangingButtons: View {
                .alert(isPresented: $confirmDeleteItemsAlert) {
                   Alert(
                      title: Text(
-                        tickedOffItems.count > 1 ? "Delete \(tickedOffItems.count) marked off items?" : "Delete \(tickedOffItems.count) item?"),
+                        tickedOffItems.count > 1 ? "Delete \(tickedOffItems.count) items?" : "Delete \(tickedOffItems.count) item?"),
                      primaryButton: .default(Text("Cancel")),
                      secondaryButton: .destructive(Text("Delete")) { deleteItems() }
                   )
                }
-               
             }
          }
             
             
-         // Done/Add button
+            // Done/Add button
          else if globalVariables.textfieldActive == true {
-            HStack {
-               
+            
                Button(action: {
                   if self.textfieldValue == "" {
                      UIApplication.shared.endEditing()
                      withAnimation {                        
-                     self.globalVariables.textfieldActive = false
+                        self.globalVariables.textfieldActive = false
                      }
-                     print(self.globalVariables.textfieldActive)
                   } else if self.textfieldValue != "" {
                      addNewItem(itemName: self.$textfieldValue)
                      self.textfieldValue = ""
@@ -81,30 +78,7 @@ struct ChangingButtons: View {
                         .foregroundColor(.green)
                         .padding()
                   }
-//                  Text(self.textfieldValue == "" ? "Done" : "Add")
                }
-               
-//               Text("").padding()
-            }
-         }
-            
-            
-            
-            //Rename done button
-         else if globalVariables.textfieldActive == false {
-            HStack {
-               
-               Button(action: {
-                  UIApplication.shared.endEditing()
-                  
-               }) {
-                  Text("Rename")
-                  .foregroundColor(Color("navBarFont"))
-                  
-               }.padding()
-               
-               Text("").padding()
-            }
          }
          
       }

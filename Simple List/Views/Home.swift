@@ -17,7 +17,6 @@ struct Home: View {
    @State var showAddButton: Bool = false
    @State var showRemoveAdsView: Bool = false
    @State var purchaseMade: Bool = false
-   @State var japaneseTextfieldValue: String = ""
    @State var isEditMode: EditMode = .inactive
    
    let standardDarkBlueUIColor: UIColor = UIColor(red: 0/255, green: 10/255, blue: 30/255, alpha: 1)
@@ -28,7 +27,7 @@ struct Home: View {
    init() {
       
       // To remove all separators in list:
-//      UITableView.appearance().separatorStyle = .none
+      //      UITableView.appearance().separatorStyle = .none
       
       // To remove only extra separators below the list:
       UITableView.appearance().tableFooterView = UIView()
@@ -60,27 +59,6 @@ struct Home: View {
          print("Could not delete. \(error), \(error.userInfo)")
       }
       
-      
-      
-      
-//
-//
-//      // Rest items for fixing move()
-//      resetMOC()
-//      let entity = NSEntityDescription.entity(forEntityName: "Item", in: managedContext)!
-//
-//
-//
-//      for position in self.itemPositions {
-//      let newItem = Item(entity: entity, insertInto: managedContext)
-//         newItem.name = self.itemNames[position]
-//      newItem.position = Int32(position)
-//      newItem.dateAdded = Date()
-//      newItem.markedOff = false
-//      newItem.id = UUID()
-//      }
-
-      
    }
    
    
@@ -89,11 +67,11 @@ struct Home: View {
       
       NavigationView {
          VStack(spacing: 0) {
-
+            
             // TextField
             TextField("Add item", text: self.$textfieldValue, onEditingChanged: { changed in
                withAnimation {
-               self.isEditMode = .inactive
+                  self.isEditMode = .inactive
                }
                self.globalVariables.textfieldActive.toggle()
             }, onCommit: {
@@ -103,8 +81,8 @@ struct Home: View {
                   self.textfieldValue = ""
                }
             })
-            .textFieldStyle(RoundedBorderTextFieldStyle())
-            .padding()
+               .textFieldStyle(RoundedBorderTextFieldStyle())
+               .padding()
                
                
                // ===Navigation bar===
@@ -169,7 +147,7 @@ struct Home: View {
             else if UserDefaults.standard.object(forKey: "purchased") as? Bool ?? nil == true {
                // Show nothing
             }
-         
+            
          }
          .background(Color("listRowBackground").edgesIgnoringSafeArea(.all))
          .alert(isPresented: self.$purchaseMade) {
@@ -179,38 +157,6 @@ struct Home: View {
          .navigationViewStyle(StackNavigationViewStyle())
       
       
-      
    }
 }
 
-
-
-
-//// Add new
-//Button(action: {
-//
-//   resetMOC()
-//
-//   guard let appDelegate =
-//      UIApplication.shared.delegate as? AppDelegate else {
-//         return
-//   }
-//
-//   let managedContext =
-//      appDelegate.persistentContainer.viewContext
-//
-//   let entity = NSEntityDescription.entity(forEntityName: "Item", in: managedContext)!
-//
-//   for position in self.itemPositions {
-//   let newItem = Item(entity: entity, insertInto: managedContext)
-//      newItem.name = self.itemNames[position]
-//   newItem.position = Int32(position)
-//   newItem.dateAdded = Date()
-//   newItem.markedOff = false
-//   newItem.id = UUID()
-//   }
-//}) {
-// Image(systemName: "arrow.clockwise")
-//   .imageScale(.large)
-//   .foregroundColor(Color("navBarFont"))
-//}

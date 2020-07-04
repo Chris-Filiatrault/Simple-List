@@ -14,13 +14,11 @@ struct RemoveAdsView: View {
    @State var restorePurchaseInfoAlert: Bool = false
    @Binding var showRemoveAdsView: Bool
    @Binding var purchaseMade: Bool
-
+   
    @ObservedObject var products = ProductsDB.shared
    @ObservedObject var globalVariables = GlobalVariableClass()
-
-
-   let backgroundColour: Color = Color(red: 0, green: 144/255, blue: 158/255, opacity: 1)
    
+   let backgroundColour: Color = Color(red: 0, green: 144/255, blue: 158/255, opacity: 1)
    
    var body: some View {
       
@@ -29,32 +27,24 @@ struct RemoveAdsView: View {
             
             VStack {
                
-               // ==========================================================================
                // === Show error message if products fail to load from App Store Connect ===
-               // ==========================================================================
                if self.products.items.isEmpty {
                   ErrorMessage()
                }
-               
                   
-               // =================================================
-               // === Show the main view if the products loaded ===
-               // =================================================
+                  
+                  // === Otherwise, show the main view if the products loaded ===
                else if !self.products.items.isEmpty {
+                  
+                  // Start of main view
                   VStack {
-                     
                      Spacer()
-
                      
-                     // Buttons
                      VStack {
-                        
                         Text("Remove Ads for \(IAPManager.shared.formatPrice(for: self.products.items[0]) ?? "")")
                            .font(.title)
-                        //                              .padding(.vertical, 10)
                         
-                        
-                        // Purchase/remove button
+                        // Purchase button
                         Button(action: {
                            let removeAdsProduct = self.products.items[0]
                            IAPManager.shared.purchaseV5(product: removeAdsProduct)
@@ -68,26 +58,26 @@ struct RemoveAdsView: View {
                               .foregroundColor(.white)
                               .cornerRadius(15)
                               .transition(.scale)
-                              .edgesIgnoringSafeArea(.horizontal)                              }
-                           .contentShape(Rectangle())
-                           .padding(.vertical, 5)
+                              .edgesIgnoringSafeArea(.horizontal)
+                        }
+                        .contentShape(Rectangle())
+                        .padding(.vertical, 5)
                         
                         
                         HStack {
-                        // Restore purchase button
-                        Button(action: {
-                           IAPManager.shared.restorePurchasesV5()
-                        }) {
-                           Text("Restore purchase")
-                              .bold()
-                              .cornerRadius(20)
-                              .font(.subheadline)
-                              .padding(5)
-                              .frame(minWidth: 50)
-                        }.contentShape(Rectangle())
-                        
-                     
-                        // Question mark button
+                           // Restore purchase button
+                           Button(action: {
+                              IAPManager.shared.restorePurchasesV5()
+                           }) {
+                              Text("Restore purchase")
+                                 .bold()
+                                 .cornerRadius(20)
+                                 .font(.subheadline)
+                                 .padding(5)
+                                 .frame(minWidth: 50)
+                           }.contentShape(Rectangle())
+                           
+                           // Information button
                            Button(action: {
                               self.restorePurchaseInfoAlert = true
                            }) {
@@ -95,10 +85,7 @@ struct RemoveAdsView: View {
                                  .foregroundColor(Color("restorePurchaseButton"))
                                  .padding(5)
                            }
-                           
                         }
-                        
-                        
                         
                      } // End of buttons
                      
@@ -108,7 +95,7 @@ struct RemoveAdsView: View {
                      
                      // Photo view
                      VStack {
-                        Text("Thank you for your support!")
+                        Text("Thank you for using Simple List!")
                            .font(.headline)
                            .padding(.top, 10)
                         
@@ -119,9 +106,8 @@ struct RemoveAdsView: View {
                            .padding(.vertical, 7)
                            .overlay(
                               Circle().stroke(Color("blackWhiteFont"), lineWidth: 2))
-                        .frame(minWidth: 150, maxWidth: 250, minHeight: 150, maxHeight: 250)
-                        
-                        
+                           .frame(minWidth: 150, maxWidth: 250, minHeight: 150, maxHeight: 250)
+                           
                         Text("Chris Filiatrault")
                            .font(.title)
                         
@@ -144,7 +130,6 @@ struct RemoveAdsView: View {
                   self.purchaseMade = true
                }
             }
-               
                
                // Navigation bar details
                .navigationBarTitle("", displayMode: .inline)

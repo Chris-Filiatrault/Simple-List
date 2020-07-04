@@ -9,27 +9,26 @@
 import SwiftUI
 
 struct ErrorMessage: View {
-    var body: some View {
-        // Make this error message into something cute
+   var body: some View {
+      // Make this error message into something cute
       GeometryReader { geometry in
          VStack(alignment: .leading) {
             
-         
-      Text("Oops! An error occurred 😵")
-         .font(.title)
-         .padding(.vertical)
-         
-         Text("Please ensure you're connected to the internet and try again.")
-            .font(.headline)
-            .padding(.vertical)
-      
-         Text("If the problem persists, please contact the developer Chris Filiatrault at:\n\nchris.filiatrault@outlook.com")
-            .font(.headline)
-            .padding(.vertical)
+            Text("Oops! An error occurred 😵")
+               .font(.title)
+               .padding(.vertical)
+            
+            Text("Please ensure you're connected to the internet and try again.")
+               .font(.headline)
+               .padding(.vertical)
+            
+            Text("If the problem persists, please contact the developer Chris Filiatrault at:\n\nchris.filiatrault@outlook.com")
+               .font(.headline)
+               .padding(.vertical)
             
          }
          Spacer(minLength: geometry.size.height * 0.25)
          
       }.padding()
-    }
+   }
 }

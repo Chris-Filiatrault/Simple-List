@@ -21,15 +21,9 @@ struct ListView: View {
       VStack(spacing: 0) {
          
          List {
-            
-//            Text("")
-//               .listRowBackground(Color("listRowBackground").edgesIgnoringSafeArea(.horizontal))
-            
             ForEach(self.itemsFromFetchRequest, id: \.self) { item in
                Row(thisItem: item, markedOff: item.markedOff, position: item.position, isEditMode: self.$isEditMode)
                   .background(ListScrollingHelper(proxy: self.globalVariables.scrollingProxy))
-
-
             }
             .onMove(perform: move)
             .onDelete(perform: deleteSwipedItem)
@@ -47,40 +41,3 @@ struct ListView: View {
       
    }
 }
-
-
-
-
-//// Old implementation, using an if statement to force an update to the view
-//
-//         if globalVariables.itemAdded == true {
-//            List {
-//               ForEach(itemsFromFetchRequest, id: \.self) { item in
-//                  VStack(spacing: 0) {
-//
-//                     Row(thisItem: item, markedOff: item.markedOff, position: item.position, globalVariables.isEditMode: self.$isEditMode)
-//
-//                  }
-//               }
-//               .onMove(perform: move)
-//               .onDelete(perform: deleteSwipedItem)
-//               .listRowBackground(Color("listRowBackground").edgesIgnoringSafeArea(.horizontal))
-//            }.environment(\.editMode, self.$isEditMode)
-//         }
-//
-//         else if globalVariables.itemAdded == false {
-//           List {
-//            ForEach(itemsFromFetchRequest, id: \.self) { item in
-//                  VStack(spacing: 0) {
-//
-//                     Row(thisItem: item, markedOff: item.markedOff, position: item.position, isEditMode: self.$isEditMode)
-//
-//
-//                  }
-//               }
-//               .onMove(perform: move)
-//               .onDelete(perform: deleteSwipedItem)
-//               .listRowBackground(Color("listRowBackground").edgesIgnoringSafeArea(.horizontal))
-//            }.environment(\.editMode, self.$isEditMode)
-//
-//         }
