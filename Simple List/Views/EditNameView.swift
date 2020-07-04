@@ -11,7 +11,7 @@ import SwiftUI
 struct EditNameView: View {
    
    var thisItem: Item
-   @State var newName: String = ""
+   @State var newName: String
    @Binding var showEditNameView: Bool
    @Binding var isEditMode: EditMode
    
@@ -20,17 +20,8 @@ struct EditNameView: View {
       NavigationView {
          GeometryReader { geometry in
             VStack {
-               
-               // VStack is for applying modifiers to all three Text() views
-               VStack {
                   Text("Rename ")
-                     + Text("\(self.thisItem.wrappedName)")
-                        .bold()
-                     + Text(" to:")
-                  
-               }
-               .font(.title)
-               .fixedSize(horizontal: false, vertical: true)
+                     .font(.title)
                
                
                // ===Enter item textfield===
@@ -53,7 +44,7 @@ struct EditNameView: View {
                   
                   // Cancel button
                   Button(action: {
-                     self.showEditNameView = false
+                     self.showEditNameView.toggle()
                      print(self.showEditNameView)
                   }) {
                      Text("Cancel")
@@ -69,10 +60,13 @@ struct EditNameView: View {
                         editName(thisItem: self.thisItem, itemNewName: self.newName)
                         self.newName = ""
                         //                     self.isEditMode = .inactive
-                        self.showEditNameView = false
+                        self.showEditNameView.toggle()
+                        print(self.showEditNameView)
                      }
                   }) {
-                     Text("Rename")
+                     
+                     
+                     Text("Done")
                         .bold()
                         .frame(minWidth: 50)
                         .font(.subheadline)
@@ -92,6 +86,7 @@ struct EditNameView: View {
             .onDisappear {
                withAnimation {
                   self.isEditMode = .inactive
+                  self.showEditNameView = false
                }
             }
          }

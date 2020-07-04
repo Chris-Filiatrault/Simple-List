@@ -27,13 +27,18 @@ struct Home: View {
    init() {
       
       // To remove all separators in list:
-      //      UITableView.appearance().separatorStyle = .none
+      //            UITableView.appearance().separatorStyle = .none
       
       // To remove only extra separators below the list:
-      UITableView.appearance().tableFooterView = UIView()
+      //      UITableView.appearance().tableFooterView = UIView()
+      
+      // To remove only extra separators below the list + last separator:
+      UITableView.appearance().tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 1))
       
       // Remove UITableView background, so it can be programmed using SwiftUI
       UITableView.appearance().backgroundColor = .clear
+      
+      
       
       //UITextField.appearance().backgroundColor = UIColor.blue
       

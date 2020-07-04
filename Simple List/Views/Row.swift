@@ -19,6 +19,9 @@ struct Row: View {
    
    var body: some View {
       HStack {
+         
+         
+         
          Button(action: {
             markOffItem(thisItem: self.thisItem)
             if self.globalVariables.textfieldActive == true {
@@ -44,9 +47,10 @@ struct Row: View {
                .foregroundColor(.blue)
                .onTapGesture {
                   self.showEditNameView.toggle()
+                  print(self.showEditNameView)
             }
             .sheet(isPresented: self.$showEditNameView){
-               EditNameView(thisItem: self.thisItem, showEditNameView: self.$showEditNameView, isEditMode: self.$isEditMode)
+               EditNameView(thisItem: self.thisItem, newName: self.thisItem.wrappedName, showEditNameView: self.$showEditNameView, isEditMode: self.$isEditMode)
             }
          }
       }
