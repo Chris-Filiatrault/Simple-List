@@ -9,8 +9,8 @@
 import UIKit
 import CoreData
 
-import GoogleMobileAds
-import AdSupport
+//import GoogleMobileAds
+//import AdSupport
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,17 +19,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
       // Override point for customization after application launch.
       
-      IAPManager.shared.startObserving()
-      IAPManager.shared.getProductsV5()
+//      IAPManager.shared.startObserving()
+//      IAPManager.shared.getProductsV5()
       
-      GADMobileAds.sharedInstance().start(completionHandler: nil)
-      GADMobileAds.sharedInstance().disableAutomatedInAppPurchaseReporting()
+//      GADMobileAds.sharedInstance().start(completionHandler: nil)
+//      GADMobileAds.sharedInstance().disableAutomatedInAppPurchaseReporting()
 
       return true
    }
    
    func applicationWillTerminate(_ application: UIApplication) {
-     IAPManager.shared.stopObserving()
+//     IAPManager.shared.stopObserving()
    }
 
    // MARK: UISceneSession Lifecycle
@@ -85,7 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       container.viewContext.automaticallyMergesChangesFromParent = true
 
       // Make the iCloud store the source of truth
-      container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+      container.viewContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
 
 
       NotificationCenter.default.addObserver(self, selector: #selector(self.processUpdate), name: .NSPersistentStoreRemoteChange, object: nil)
@@ -109,15 +109,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
    }
 
    
-   // Function for performing 
+   // Function for performing actions as updates are processed
    @objc
    func processUpdate(notification: NSNotification) {
       operationQueue.addOperation {
          
          let context = self.persistentContainer.newBackgroundContext()
          context.performAndWait {
-            
-            
+            // Add actions here
          }
       }
    }

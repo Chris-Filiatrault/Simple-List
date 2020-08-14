@@ -21,9 +21,6 @@ struct Home: View {
    
    let standardDarkBlueUIColor: UIColor = UIColor(red: 0/255, green: 10/255, blue: 30/255, alpha: 1)
    
-   let itemNames: [String] = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve"]
-   let itemPositions: [Int] = [0,1,2,3,4]
-   
    init() {
       
       // To remove all separators in list:
@@ -113,24 +110,24 @@ struct Home: View {
                   },trailing:
                   
                   HStack {
-                     VStack {
-                        if self.globalVariables.textfieldActive == false &&
-                           UserDefaults.standard.object(forKey: "purchased") as? Bool ?? nil != true {
-                           
-                           Button(action: {
-                              self.isEditMode = .inactive
-                              self.showRemoveAdsView = true
-                           }) {
-                              Image(systemName: "info.circle")
-                                 .imageScale(.large)
-                                 .foregroundColor(Color("navBarFont"))
-                           }
-                           .padding()
-                           .sheet(isPresented: self.$showRemoveAdsView){
-                              RemoveAdsView(showRemoveAdsView: self.$showRemoveAdsView, purchaseMade: self.$purchaseMade)
-                           }
-                        }
-                     }
+//                     VStack {
+//                        if self.globalVariables.textfieldActive == false &&
+//                           UserDefaults.standard.object(forKey: "purchased") as? Bool ?? nil != true {
+//
+//                           Button(action: {
+//                              self.isEditMode = .inactive
+//                              self.showRemoveAdsView = true
+//                           }) {
+//                              Image(systemName: "info.circle")
+//                                 .imageScale(.large)
+//                                 .foregroundColor(Color("navBarFont"))
+//                           }
+//                           .padding()
+//                           .sheet(isPresented: self.$showRemoveAdsView){
+//                              RemoveAdsView(showRemoveAdsView: self.$showRemoveAdsView, purchaseMade: self.$purchaseMade)
+//                           }
+//                        }
+//                     }
                      
                      // Changing buttons
                      ChangingButtons(textfieldValue: self.$textfieldValue, isEditMode: self.$isEditMode)
@@ -144,20 +141,20 @@ struct Home: View {
             
             
             // ===Ad View===
-            if UserDefaults.standard.object(forKey: "purchased") as? Bool ?? nil != true && self.globalVariables.textfieldActive == false {
-               AdView()
-                  .frame(width: 320, height: 50, alignment: .center)
-                  .padding(.top, 5)
-            }
-            else if UserDefaults.standard.object(forKey: "purchased") as? Bool ?? nil == true {
-               // Show nothing
-            }
+//            if UserDefaults.standard.object(forKey: "purchased") as? Bool ?? nil != true && self.globalVariables.textfieldActive == false {
+//               AdView()
+//                  .frame(width: 320, height: 50, alignment: .center)
+//                  .padding(.top, 5)
+//            }
+//            else if UserDefaults.standard.object(forKey: "purchased") as? Bool ?? nil == true {
+//               // Show nothing
+//            }
             
          }
          .background(Color("listRowBackground").edgesIgnoringSafeArea(.all))
-         .alert(isPresented: self.$purchaseMade) {
-            Alert(title: Text("Thanks for your support! 😁"), dismissButton: .default(Text("Done")))
-         }
+//         .alert(isPresented: self.$purchaseMade) {
+//            Alert(title: Text("Thanks for your support! 😁"), dismissButton: .default(Text("Done")))
+//         }
       } // End of NavView
          .navigationViewStyle(StackNavigationViewStyle())
       
