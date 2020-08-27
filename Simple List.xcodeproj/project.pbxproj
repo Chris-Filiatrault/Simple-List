@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6D06DB1E249CC01D00F0A019 /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D06DB1D249CC01D00F0A019 /* IAPManager.swift */; };
-		6D0889F824A9A0A400428F50 /* CustomTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0889F724A9A0A400428F50 /* CustomTextfield.swift */; };
 		6D0889FA24A9A2E800428F50 /* UIKitTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0889F924A9A2E800428F50 /* UIKitTextField.swift */; };
 		6D2B1F9D24904A070025E786 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B1F9C24904A070025E786 /* AppDelegate.swift */; };
 		6D2B1F9F24904A070025E786 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B1F9E24904A070025E786 /* SceneDelegate.swift */; };
@@ -30,6 +29,8 @@
 		6D2B2022249050710025E786 /* AdaptsToSK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B2021249050710025E786 /* AdaptsToSK.swift */; };
 		6D2B2025249051400025E786 /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B2024249051400025E786 /* Misc.swift */; };
 		6D31227C24A21802009860F8 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D31227B24A21802009860F8 /* ErrorMessage.swift */; };
+		6D3996D324F72CF000C57150 /* CustomTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3996D224F72CF000C57150 /* CustomTextfield.swift */; };
+		6D3996D724F7323F00C57150 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3996D624F7323F00C57150 /* ViewModifiers.swift */; };
 		6D6672252498DA6E00EA7058 /* BuyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6672242498DA6E00EA7058 /* BuyView.swift */; };
 		6D6672272498DB6B00EA7058 /* TestHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6672262498DB6B00EA7058 /* TestHome.swift */; };
 		6D8E1A6624AA0295006D218B /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8E1A6524AA0295006D218B /* HostingController.swift */; };
@@ -38,6 +39,7 @@
 		6DB0B0172499B95F0020CCAB /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0B0162499B95F0020CCAB /* UserSettings.swift */; };
 		6DB0B0192499B9900020CCAB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0B0182499B9900020CCAB /* SettingsView.swift */; };
 		6DB0B01B2499FD8F0020CCAB /* AdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0B01A2499FD8F0020CCAB /* AdView.swift */; };
+		6DC0CF4424F748DC004A4B97 /* MKiCloudSync.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DC0CF4324F748DC004A4B97 /* MKiCloudSync.m */; };
 		6DDD831A249461E900D347C3 /* EditNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDD8319249461E900D347C3 /* EditNameView.swift */; };
 		6DE4934D2493084E00C4FB02 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DE4934C2493084E00C4FB02 /* CloudKit.framework */; };
 		6DE77BF224988FE6009DF678 /* RemoveAdsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE77BF124988FE6009DF678 /* RemoveAdsView.swift */; };
@@ -73,7 +75,6 @@
 		5F39C66B4012F7D4B5799CE0 /* Pods_Simple_List_Simple_ListUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Simple_List_Simple_ListUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AE8C91E7A82DC1AA73C0A7D /* Pods-Simple List.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Simple List.release.xcconfig"; path = "Target Support Files/Pods-Simple List/Pods-Simple List.release.xcconfig"; sourceTree = "<group>"; };
 		6D06DB1D249CC01D00F0A019 /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
-		6D0889F724A9A0A400428F50 /* CustomTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextfield.swift; sourceTree = "<group>"; };
 		6D0889F924A9A2E800428F50 /* UIKitTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitTextField.swift; sourceTree = "<group>"; };
 		6D2B1F9924904A070025E786 /* Simple List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Simple List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D2B1F9C24904A070025E786 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +102,8 @@
 		6D2B2021249050710025E786 /* AdaptsToSK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptsToSK.swift; sourceTree = "<group>"; };
 		6D2B2024249051400025E786 /* Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Misc.swift; sourceTree = "<group>"; };
 		6D31227B24A21802009860F8 /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
+		6D3996D224F72CF000C57150 /* CustomTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextfield.swift; sourceTree = "<group>"; };
+		6D3996D624F7323F00C57150 /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
 		6D6672242498DA6E00EA7058 /* BuyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyView.swift; sourceTree = "<group>"; };
 		6D6672262498DB6B00EA7058 /* TestHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHome.swift; sourceTree = "<group>"; };
 		6D8E1A6524AA0295006D218B /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
@@ -109,6 +112,9 @@
 		6DB0B0162499B95F0020CCAB /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		6DB0B0182499B9900020CCAB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		6DB0B01A2499FD8F0020CCAB /* AdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdView.swift; sourceTree = "<group>"; };
+		6DC0CF4224F748DC004A4B97 /* MKiCloudSync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKiCloudSync.h; sourceTree = "<group>"; };
+		6DC0CF4324F748DC004A4B97 /* MKiCloudSync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKiCloudSync.m; sourceTree = "<group>"; };
+		6DC0CF4724F749AC004A4B97 /* Simple-List-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Simple-List-Bridging-Header.h"; sourceTree = "<group>"; };
 		6DDD8319249461E900D347C3 /* EditNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNameView.swift; sourceTree = "<group>"; };
 		6DE4934A2493082D00C4FB02 /* Simple List.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Simple List.entitlements"; sourceTree = "<group>"; };
 		6DE4934C2493084E00C4FB02 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -245,9 +251,14 @@
 				6D2B201B249050550025E786 /* Globals.swift */,
 				6D2B201D2490505E0025E786 /* Functions.swift */,
 				6D06DB1D249CC01D00F0A019 /* IAPManager.swift */,
+				6D3996D624F7323F00C57150 /* ViewModifiers.swift */,
+				6D3996D224F72CF000C57150 /* CustomTextfield.swift */,
 				6D2B201F249050690025E786 /* Extensions.swift */,
 				6D8E1A6524AA0295006D218B /* HostingController.swift */,
 				6D2B2021249050710025E786 /* AdaptsToSK.swift */,
+				6DC0CF4224F748DC004A4B97 /* MKiCloudSync.h */,
+				6DC0CF4324F748DC004A4B97 /* MKiCloudSync.m */,
+				6DC0CF4724F749AC004A4B97 /* Simple-List-Bridging-Header.h */,
 				6D9969B824A8828D002D3CE0 /* AutoScroll.swift */,
 			);
 			path = Helpers;
@@ -257,7 +268,6 @@
 			isa = PBXGroup;
 			children = (
 				6D9969BA24A882AC002D3CE0 /* AutoScrollTest.swift */,
-				6D0889F724A9A0A400428F50 /* CustomTextfield.swift */,
 				6D0889F924A9A2E800428F50 /* UIKitTextField.swift */,
 				6DB0B0182499B9900020CCAB /* SettingsView.swift */,
 				6DB0B0162499B95F0020CCAB /* UserSettings.swift */,
@@ -366,6 +376,7 @@
 				TargetAttributes = {
 					6D2B1F9824904A070025E786 = {
 						CreatedOnToolsVersion = 11.5;
+						LastSwiftMigration = 1160;
 					};
 					6D2B1FB124904A120025E786 = {
 						CreatedOnToolsVersion = 11.5;
@@ -533,6 +544,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6DE77BF224988FE6009DF678 /* RemoveAdsView.swift in Sources */,
+				6D3996D724F7323F00C57150 /* ViewModifiers.swift in Sources */,
 				6D0889FA24A9A2E800428F50 /* UIKitTextField.swift in Sources */,
 				6D6672272498DB6B00EA7058 /* TestHome.swift in Sources */,
 				6D2B1F9D24904A070025E786 /* AppDelegate.swift in Sources */,
@@ -540,12 +552,14 @@
 				6D31227C24A21802009860F8 /* ErrorMessage.swift in Sources */,
 				6D06DB1E249CC01D00F0A019 /* IAPManager.swift in Sources */,
 				6D2B2019249050400025E786 /* ChangingButtons.swift in Sources */,
+				6D3996D324F72CF000C57150 /* CustomTextfield.swift in Sources */,
 				6D2B2015249050240025E786 /* List.swift in Sources */,
 				6D2B201E2490505E0025E786 /* Functions.swift in Sources */,
 				6D2B1FF924904B830025E786 /* Item+CoreDataClass.swift in Sources */,
 				6D6672252498DA6E00EA7058 /* BuyView.swift in Sources */,
 				6D9969B924A8828D002D3CE0 /* AutoScroll.swift in Sources */,
 				6D2B20172490502B0025E786 /* Row.swift in Sources */,
+				6DC0CF4424F748DC004A4B97 /* MKiCloudSync.m in Sources */,
 				6DDD831A249461E900D347C3 /* EditNameView.swift in Sources */,
 				6DB0B01B2499FD8F0020CCAB /* AdView.swift in Sources */,
 				6D2B2020249050690025E786 /* Extensions.swift in Sources */,
@@ -558,7 +572,6 @@
 				6DB0B0172499B95F0020CCAB /* UserSettings.swift in Sources */,
 				6D2B201C249050550025E786 /* Globals.swift in Sources */,
 				6D2B1FA224904A070025E786 /* Simple_List.xcdatamodeld in Sources */,
-				6D0889F824A9A0A400428F50 /* CustomTextfield.swift in Sources */,
 				6DB0B0192499B9900020CCAB /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -727,6 +740,7 @@
 			baseConfigurationReference = 098720754696CDE80CBECF44 /* Pods-Simple List.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Simple List/Simple List.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -739,9 +753,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3;
+				MARKETING_VERSION = 2.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.cfiliatrault.Simple-List";
 				PRODUCT_NAME = "Simple List";
+				SWIFT_OBJC_BRIDGING_HEADER = "Simple List/Helpers/Simple-List-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -752,6 +768,7 @@
 			baseConfigurationReference = 6AE8C91E7A82DC1AA73C0A7D /* Pods-Simple List.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Simple List/Simple List.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -764,9 +781,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3;
+				MARKETING_VERSION = 2.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.cfiliatrault.Simple-List";
 				PRODUCT_NAME = "Simple List";
+				SWIFT_OBJC_BRIDGING_HEADER = "Simple List/Helpers/Simple-List-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

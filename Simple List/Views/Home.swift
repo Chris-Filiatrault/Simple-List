@@ -13,13 +13,16 @@ struct Home: View {
    
    @EnvironmentObject var globalVariables: GlobalVariableClass
    
-   @State var textfieldValue: String = ""
+//   @State var itemInTextfield: String = ""
    @State var showAddButton: Bool = false
    @State var showRemoveAdsView: Bool = false
    @State var purchaseMade: Bool = false
    @State var isEditMode: EditMode = .inactive
    
    let standardDarkBlueUIColor: UIColor = UIColor(red: 0/255, green: 10/255, blue: 30/255, alpha: 1)
+   
+//   static var itemInTextfield: String = ""
+//   static var itemInTextfieldBinding = Binding<String>(get: { itemInTextfield }, set: { itemInTextfield = $0 } )
    
    init() {
       
@@ -70,22 +73,29 @@ struct Home: View {
       NavigationView {
          VStack(spacing: 0) {
             
-            // TextField
-            TextField("Add item", text: self.$textfieldValue, onEditingChanged: { changed in
+            
+            CustomTextField("Add item", text: $globalVariables.itemInTextfield, focusTextfieldCursor: false, onCommit: {
+               if self.globalVariables.itemInTextfield != "" {
+                  addNewItem(itemName: self.$globalVariables.itemInTextfield)
+                     self.globalVariables.scrollingProxy.scrollTo(.end)
+                  self.globalVariables.itemInTextfield = ""
+                  }
+               else if self.globalVariables.itemInTextfield == "" {
+                  UIApplication.shared.endEditing()
+                  self.globalVariables.textfieldActive = false
+               }
+            }, onBeginEditing: {
                withAnimation {
                   self.isEditMode = .inactive
+                  self.globalVariables.textfieldActive = true
                }
-               self.globalVariables.textfieldActive.toggle()
-            }, onCommit: {
-               if self.textfieldValue != "" {
-                  addNewItem(itemName: self.$textfieldValue)
-                  self.globalVariables.scrollingProxy.scrollTo(.end)
-                  self.textfieldValue = ""
-               }
+
             })
-               .textFieldStyle(RoundedBorderTextFieldStyle())
-               .padding()
-               
+               .padding(.top, 10)
+               .modifier(ClearButton(itemInTextfield: $globalVariables.itemInTextfield))
+               .padding(EdgeInsets(top: 15, leading: 15, bottom: 15, trailing:
+                  globalVariables.itemInTextfield == "" ? 15 : 0
+               ))
                
                // ===Navigation bar===
                .navigationBarTitle("", displayMode: .inline)
@@ -130,7 +140,7 @@ struct Home: View {
 //                     }
                      
                      // Changing buttons
-                     ChangingButtons(textfieldValue: self.$textfieldValue, isEditMode: self.$isEditMode)
+                     ChangingButtons(textfieldValue: $globalVariables.itemInTextfield, isEditMode: self.$isEditMode)
                   }
             )
                .environment(\.editMode, self.$isEditMode)
@@ -151,7 +161,7 @@ struct Home: View {
 //            }
             
          }
-         .background(Color("listRowBackground").edgesIgnoringSafeArea(.all))
+         .background(Color("homeBackground").edgesIgnoringSafeArea(.all))
 //         .alert(isPresented: self.$purchaseMade) {
 //            Alert(title: Text("Thanks for your support! 😁"), dismissButton: .default(Text("Done")))
 //         }
