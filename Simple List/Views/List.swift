@@ -31,7 +31,7 @@ struct ListView: View {
             
             if self.itemsFromFetchRequest.count > 0 {
             Text("")
-            .listRowBackground(Color("listRowBackground").edgesIgnoringSafeArea(.horizontal))
+            .listRowBackground(Color("homeBackground").edgesIgnoringSafeArea(.horizontal))
             }
 
          }.environment(\.editMode, self.$isEditMode)

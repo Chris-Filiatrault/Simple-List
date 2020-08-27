@@ -24,6 +24,7 @@ struct Row: View {
             markOffItem(thisItem: self.thisItem)
             if self.globalVariables.textfieldActive == true {
                UIApplication.shared.endEditing()
+               self.globalVariables.textfieldActive = false
             }
          }) {
             Image(systemName: thisItem.markedOff ? "checkmark.circle" : "circle")
@@ -48,7 +49,8 @@ struct Row: View {
                   print(self.showEditNameView)
             }
             .sheet(isPresented: self.$showEditNameView){
-               EditNameView(thisItem: self.thisItem, newName: self.thisItem.wrappedName, showEditNameView: self.$showEditNameView, isEditMode: self.$isEditMode)
+               EditNameView(thisItem: self.thisItem, showEditNameView: self.$showEditNameView, isEditMode: self.$isEditMode)
+                  .environmentObject(self.globalVariables)
             }
          }
       }

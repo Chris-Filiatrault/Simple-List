@@ -8,6 +8,7 @@
 
 
 import SwiftUI
+import StoreKit
 
 struct ChangingButtons: View {
    
@@ -46,7 +47,14 @@ struct ChangingButtons: View {
                      title: Text(
                         tickedOffItems.count > 1 ? "Delete \(tickedOffItems.count) items?" : "Delete \(tickedOffItems.count) item?"),
                      primaryButton: .default(Text("Cancel")),
-                     secondaryButton: .destructive(Text("Delete")) { deleteItems() }
+                     secondaryButton: .destructive(Text("Delete")) {
+                        deleteItems()
+                        
+                        if UserDefaults.standard.integer(forKey: "syncNumTimesUsed") > 20 && UserDefaults.standard.bool(forKey: "syncShownReviewRequest") != true {
+                           SKStoreReviewController.requestReview()
+                           UserDefaults.standard.set(true, forKey: "syncShownReviewRequest")
+                        }
+                     }
                   )
                }
             }
@@ -56,29 +64,22 @@ struct ChangingButtons: View {
             // Done/Add button
          else if globalVariables.textfieldActive == true {
             
-               Button(action: {
-                  if self.textfieldValue == "" {
-                     UIApplication.shared.endEditing()
-                     withAnimation {                        
-                        self.globalVariables.textfieldActive = false
-                     }
-                  } else if self.textfieldValue != "" {
-                     addNewItem(itemName: self.$textfieldValue)
-                     self.textfieldValue = ""
-                     self.globalVariables.scrollingProxy.scrollTo(.end)
+            Button(action: {
+               if self.textfieldValue == "" {
+                  UIApplication.shared.endEditing()
+                  withAnimation {                        
+                     self.globalVariables.textfieldActive = false
                   }
-               }) {
-                  if self.textfieldValue == "" {
-                     Text("Done")
-                        .foregroundColor(Color("navBarFont"))
-                        .padding()
-                  } else {
-                     Image(systemName: "plus.circle.fill")
-                        .imageScale(.large)
-                        .foregroundColor(.green)
-                        .padding()
-                  }
+               } else if self.textfieldValue != "" {
+                  addNewItem(itemName: self.$textfieldValue)
+                  self.textfieldValue = ""
+                  self.globalVariables.scrollingProxy.scrollTo(.end)
                }
+            }) {
+               Text(self.textfieldValue == "" ? "Done" : "Add")
+                  .foregroundColor(Color("navBarFont"))
+                  .padding()
+            }
          }
          
       }

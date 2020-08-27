@@ -24,7 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       
 //      GADMobileAds.sharedInstance().start(completionHandler: nil)
 //      GADMobileAds.sharedInstance().disableAutomatedInAppPurchaseReporting()
-
+      
+      MKiCloudSync.start(withPrefix: "sync")
       return true
    }
    
