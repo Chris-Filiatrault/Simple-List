@@ -16,14 +16,14 @@ public class Item: NSManagedObject {
 
 }
 
-extension Item {
-   static func getItemsFetchRequest () -> NSFetchRequest<Item> {
-      let request: NSFetchRequest<Item> = Item.fetchRequest() 
-      request.sortDescriptors = [NSSortDescriptor(key: "position", ascending: false)]
-      return request
-   }
-}
-
+//extension Item {
+//   static func getItemsFetchRequest () -> NSFetchRequest<Item> {
+//      let request: NSFetchRequest<Item> = Item.fetchRequest()
+//      request.sortDescriptors = []
+//      return request
+//   }
+//}
+//
 
 
 

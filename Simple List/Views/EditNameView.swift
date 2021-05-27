@@ -9,106 +9,101 @@
 import SwiftUI
 
 struct EditNameView: View {
+   
+   @EnvironmentObject var globalVariables: GlobalVariableClass
    var thisItem: Item
-   @State var newName: String = ""
    @Binding var showEditNameView: Bool
    @Binding var isEditMode: EditMode
-
+   
+   static var focusTextfield: Bool = true
+   static var itemName: String = ""
+   static var itemNameBinding = Binding<String>(get: { itemName }, set: { itemName = $0 } )
+   
    var body: some View {
+      
+            VStack {
+               
+               // ===Title===
+               Text("Rename Item")
+                  .bold()
+                  .font(.largeTitle)
+                  .padding(.top, 50)
+               Divider()
+                  .padding(.bottom, 30)
+                  .offset(y: -15)
+               
+               // ===Edit item textfield===
+               CustomTextField("", text: EditNameView.itemNameBinding, focusTextfieldCursor: EditNameView.focusTextfield, onCommit: {
+                  print("Commit")
+                  self.commit()
 
-      NavigationView {
-      GeometryReader { geometry in
-
-         VStack {
-
-            Text("Rename \"\(self.thisItem.wrappedName)\" to...")
-               .font(.title)
-               .padding(.top)
-
-
-            // ===Enter item textfield===
-            TextField("Enter new name...", text: self.$newName, onCommit: {
-                        if self.newName != "" {
-                           editName(thisItem: self.thisItem, itemNewName: self.newName)
-                           self.showEditNameView.toggle()
-                           self.isEditMode = .inactive
-                           self.newName = ""
-                        }
-               print(self.showEditNameView)
-            })
-               .textFieldStyle(RoundedBorderTextFieldStyle())
-               .padding(5)
-               .cornerRadius(5)
-               .padding(.bottom, 10)
-
-
-
-            // ===Buttons===
-            HStack(alignment: .center) {
-
-               // Cancel button
-               Button(action: {
-                  self.showEditNameView.toggle()
-                  self.isEditMode = .inactive
-                  print(self.showEditNameView)
-               }) {
-                  Text("Cancel")
-                     .bold()
-                     .cornerRadius(20)
-                     .font(.subheadline)
-                     .frame(minWidth: 50)
-               }.contentShape(Rectangle())
-
-               // Add button
-               Button(action: {
-                  if self.newName != "" {
-                     editName(thisItem: self.thisItem, itemNewName: self.newName)
-                     self.newName = ""
-                     self.isEditMode = .inactive
+               }, onBeginEditing: {
+                  print("Begin edit")
+               })
+               .padding(.bottom)
+               .environmentObject(globalVariables)
+               
+               
+               // ===Buttons===
+               HStack(alignment: .center) {
+                  
+                  // Cancel button
+                  Button(action: {
                      self.showEditNameView.toggle()
+                     print(self.showEditNameView)
+                  }) {
+                     Text("Cancel")
+                        .bold()
+                        .cornerRadius(20)
+                        .font(.subheadline)
+                        .frame(minWidth: 50)
+                  }.contentShape(Rectangle())
+                  
+                  // Add button
+                  Button(action: {
+                     self.commit()
+                  }) {
+                     
+                     
+                     Text("Done")
+                        .bold()
+                        .frame(minWidth: 50)
+                        .font(.subheadline)
+                        .padding(10)
+                        .background(Color("blueButton"))
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                        .transition(.scale)
+                        .edgesIgnoringSafeArea(.horizontal)
                   }
-                  print(self.showEditNameView)
-
-               }) {
-                  Text("Done")
-                     .bold()
-                     .frame(minWidth: 50)
-                     .font(.subheadline)
-                     .padding(10)
-                     .background(Color("blueButton"))
-                     .foregroundColor(.white)
-                     .cornerRadius(10)
-                     .transition(.scale)
-                     .edgesIgnoringSafeArea(.horizontal)
+                  .contentShape(Rectangle())
+                  .padding(.leading, 20)
                }
-               .contentShape(Rectangle())
-               .padding(.leading, 20)
-
+               
+               Spacer()
+               
+            } // End of VStack
+            .padding()
+            .onAppear {
+               EditNameView.focusTextfield = true
+               EditNameView.itemName = self.thisItem.wrappedName
             }
-
-         }
-         .padding(.bottom, geometry.size.height * 0.65)
-         .padding()
-            }
-
-         .navigationBarTitle("", displayMode: .inline)
-
-         .navigationBarItems(leading:
-               Button(action: {
-                  self.showEditNameView.toggle()
+            .onDisappear {
+               withAnimation {
                   self.isEditMode = .inactive
-                  print(self.showEditNameView)
-               }) {
-                  Text("Cancel")
-                  .padding(EdgeInsets(top: 10, leading: 5, bottom: 10, trailing: 15))
+                  self.showEditNameView = false
                }
-      )
-
-      .background(Color("background").edgesIgnoringSafeArea(.all))
-
-
+            }
+            .environment(\.horizontalSizeClass, .compact)
+            .background(Color("homeBackground").edgesIgnoringSafeArea(.all))
+   }
+   
+   func commit() {
+      if EditNameView.itemName != "" {
+         editName(thisItem: self.thisItem, itemNewName: EditNameView.itemName)
+         self.showEditNameView.toggle()
+         EditNameView.itemName = ""
       }
-      .environment(\.horizontalSizeClass, .compact)
    }
 }
 
